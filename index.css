@@ -13,12 +13,20 @@ a {
 
 .profiles {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.profiles a {
-    margin-right: 20px;
+@media screen and (min-width: 700px) {
+    .profiles {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+  }
 
+.profiles a {
+    margin: 20px;
 }
 
 .center {

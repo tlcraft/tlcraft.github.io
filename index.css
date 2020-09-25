@@ -1,7 +1,7 @@
 body {
     max-width: 1000px;
     margin: auto;
-    padding: 5px;
+    padding: 25px;
     background-color: #00a2e8;
     color: white;
     font-size: 2em;
@@ -13,12 +13,20 @@ a {
 
 .profiles {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
-.profiles a {
-    margin-right: 20px;
+@media screen and (min-width: 700px) {
+    .profiles {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+  }
 
+.profiles a {
+    margin: 20px;
 }
 
 .center {
@@ -27,4 +35,8 @@ a {
 
 footer {
     font-size: 1em;
+}
+
+.copyright {
+    margin-top: 10px;
 }

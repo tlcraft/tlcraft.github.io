@@ -40,3 +40,17 @@ footer {
 .copyright {
     margin-top: 10px;
 }
+
+@keyframes scroll {
+    0% { top: -10%; left: 15%; opacity: 100%;}
+    100% { top: 90%; left: 15%; opacity: 0%;}
+}
+
+div.textScroll {
+    position: absolute;
+    top: 0%; 
+    left: 15%;
+    animation-name: scroll;
+    animation-duration: 8s;
+    animation-iteration-count: infinite;
+}

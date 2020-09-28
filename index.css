@@ -43,8 +43,8 @@ footer {
 
 @keyframes scroll {
     0% { top: -10%; left: 15%; opacity: 100%;}
-    90% { top: 80%; left: 15%; opacity: 0%;}
-    100% { top: 80%; left: 15%; opacity: 0% ;}
+    70% { top: 70%; left: 15%; opacity: 0%;}
+    100% { top: 70%; left: 15%; opacity: 0% ;}
 }
 
 div.textScroll {
@@ -55,4 +55,6 @@ div.textScroll {
     animation-duration: 4s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
 }

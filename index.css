@@ -42,14 +42,14 @@ footer {
 }
 
 @keyframes scroll {
-    0% { top: -10%; opacity: 100%;}
-    70% { top: 70%; opacity: 0%;}
-    100% { top: 70%; opacity: 0% ;}
+    0% { top: -10%; opacity: 100%; }
+    70% { top: 70%; opacity: 0%; }
+    100% { top: 70%; opacity: 0%; }
 }
 
-div.textScroll {
+div.text-scroll {
     position: absolute;
-    top: 0%;
+    top: -10%;
     animation-name: scroll;
     animation-duration: 4s;
     animation-iteration-count: infinite;

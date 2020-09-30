@@ -9,7 +9,7 @@ function generateCopyright() {
 
 function startTextScroll() {
     const div = document.createElement("div");
-    div.setAttribute("class", "textScroll");
+    div.setAttribute("class", "text-scroll");
     div.setAttribute("style", "left: 80%");
 
     const text = document.createTextNode("Hello World...");

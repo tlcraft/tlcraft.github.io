@@ -8,9 +8,10 @@ function generateCopyright() {
 }
 
 function startTextScroll() {
+    const leftPosition = getRandomInt(100);
     const div = document.createElement("div");
     div.setAttribute("class", "text-scroll");
-    div.setAttribute("style", "left: 80%; animation-duration: 10s;");
+    div.setAttribute("style", "left: " + leftPosition + "%; animation-duration: 10s;");
 
     const text = document.createTextNode("Hello World...");
     div.appendChild(text);
@@ -21,4 +22,8 @@ function startTextScroll() {
     $(".text-scroll").one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
         this.remove();
     });
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
 }

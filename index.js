@@ -9,9 +9,11 @@ function generateCopyright() {
 
 function startTextScroll() {
     const leftPosition = getRandomInt(100);
+    const animationDuration = getRandomInt(10) + 1;
+
     const div = document.createElement("div");
     div.setAttribute("class", "text-scroll");
-    div.setAttribute("style", "left: " + leftPosition + "%; animation-duration: 10s;");
+    div.setAttribute("style", "left: " + leftPosition + "%; animation-duration: " + animationDuration + "s;");
 
     const text = document.createTextNode("Hello World...");
     div.appendChild(text);

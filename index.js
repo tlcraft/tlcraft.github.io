@@ -1,10 +1,15 @@
 $(document).ready(function () {
     generateCopyright();
-    startTextScroll();
+    textScrollInterval();
 });
 
 function generateCopyright() {
     $("footer #copyrightDate").text(new Date().getFullYear());
+}
+
+function textScrollInterval() {
+    startTextScroll();
+    setInterval(startTextScroll, 500);
 }
 
 function startTextScroll() {

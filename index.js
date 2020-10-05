@@ -1,3 +1,6 @@
+let count = 0;
+const MAX = 5;
+
 $(document).ready(function () {
     generateCopyright();
     textScrollInterval();
@@ -9,7 +12,12 @@ function generateCopyright() {
 
 function textScrollInterval() {
     startTextScroll();
-    setInterval(startTextScroll, 500);
+    setInterval(() => {
+        if(count < MAX) {
+            count++;
+            startTextScroll();
+        }
+    }, 500);
 }
 
 function startTextScroll() {
@@ -28,6 +36,11 @@ function startTextScroll() {
 
     $(".text-scroll").one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
         this.remove();
+        if(count > 0) {
+            count--;
+        } else {
+            count = 0;
+        }
     });
 }
 

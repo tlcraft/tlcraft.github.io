@@ -27,7 +27,9 @@ function startTextScroll() {
     const animationDuration = getRandomInt(10) + 1;
 
     const div = document.createElement("div");
+    const id = "text-scroll-" + totalCount;
     div.setAttribute("class", "text-scroll");
+    div.setAttribute("id", id);
     div.setAttribute("style", "left: " + leftPosition + "%; animation-duration: " + animationDuration + "s;");
 
     const text = document.createTextNode("Hello World...");
@@ -36,13 +38,9 @@ function startTextScroll() {
     const container = document.getElementById("scroll-container");
     container.appendChild(div);
 
-    $(".text-scroll").one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
+    $('#'+id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
         this.remove();
-        if(count > 0) {
-            count--;
-        } else {
-            count = 0;
-        }
+        count--;
     });
 
     debugScroll();

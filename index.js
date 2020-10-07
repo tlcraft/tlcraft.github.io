@@ -1,4 +1,5 @@
 let count = 0;
+let totalCount = 0;
 const MAX = 5;
 
 $(document).ready(function () {
@@ -15,6 +16,7 @@ function textScrollInterval() {
     setInterval(() => {
         if(count < MAX) {
             count++;
+            totalCount++;
             startTextScroll();
         }
     }, 500);
@@ -42,8 +44,17 @@ function startTextScroll() {
             count = 0;
         }
     });
+
+    debugScroll();
 }
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
+}
+
+function debugScroll() {
+    const countDiv = document.getElementById('count');
+    countDiv.innerHTML = 'Curent count: ' + count;
+    const totalCountDiv = document.getElementById('total-count');
+    totalCountDiv.innerHTML = 'Total count: '  + totalCount;
 }

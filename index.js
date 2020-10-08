@@ -1,6 +1,6 @@
-let count = 0;
-let totalCount = 0;
-const MAX = 5;
+let currentScrollCount = 0;
+let totalLifetimeScrollCount = 0;
+const MAX_TEXT_SCROLLS = 5;
 
 $(document).ready(function () {
     generateCopyright();
@@ -14,9 +14,9 @@ function generateCopyright() {
 function textScrollInterval() {
     startTextScroll();
     setInterval(() => {
-        if(count < MAX) {
-            count++;
-            totalCount++;
+        if(currentScrollCount < MAX_TEXT_SCROLLS) {
+            currentScrollCount++;
+            totalLifetimeScrollCount++;
             startTextScroll();
         }
     }, 500);
@@ -27,7 +27,7 @@ function startTextScroll() {
     const animationDuration = getRandomInt(10) + 1;
 
     const div = document.createElement("div");
-    const id = "text-scroll-" + totalCount;
+    const id = "text-scroll-" + totalLifetimeScrollCount;
     div.setAttribute("class", "text-scroll");
     div.setAttribute("id", id);
     div.setAttribute("style", "left: " + leftPosition + "%; animation-duration: " + animationDuration + "s;");
@@ -40,7 +40,8 @@ function startTextScroll() {
 
     $('#'+id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
         this.remove();
-        count--;
+        currentScrollCount--;
+        debugScroll();
     });
 
     debugScroll();
@@ -52,7 +53,7 @@ function getRandomInt(max) {
 
 function debugScroll() {
     const countDiv = document.getElementById('count');
-    countDiv.innerHTML = 'Curent count: ' + count;
+    countDiv.innerHTML = 'Curent count: ' + currentScrollCount;
     const totalCountDiv = document.getElementById('total-count');
-    totalCountDiv.innerHTML = 'Total count: '  + totalCount;
+    totalCountDiv.innerHTML = 'Total count: '  + totalLifetimeScrollCount;
 }

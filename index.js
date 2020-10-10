@@ -35,7 +35,7 @@ function startTextScroll() {
     const text = document.createTextNode("Hello World...");
     div.appendChild(text);
     
-    const container = document.getElementById("scroll-container");
+    const container = document.getElementById("right-scroll-container");
     container.appendChild(div);
 
     $('#'+id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 

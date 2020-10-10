@@ -1,10 +1,17 @@
 body {
-    max-width: 1000px;
-    margin: auto;
     padding: 25px;
     background-color: #00a2e8;
     color: white;
     font-size: 2em;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 10% 80% 10%;
+}
+
+@media screen and (min-width: 1500px) {
+    body {
+        grid-template-columns: 30% 40% 30%;
+    }
 }
 
 a {
@@ -18,7 +25,7 @@ a {
     flex-direction: column;
 }
 
-@media screen and (min-width: 700px) {
+@media screen and (min-width: 1000px) {
     .profiles {
         justify-content: space-between;
         flex-direction: row;
@@ -47,12 +54,20 @@ footer {
     100% { top: 70%; opacity: 0%; }
 }
 
-div.text-scroll {
-    position: absolute;
-    top: -10%;
-    animation-name: scroll;
-    animation-duration: 4s;
-    animation-timing-function: linear;
-    writing-mode: vertical-rl;
-    text-orientation: upright;
+@media screen and (max-width: 1499px) {
+    div.text-scroll {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    div.text-scroll {
+        position: absolute;
+        top: -10%;
+        animation-name: scroll;
+        animation-duration: 4s;
+        animation-timing-function: linear;
+        writing-mode: vertical-rl;
+        text-orientation: upright;
+    }
 }

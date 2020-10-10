@@ -8,12 +8,6 @@ body {
     grid-template-columns: 10% 80% 10%;
 }
 
-@media screen and (min-width: 1500px) {
-    body {
-        grid-template-columns: 30% 40% 30%;
-    }
-}
-
 a {
     color: white;
 }
@@ -25,23 +19,13 @@ a {
     flex-direction: column;
 }
 
-@media screen and (min-width: 1000px) {
-    .profiles {
-        justify-content: space-between;
-        flex-direction: row;
-    }
-  }
-
 .profiles a {
     margin: 20px;
 }
 
-.center {
-    text-align: center;
-}
-
 footer {
     font-size: 1em;
+    text-align: center;
 }
 
 .copyright {
@@ -54,6 +38,13 @@ footer {
     100% { top: 70%; opacity: 0%; }
 }
 
+@media screen and (min-width: 1000px) {
+    .profiles {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+}
+
 @media screen and (max-width: 1499px) {
     div.text-scroll {
         display: none;
@@ -61,6 +52,10 @@ footer {
 }
 
 @media screen and (min-width: 1500px) {
+    body {
+        grid-template-columns: 30% 40% 30%;
+    }
+
     div.text-scroll {
         position: absolute;
         top: -10%;

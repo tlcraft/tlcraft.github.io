@@ -12,6 +12,10 @@ a {
     color: white;
 }
 
+a:hover {
+    color: #ec4300; /* Federal Standard #12199 */
+}
+
 .profiles {
     display: flex;
     justify-content: center;

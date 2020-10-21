@@ -35,7 +35,7 @@ function startTextScroll() {
     const text = document.createTextNode("Hello World...");
     div.appendChild(text);
     
-    const container = document.getElementById("right-scroll-container");
+    const container = getRandomScrollContainer();
     container.appendChild(div);
 
     $('#'+id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
@@ -49,6 +49,12 @@ function startTextScroll() {
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
+}
+
+function getRandomScrollContainer() {
+    const randomValue = getRandomInt(100) + 1;
+    const containerId = randomValue > 50 ? 'right-scroll-container' : 'left-scroll-container';
+    return  document.getElementById(containerId);
 }
 
 function debugScroll() {

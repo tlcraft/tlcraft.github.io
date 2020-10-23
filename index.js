@@ -23,19 +23,20 @@ function textScrollInterval() {
 }
 
 function startTextScroll() {
-    const leftPosition = getRandomInt(100);
+    const screenPosition = getLeftOrRight();
+    const leftPercentage = getLeftPercentage(screenPosition);
     const animationDuration = getRandomInt(10) + 1;
 
     const div = document.createElement("div");
     const id = "text-scroll-" + totalLifetimeScrollCount;
     div.setAttribute("class", "text-scroll");
     div.setAttribute("id", id);
-    div.setAttribute("style", "left: " + leftPosition + "%; animation-duration: " + animationDuration + "s;");
+    div.setAttribute("style", "left: " + leftPercentage + "%; animation-duration: " + animationDuration + "s;");
 
     const text = document.createTextNode("Hello World...");
     div.appendChild(text);
     
-    const container = getRandomScrollContainer();
+    const container = document.getElementById(screenPosition + '-scroll-container')
     container.appendChild(div);
 
     $('#'+id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
@@ -47,14 +48,24 @@ function startTextScroll() {
     debugScroll();
 }
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+function getLeftOrRight() {
+    const randomValue = getRandomInt(100) + 1;
+    const screenPosition = randomValue > 50 ? 'right' : 'left';
+    return screenPosition;
 }
 
-function getRandomScrollContainer() {
-    const randomValue = getRandomInt(100) + 1;
-    const containerId = randomValue > 50 ? 'right-scroll-container' : 'left-scroll-container';
-    return  document.getElementById(containerId);
+function getLeftPercentage(screenPosition) {
+    const basePercentage = getRandomInt(28);
+
+    if (screenPosition === 'right') {
+        return basePercentage + 70;
+    }
+
+    return basePercentage;
+}
+
+function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
 }
 
 function debugScroll() {

@@ -25,7 +25,7 @@ function textScrollInterval() {
 function startTextScroll() {
     const screenPosition = getLeftOrRight();
     const leftPercentage = getLeftPercentage(screenPosition);
-    const animationDuration = getRandomInt(10) + 1;
+    const animationDuration = getRandomInt(10);
 
     const div = document.createElement("div");
     const id = "text-scroll-" + totalLifetimeScrollCount;
@@ -49,8 +49,8 @@ function startTextScroll() {
 }
 
 function getLeftOrRight() {
-    const randomValue = getRandomInt(100) + 1;
-    const screenPosition = randomValue > 50 ? 'right' : 'left';
+    const randomValue = getRandomInt(2);
+    const screenPosition = randomValue === 2 ? 'right' : 'left';
     return screenPosition;
 }
 
@@ -58,14 +58,14 @@ function getLeftPercentage(screenPosition) {
     const basePercentage = getRandomInt(28);
 
     if (screenPosition === 'right') {
-        return basePercentage + 70;
+        return basePercentage + 71;
     }
 
     return basePercentage;
 }
 
 function getRandomInt(max) {
-    return Math.floor(Math.random() * Math.floor(max));
+    return Math.floor(Math.random() * Math.floor(max)) + 1;
 }
 
 function debugScroll() {

@@ -16,6 +16,12 @@ a:hover {
     color: #D20014;
 }
 
+.animation-toggle {
+    position: absolute;
+    top: 5px;
+    left: 65%;
+}
+
 .profiles {
     display: flex;
     justify-content: center;
@@ -51,6 +57,10 @@ footer {
 
 @media screen and (max-width: 1499px) {
     div.text-scroll {
+        display: none;
+    }
+
+    .animation-toggle {
         display: none;
     }
 }

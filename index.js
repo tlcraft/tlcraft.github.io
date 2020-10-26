@@ -5,6 +5,7 @@ const MAX_TEXT_SCROLLS = 5;
 $(document).ready(function () {
     generateCopyright();
     textScrollInterval();
+    watchAnimationButton();
 });
 
 function generateCopyright() {
@@ -73,4 +74,15 @@ function debugScroll() {
     countDiv.innerHTML = 'Curent count: ' + currentScrollCount;
     const totalCountDiv = document.getElementById('total-count');
     totalCountDiv.innerHTML = 'Total count: '  + totalLifetimeScrollCount;
+}
+
+function watchAnimationButton() {
+    const button = document.getElementById('animation-toggle');
+    button.addEventListener('click', function() {
+        if (this.innerHTML === 'Turn Animation Off') {
+            this.innerHTML = 'Turn Animation On';
+        } else {
+            this.innerHTML = 'Turn Animation Off';
+        }
+    });
 }

@@ -83,6 +83,13 @@ function watchAnimationButton() {
         if (this.innerHTML === 'Turn Animation Off') {
             this.innerHTML = 'Turn Animation On';
             displayAnimation = false;
+
+            const animations = document.getElementsByClassName('text-scroll');
+            console.log('Animation count: ', animations.length);
+            for (let animation of animations) {
+                console.log('ID: ', animation.id);
+            }
+
         } else {
             this.innerHTML = 'Turn Animation Off';
             displayAnimation = true;

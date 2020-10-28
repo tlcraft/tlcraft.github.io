@@ -1,6 +1,7 @@
 let currentScrollCount = 0;
 let totalLifetimeScrollCount = 0;
 const MAX_TEXT_SCROLLS = 5;
+let displayAnimation = true;
 
 $(document).ready(function () {
     generateCopyright();
@@ -15,7 +16,7 @@ function generateCopyright() {
 function textScrollInterval() {
     startTextScroll();
     setInterval(() => {
-        if(currentScrollCount < MAX_TEXT_SCROLLS) {
+        if(displayAnimation && currentScrollCount < MAX_TEXT_SCROLLS) {
             currentScrollCount++;
             totalLifetimeScrollCount++;
             startTextScroll();
@@ -81,8 +82,10 @@ function watchAnimationButton() {
     button.addEventListener('click', function() {
         if (this.innerHTML === 'Turn Animation Off') {
             this.innerHTML = 'Turn Animation On';
+            displayAnimation = false;
         } else {
             this.innerHTML = 'Turn Animation Off';
+            displayAnimation = true;
         }
     });
 }

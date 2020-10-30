@@ -2,6 +2,7 @@ let currentScrollCount = 0;
 let totalLifetimeScrollCount = 0;
 const MAX_TEXT_SCROLLS = 5;
 let displayAnimation = true;
+let animationInterval;
 
 $(document).ready(function () {
     generateCopyright();
@@ -15,7 +16,7 @@ function generateCopyright() {
 
 function textScrollInterval() {
     startTextScroll();
-    setInterval(() => {
+    animationInterval = setInterval(() => {
         if(displayAnimation && currentScrollCount < MAX_TEXT_SCROLLS) {
             currentScrollCount++;
             totalLifetimeScrollCount++;
@@ -44,6 +45,9 @@ function startTextScroll() {
     $('#'+id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
         this.remove();
         currentScrollCount--;
+        if (currentScrollCount < 0) {
+            currentScrollCount = 0;
+        }
         debugScroll();
     });
 
@@ -81,19 +85,21 @@ function watchAnimationButton() {
     const button = document.getElementById('animation-toggle');
     button.addEventListener('click', function() {
         if (this.innerHTML === 'Turn Animation Off') {
+            clearInterval(animationInterval);
             this.innerHTML = 'Turn Animation On';
             displayAnimation = false;
+            currentScrollCount = 0;
 
             const animations = document.getElementsByClassName('text-scroll');
             console.log('Animation count: ', animations.length);
             for (let animation of animations) {
                 console.log('ID: ', animation.id);              
-                animation.classList.remove('text-scroll');
-                animation.setAttribute('display', 'none');
+                animation.remove();
             }
         } else {
             this.innerHTML = 'Turn Animation Off';
             displayAnimation = true;
+            textScrollInterval();
         }
     });
 }

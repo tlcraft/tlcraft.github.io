@@ -87,9 +87,10 @@ function watchAnimationButton() {
             const animations = document.getElementsByClassName('text-scroll');
             console.log('Animation count: ', animations.length);
             for (let animation of animations) {
-                console.log('ID: ', animation.id);
+                console.log('ID: ', animation.id);              
+                animation.classList.remove('text-scroll');
+                animation.setAttribute('display', 'none');
             }
-
         } else {
             this.innerHTML = 'Turn Animation Off';
             displayAnimation = true;

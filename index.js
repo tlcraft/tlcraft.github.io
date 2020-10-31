@@ -1,7 +1,6 @@
 let currentScrollCount = 0;
 let totalLifetimeScrollCount = 0;
 const MAX_TEXT_SCROLLS = 5;
-let displayAnimation = true;
 let animationInterval;
 
 $(document).ready(function () {
@@ -17,7 +16,7 @@ function generateCopyright() {
 function textScrollInterval() {
     startTextScroll();
     animationInterval = setInterval(() => {
-        if(displayAnimation && currentScrollCount < MAX_TEXT_SCROLLS) {
+        if(currentScrollCount < MAX_TEXT_SCROLLS) {
             currentScrollCount++;
             totalLifetimeScrollCount++;
             startTextScroll();
@@ -87,7 +86,6 @@ function watchAnimationButton() {
         if (this.innerHTML === 'Turn Animation Off') {
             clearInterval(animationInterval);
             this.innerHTML = 'Turn Animation On';
-            displayAnimation = false;
             currentScrollCount = 0;
 
             const animations = document.getElementsByClassName('text-scroll');
@@ -98,7 +96,6 @@ function watchAnimationButton() {
             }
         } else {
             this.innerHTML = 'Turn Animation Off';
-            displayAnimation = true;
             textScrollInterval();
         }
     });

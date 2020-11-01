@@ -19,7 +19,13 @@ a:hover {
 .animation-toggle {
     position: fixed;
     top: 5px;
-    left: 65%;
+    left: 63%;
+    border: solid 5px white;
+    background-color: transparent;
+    color: white;
+    font-size: .5em;
+    width: 200px;
+    padding: 4px;
 }
 
 .profiles {

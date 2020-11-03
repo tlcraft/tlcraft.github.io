@@ -47,10 +47,7 @@ function startTextScroll() {
         if (currentScrollCount < 0) {
             currentScrollCount = 0;
         }
-        debugScroll();
     });
-
-    debugScroll();
 }
 
 function getLeftOrRight() {
@@ -71,13 +68,6 @@ function getLeftPercentage(screenPosition) {
 
 function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max)) + 1;
-}
-
-function debugScroll() {
-    const countDiv = document.getElementById('count');
-    countDiv.innerHTML = 'Curent count: ' + currentScrollCount;
-    const totalCountDiv = document.getElementById('total-count');
-    totalCountDiv.innerHTML = 'Total count: '  + totalLifetimeScrollCount;
 }
 
 function watchAnimationButton() {

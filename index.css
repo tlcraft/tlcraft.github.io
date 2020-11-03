@@ -17,15 +17,24 @@ a:hover {
 }
 
 .animation-toggle {
-    position: fixed;
+    position: relative;
     top: 5px;
-    left: 63%;
+    left: 60%;
     border: solid 5px white;
     background-color: transparent;
     color: white;
     font-size: .5em;
     width: 200px;
     padding: 4px;
+}
+
+header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 50px;
+    width: 100%;
+    background-color: #00a2e8;
 }
 
 .profiles {

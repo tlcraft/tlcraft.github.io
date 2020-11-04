@@ -91,7 +91,8 @@ footer {
         animation-name: scroll;
         animation-duration: 4s;
         animation-timing-function: linear;
-        writing-mode: vertical-rl;
+        writing-mode: vertical-lr;
         text-orientation: upright;
+        height: max-content;
     }
 }

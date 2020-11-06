@@ -37,6 +37,10 @@ header {
     background-color: #00a2e8;
 }
 
+.content { 
+    padding: 0 5px;
+}
+
 .profiles {
     display: flex;
     justify-content: center;

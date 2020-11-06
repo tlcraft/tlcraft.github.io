@@ -57,7 +57,7 @@ function getLeftOrRight() {
 }
 
 function getLeftPercentage(screenPosition) {
-    const basePercentage = getRandomInt(28);
+    const basePercentage = getRandomInt(25);
 
     if (screenPosition === 'right') {
         return basePercentage + 71;

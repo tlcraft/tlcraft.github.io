@@ -1,8 +1,9 @@
 body {
     padding: 25px;
-    background-color: #00a2e8;
+    background-color: #008ac5;
     color: white;
     font-size: 2em;
+    font-weight: bold;
     display: grid;
     align-items: center;
     grid-template-columns: 10% 80% 10%;
@@ -23,8 +24,9 @@ a:hover {
     border: solid 5px white;
     background-color: transparent;
     color: white;
-    font-size: .5em;
-    width: 200px;
+    font-size: .6em;
+    font-weight: bold;
+    width: 250px;
     padding: 4px;
 }
 
@@ -34,7 +36,7 @@ header {
     left: 0px;
     height: 50px;
     width: 100%;
-    background-color: #00a2e8;
+    background-color: #008ac5;
 }
 
 .content { 

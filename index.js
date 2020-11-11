@@ -21,13 +21,13 @@ function textScrollInterval() {
             totalLifetimeScrollCount++;
             startTextScroll();
         }
-    }, 500);
+    }, 1000);
 }
 
 function startTextScroll() {
     const screenPosition = getLeftOrRight();
     const leftPercentage = getLeftPercentage(screenPosition);
-    const animationDuration = getRandomInt(5) + 2;
+    const animationDuration = getRandomInt(4) + 2;
 
     const div = document.createElement("div");
     const id = "text-scroll-" + totalLifetimeScrollCount;

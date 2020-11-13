@@ -64,9 +64,9 @@ footer {
 }
 
 @keyframes scroll {
-    0% { top: -10%; opacity: 100%; }
-    70% { top: 40%; opacity: 0%; }
-    100% { top: 50%; opacity: 0%; }
+    0% { top: -500px; opacity: 100%; }
+    70% { top: 50%; opacity: 0%; }
+    100% { top: 60%; opacity: 0%; }
 }
 
 @media screen and (min-width: 1000px) {
@@ -93,9 +93,7 @@ footer {
 
     div.text-scroll {
         position: absolute;
-        top: -10%;
         animation-name: scroll;
-        animation-duration: 4s;
         animation-timing-function: linear;
         writing-mode: vertical-lr;
         text-orientation: upright;

@@ -21,13 +21,13 @@ function textScrollInterval() {
             totalLifetimeScrollCount++;
             startTextScroll();
         }
-    }, 1000);
+    }, 750);
 }
 
 function startTextScroll() {
     const screenPosition = getLeftOrRight();
     const leftPercentage = getLeftPercentage(screenPosition);
-    const animationDuration = getRandomInt(4) + 2;
+    const animationDuration = getAnimationDuration();
 
     const div = document.createElement("div");
     const id = "text-scroll-" + totalLifetimeScrollCount;
@@ -56,6 +56,15 @@ function getLeftOrRight() {
     return screenPosition;
 }
 
+function getAnimationDuration() {
+    const windowHeight = $(window).height();
+
+    if (windowHeight <= 650) {
+        return getRandomInt(3) + 1;
+    }
+
+    return getRandomInt(4) + 2;
+}
 function getLeftPercentage(screenPosition) {
     const basePercentage = getRandomInt(25);
 

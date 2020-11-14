@@ -81,21 +81,25 @@ function getRandomInt(max) {
 
 function watchAnimationButton() {
     const button = document.getElementById('animation-toggle');
-    button.addEventListener('click', function() {
-        if (this.innerHTML === 'Turn Animation Off') {
-            clearInterval(animationInterval);
-            this.innerHTML = 'Turn Animation On';
-            currentScrollCount = 0;
+    button.addEventListener('click', toggleButton);
+}
 
-            const animations = document.getElementsByClassName('text-scroll');
-            console.log('Animation count: ', animations.length);
-            for (let animation of animations) {
-                console.log('ID: ', animation.id);              
-                animation.remove();
-            }
-        } else {
-            this.innerHTML = 'Turn Animation Off';
-            textScrollInterval();
+function toggleButton() {
+    if (this.innerHTML === 'Turn Animation Off') {
+        clearInterval(animationInterval);
+        this.innerHTML = 'Turn Animation On';
+        this.setAttribute('aria-pressed', true);
+        currentScrollCount = 0;
+
+        const animations = document.getElementsByClassName('text-scroll');
+        console.log('Animation count: ', animations.length);
+        for (let animation of animations) {
+            console.log('ID: ', animation.id);              
+            animation.remove();
         }
-    });
+    } else {
+        this.innerHTML = 'Turn Animation Off';            
+        this.setAttribute('aria-pressed', false);
+        textScrollInterval();
+    }
 }

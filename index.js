@@ -1,11 +1,11 @@
-let currentScrollCount = 0;
-let totalLifetimeScrollCount = 0;
-const MAX_TEXT_SCROLLS = 5;
+let currentAnimationCount = 0;
+let totalLifetimeAnimationCount = 0;
+const MAX_PARALLEL_ANIMATIONS = 5;
 let animationInterval;
 
 $(document).ready(function () {
     generateCopyright();
-    textScrollInterval();
+    startAnimationInterval();
     watchAnimationButton();
 });
 
@@ -13,12 +13,12 @@ function generateCopyright() {
     $("footer #copyrightDate").text(new Date().getFullYear());
 }
 
-function textScrollInterval() {
+function startAnimationInterval() {
     startTextScroll();
     animationInterval = setInterval(() => {
-        if(currentScrollCount < MAX_TEXT_SCROLLS) {
-            currentScrollCount++;
-            totalLifetimeScrollCount++;
+        if(currentAnimationCount < MAX_PARALLEL_ANIMATIONS) {
+            currentAnimationCount++;
+            totalLifetimeAnimationCount++;
             startTextScroll();
         }
     }, 750);
@@ -30,7 +30,7 @@ function startTextScroll() {
     const animationDuration = getAnimationDuration();
 
     const div = document.createElement("div");
-    const id = "text-scroll-" + totalLifetimeScrollCount;
+    const id = "text-scroll-" + totalLifetimeAnimationCount;
     div.setAttribute("class", "text-scroll");
     div.setAttribute("id", id);
     div.setAttribute("style", "left: " + leftPercentage + "%; animation-duration: " + animationDuration + "s;");
@@ -41,11 +41,11 @@ function startTextScroll() {
     const container = document.getElementById(screenPosition + '-scroll-container')
     container.appendChild(div);
 
-    $('#'+id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
+    $('#' + id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
         this.remove();
-        currentScrollCount--;
-        if (currentScrollCount < 0) {
-            currentScrollCount = 0;
+        currentAnimationCount--;
+        if (currentAnimationCount < 0) {
+            currentAnimationCount = 0;
         }
     });
 }
@@ -89,7 +89,7 @@ function toggleButton() {
         clearInterval(animationInterval);
         this.innerHTML = 'Turn Animation On';
         this.setAttribute('aria-pressed', true);
-        currentScrollCount = 0;
+        currentAnimationCount = 0;
 
         const animations = document.getElementsByClassName('text-scroll');
         console.log('Animation count: ', animations.length);
@@ -100,6 +100,6 @@ function toggleButton() {
     } else {
         this.innerHTML = 'Turn Animation Off';            
         this.setAttribute('aria-pressed', false);
-        textScrollInterval();
+        startAnimationInterval();
     }
 }

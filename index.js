@@ -60,10 +60,12 @@ function getAnimationDuration() {
     const windowHeight = $(window).height();
 
     if (windowHeight <= 650) {
-        return getRandomInt(3) + 1;
+        return getRandomInt(4) + 1;
+    } else if (windowHeight <= 1300) {
+        return getRandomInt(5) + 2;
     }
 
-    return getRandomInt(4) + 2;
+    return getRandomInt(6) + 3;
 }
 function getLeftPercentage(screenPosition) {
     const basePercentage = getRandomInt(25);

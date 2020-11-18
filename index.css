@@ -31,7 +31,7 @@ header {
     top: 5px;
     left: 60%;
     border: solid 5px white;
-    background-color: transparent;
+    background-color: #008ac5;
     color: white;
     font-size: .6em;
     font-weight: bold;
@@ -45,9 +45,9 @@ header {
 
 .profiles {
     display: flex;
-    justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: column;    
+    text-align: center;
 }
 
 .profiles a {

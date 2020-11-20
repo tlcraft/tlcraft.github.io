@@ -26,14 +26,13 @@ function startAnimationInterval() {
 
 function startTextScroll() {
     const screenPosition = getLeftOrRight();
-    const leftPercentage = getLeftPercentage(screenPosition);
-    const animationDuration = getAnimationDuration();
+    const style = getTextScrollStyle(screenPosition);
 
     const div = document.createElement("div");
     const id = "text-scroll-" + totalLifetimeAnimationCount;
     div.setAttribute("class", "text-scroll");
     div.setAttribute("id", id);
-    div.setAttribute("style", "left: " + leftPercentage + "%; animation-duration: " + animationDuration + "s;");
+    div.setAttribute("style", style);
 
     const text = document.createTextNode("Hello World...");
     div.appendChild(text);
@@ -56,6 +55,22 @@ function getLeftOrRight() {
     return screenPosition;
 }
 
+function getTextScrollStyle(screenPosition) {
+    const leftPercentage = getLeftPercentage(screenPosition);
+    const animationDuration = getAnimationDuration();
+    return "left: " + leftPercentage + "%; animation-duration: " + animationDuration + "s;";
+}
+
+function getLeftPercentage(screenPosition) {
+    const basePercentage = getRandomInt(25);
+
+    if (screenPosition === 'right') {
+        return basePercentage + 71;
+    }
+
+    return basePercentage;
+}
+
 function getAnimationDuration() {
     const windowHeight = $(window).height();
 
@@ -66,15 +81,6 @@ function getAnimationDuration() {
     }
 
     return getRandomInt(6) + 3;
-}
-function getLeftPercentage(screenPosition) {
-    const basePercentage = getRandomInt(25);
-
-    if (screenPosition === 'right') {
-        return basePercentage + 71;
-    }
-
-    return basePercentage;
 }
 
 function getRandomInt(max) {

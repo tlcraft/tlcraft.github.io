@@ -109,9 +109,7 @@ function toggleButton() {
         currentAnimationCount = 0;
 
         const animations = document.getElementsByClassName('text-scroll');
-        console.log('Animation count: ', animations.length);
-        for (let animation of animations) {
-            console.log('ID: ', animation.id);              
+        for (let animation of animations) {             
             animation.remove();
         }
     } else {

@@ -26,33 +26,33 @@ function startAnimationInterval() {
 
 function startAnimation() {
     const screenPosition = getLeftOrRight();
-    const style = getAnimationStyle(screenPosition);
-
-    const div = document.createElement("div");
     const id = "text-scroll-" + totalLifetimeAnimationCount;
-    div.setAttribute("class", "text-scroll");
-    div.setAttribute("id", id);
-    div.setAttribute("style", style);
 
-    const text = document.createTextNode("Hello World...");
-    div.appendChild(text);
-    
+    const div = generateNewAnimationElement(screenPosition, id);
     const container = document.getElementById(screenPosition + '-scroll-container')
     container.appendChild(div);
 
-    $('#' + id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
-        this.remove();
-        currentAnimationCount--;
-        if (currentAnimationCount < 0) {
-            currentAnimationCount = 0;
-        }
-    });
+    attachEventListener(id);
 }
 
 function getLeftOrRight() {
     const randomValue = getRandomInt(2);
     const screenPosition = randomValue === 2 ? 'right' : 'left';
     return screenPosition;
+}
+
+function generateNewAnimationElement(screenPosition, id) {
+    const style = getAnimationStyle(screenPosition);
+
+    const div = document.createElement("div");
+    div.setAttribute("class", "text-scroll");
+    div.setAttribute("id", id);
+    div.setAttribute("style", style);
+
+    const text = document.createTextNode("Hello World...");
+    div.appendChild(text);
+
+    return div;
 }
 
 function getAnimationStyle(screenPosition) {
@@ -87,6 +87,15 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max)) + 1;
 }
 
+function attachEventListener(id) {    
+    $('#' + id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
+        this.remove();
+        currentAnimationCount--;
+        if (currentAnimationCount < 0) {
+            currentAnimationCount = 0;
+        }
+    });
+}
 function watchAnimationButton() {
     const button = document.getElementById('animation-toggle');
     button.addEventListener('click', toggleButton);

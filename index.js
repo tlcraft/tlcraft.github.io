@@ -14,19 +14,19 @@ function generateCopyright() {
 }
 
 function startAnimationInterval() {
-    startTextScroll();
+    startAnimation();
     animationInterval = setInterval(() => {
         if(currentAnimationCount < MAX_PARALLEL_ANIMATIONS) {
             currentAnimationCount++;
             totalLifetimeAnimationCount++;
-            startTextScroll();
+            startAnimation();
         }
     }, 750);
 }
 
-function startTextScroll() {
+function startAnimation() {
     const screenPosition = getLeftOrRight();
-    const style = getTextScrollStyle(screenPosition);
+    const style = getAnimationStyle(screenPosition);
 
     const div = document.createElement("div");
     const id = "text-scroll-" + totalLifetimeAnimationCount;
@@ -55,7 +55,7 @@ function getLeftOrRight() {
     return screenPosition;
 }
 
-function getTextScrollStyle(screenPosition) {
+function getAnimationStyle(screenPosition) {
     const leftPercentage = getLeftPercentage(screenPosition);
     const animationDuration = getAnimationDuration();
     return "left: " + leftPercentage + "%; animation-duration: " + animationDuration + "s;";

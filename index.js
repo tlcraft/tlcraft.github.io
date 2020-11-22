@@ -36,7 +36,7 @@ function startAnimation() {
 }
 
 function getLeftOrRight() {
-    const randomValue = getRandomInt(2);
+    const randomValue = getRandomIntNonZero(2);
     const screenPosition = randomValue === 2 ? 'right' : 'left';
     return screenPosition;
 }
@@ -62,7 +62,7 @@ function getAnimationStyle(screenPosition) {
 }
 
 function getLeftPercentage(screenPosition) {
-    const basePercentage = getRandomInt(25);
+    const basePercentage = getRandomIntNonZero(25);
 
     if (screenPosition === 'right') {
         return basePercentage + 71;
@@ -75,16 +75,20 @@ function getAnimationDuration() {
     const windowHeight = $(window).height();
 
     if (windowHeight <= 650) {
-        return getRandomInt(4) + 1;
+        return getRandomIntNonZero(4) + 1;
     } else if (windowHeight <= 1300) {
-        return getRandomInt(5) + 2;
+        return getRandomIntNonZero(5) + 2;
     }
 
-    return getRandomInt(6) + 3;
+    return getRandomIntNonZero(6) + 3;
 }
 
-function getRandomInt(max) {
+function getRandomIntNonZero(max) {
     return Math.floor(Math.random() * Math.floor(max)) + 1;
+}
+
+function getRandomIntIncludingZero(max) {
+    return Math.floor(Math.random() * Math.floor(max));
 }
 
 function attachEventListener(id) {    

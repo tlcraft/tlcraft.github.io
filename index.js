@@ -2,6 +2,8 @@ let currentAnimationCount = 0;
 let totalLifetimeAnimationCount = 0;
 const MAX_PARALLEL_ANIMATIONS = 5;
 let animationInterval;
+const timeouts = [500, 700, 1000, 1500];
+const textChangeIntervals = {};
 
 $(document).ready(function () {
     generateCopyright();
@@ -94,12 +96,27 @@ function getRandomIntIncludingZero(max) {
 function attachEventListener(id) {    
     $('#' + id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
         this.remove();
+        clearInterval(textChangeIntervals[id]);
+        delete textChangeIntervals[id];
+        console.log('ID: ', id, 'deleted.');
+        
         currentAnimationCount--;
         if (currentAnimationCount < 0) {
             currentAnimationCount = 0;
         }
     });
+
+    const timeoutIndex = getRandomIntIncludingZero(timeouts.length);
+    const intervalTimeout = timeouts[timeoutIndex];
+
+    const interval = setInterval(() => {
+        const innerHtml = $('#' + id).text();
+        console.log('ID: ', id, 'Text: ', innerHtml, 'Timeout: ', intervalTimeout);
+    }, intervalTimeout);
+
+    textChangeIntervals[id] = interval;
 }
+
 function watchAnimationButton() {
     const button = document.getElementById('animation-toggle');
     button.addEventListener('click', toggleButton);
@@ -115,6 +132,13 @@ function toggleButton() {
         const animations = document.getElementsByClassName('text-scroll');
         for (let animation of animations) {             
             animation.remove();
+        }
+
+        for (const interval in textChangeIntervals) {
+            if (textChangeIntervals.hasOwnProperty(interval)) {
+                clearInterval(textChangeIntervals[interval]);
+                delete textChangeIntervals[interval];
+            }
         }
     } else {
         this.innerHTML = 'Turn Animation Off';            

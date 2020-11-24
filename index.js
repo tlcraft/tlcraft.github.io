@@ -3,6 +3,7 @@ let totalLifetimeAnimationCount = 0;
 const MAX_PARALLEL_ANIMATIONS = 5;
 let animationInterval;
 const timeouts = [500, 700, 1000, 1500];
+const specialCharacters = ['!', '#', '*', '|', '日', '本',　'木',　'気',　'こ', 'ん', 'に', 'ち', 'は', 'ト', 'ラ', 'ビ', 'ス', 'ク', 'ラ', 'フ', 'ト', 'ア', 'イ', 'ウ', 'エ', 'オ', 'ン', 'を', 'あ', 'い', 'う', 'え', 'お', '火', '大', 'シ', 'ツ', 'ロ', 'マ', 'ム', '父', 'ノ', 'ケ', 'サ', 'セ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 const textChangeIntervals = {};
 
 $(document).ready(function () {
@@ -110,11 +111,23 @@ function attachEventListener(id) {
     const intervalTimeout = timeouts[timeoutIndex];
 
     const interval = setInterval(() => {
-        const innerHtml = $('#' + id).text();
+        const element = $('#' + id);
+        const innerHtml = element.text();
         console.log('ID: ', id, 'Text: ', innerHtml, 'Timeout: ', intervalTimeout);
+        
+        const randomIndex = getRandomIntIncludingZero(innerHtml.length);
+        const characterToReplace = innerHtml[randomIndex];
+        const newInnerHtml = innerHtml.replace(characterToReplace, getSpecialCharacter());
+        element.text(newInnerHtml);
+        console.log('ID: ', id, 'Text: ', newInnerHtml);
     }, intervalTimeout);
 
     textChangeIntervals[id] = interval;
+}
+
+function getSpecialCharacter() {
+    const randomIndex = getRandomIntIncludingZero(specialCharacters.length);
+    return specialCharacters[randomIndex];
 }
 
 function watchAnimationButton() {

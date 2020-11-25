@@ -109,20 +109,21 @@ function attachEventListener(id) {
 
     const timeoutIndex = getRandomIntIncludingZero(timeouts.length);
     const intervalTimeout = timeouts[timeoutIndex];
-
-    const interval = setInterval(() => {
-        const element = $('#' + id);
-        const innerHtml = element.text();
-        console.log('ID: ', id, 'Text: ', innerHtml, 'Timeout: ', intervalTimeout);
-        
-        const randomIndex = getRandomIntIncludingZero(innerHtml.length);
-        const characterToReplace = innerHtml[randomIndex];
-        const newInnerHtml = innerHtml.replace(characterToReplace, getSpecialCharacter());
-        element.text(newInnerHtml);
-        console.log('ID: ', id, 'Text: ', newInnerHtml);
-    }, intervalTimeout);
+    const interval = setInterval(changeLetter(id), intervalTimeout);
 
     textChangeIntervals[id] = interval;
+}
+
+function changeLetter(id) {
+    const element = $('#' + id);
+    const innerHtml = element.text();
+    console.log('ID: ', id, 'Text: ', innerHtml, 'Timeout: ', intervalTimeout);
+    
+    const randomIndex = getRandomIntIncludingZero(innerHtml.length);
+    const characterToReplace = innerHtml[randomIndex];
+    const newInnerHtml = innerHtml.replace(characterToReplace, getSpecialCharacter());
+    element.text(newInnerHtml);
+    console.log('ID: ', id, 'Text: ', newInnerHtml);
 }
 
 function getSpecialCharacter() {

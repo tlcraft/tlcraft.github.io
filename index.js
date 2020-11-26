@@ -109,12 +109,12 @@ function attachEventListener(id) {
 
     const timeoutIndex = getRandomIntIncludingZero(timeouts.length);
     const intervalTimeout = timeouts[timeoutIndex];
-    const interval = setInterval(changeLetter(id), intervalTimeout);
+    const interval = setInterval(changeLetter(id, intervalTimeout), intervalTimeout);
 
     textChangeIntervals[id] = interval;
 }
 
-function changeLetter(id) {
+function changeLetter(id, intervalTimeout) {
     const element = $('#' + id);
     const innerHtml = element.text();
     console.log('ID: ', id, 'Text: ', innerHtml, 'Timeout: ', intervalTimeout);

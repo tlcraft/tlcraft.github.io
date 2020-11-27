@@ -107,9 +107,8 @@ function attachEventListener(id) {
         }
     });
 
-    const timeoutIndex = getRandomIntIncludingZero(timeouts.length);
-    const intervalTimeout = timeouts[timeoutIndex];
-    const interval = setInterval(changeLetter(id, intervalTimeout), intervalTimeout);
+    const intervalTimeout = getRandomArrayValue(timeouts);
+    const interval = setInterval(() => changeLetter(id, intervalTimeout), intervalTimeout);
 
     textChangeIntervals[id] = interval;
 }
@@ -119,16 +118,15 @@ function changeLetter(id, intervalTimeout) {
     const innerHtml = element.text();
     console.log('ID: ', id, 'Text: ', innerHtml, 'Timeout: ', intervalTimeout);
     
-    const randomIndex = getRandomIntIncludingZero(innerHtml.length);
-    const characterToReplace = innerHtml[randomIndex];
-    const newInnerHtml = innerHtml.replace(characterToReplace, getSpecialCharacter());
+    const characterToReplace = getRandomArrayValue(innerHtml);
+    const newInnerHtml = innerHtml.replace(characterToReplace, getRandomArrayValue(specialCharacters));
     element.text(newInnerHtml);
     console.log('ID: ', id, 'Text: ', newInnerHtml);
 }
 
-function getSpecialCharacter() {
-    const randomIndex = getRandomIntIncludingZero(specialCharacters.length);
-    return specialCharacters[randomIndex];
+function getRandomArrayValue(array) {
+    const randomIndex = getRandomIntIncludingZero(array.length);
+    return array[randomIndex];
 }
 
 function watchAnimationButton() {

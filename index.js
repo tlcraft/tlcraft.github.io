@@ -52,7 +52,7 @@ function generateNewAnimationElement(screenPosition, id) {
     div.setAttribute("id", id);
     div.setAttribute("style", style);
 
-    const text = document.createTextNode("Hello World...");
+    const text = document.createTextNode(getText());
     div.appendChild(text);
 
     return div;
@@ -84,6 +84,14 @@ function getAnimationDuration() {
     }
 
     return getRandomIntNonZero(6) + 3;
+}
+
+function getText() {
+    if (getRandomIntNonZero(2) === 2) {
+        return 'Hello World...';
+    } else {
+        return (Math.random() + 1).toString(36).substr(2, 10);  
+    }
 }
 
 function getRandomIntNonZero(max) {

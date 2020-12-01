@@ -87,8 +87,11 @@ function getAnimationDuration() {
 }
 
 function getText() {
-    if (getRandomIntNonZero(2) === 2) {
+    const textChoice = getRandomIntNonZero(3);
+    if (textChoice === 3) {
         return 'Hello World...';
+    } else if (textChoice === 2) {
+        return 'トラビスクラフト';
     } else {
         return (Math.random() + 1).toString(36).substr(2, 10);  
     }

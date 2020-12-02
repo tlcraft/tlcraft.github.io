@@ -9,6 +9,10 @@ body {
     grid-template-columns: 10% 80% 10%;
 }
 
+h1, h2 {
+    margin-top: 80px;
+}
+
 a {
     color: white;
 }
@@ -57,6 +61,7 @@ header {
 footer {
     font-size: 1em;
     text-align: center;
+    margin-top: 80px;
 }
 
 .copyright {

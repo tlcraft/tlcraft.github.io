@@ -2,9 +2,9 @@ let currentAnimationCount = 0;
 let totalLifetimeAnimationCount = 0;
 const MAX_PARALLEL_ANIMATIONS = 5;
 let animationInterval;
-const timeouts = [500, 700, 1000, 1500];
-const specialCharacters = ['!', '#', '*', '|', '日', '本',　'木',　'気',　'こ', 'ん', 'に', 'ち', 'は', 'ト', 'ラ', 'ビ', 'ス', 'ク', 'ラ', 'フ', 'ト', 'ア', 'イ', 'ウ', 'エ', 'オ', 'ン', 'を', 'あ', 'い', 'う', 'え', 'お', '火', '大', 'シ', 'ツ', 'ロ', 'マ', 'ム', '父', 'ノ', 'ケ', 'サ', 'セ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 const textChangeIntervals = {};
+const changeCharacterTimeouts = [500, 700, 1000, 1500];
+const specialCharacters = ['!', '#', '*', '|', '日', '本',　'木',　'気',　'こ', 'ん', 'に', 'ち', 'は', 'ト', 'ラ', 'ビ', 'ス', 'ク', 'ラ', 'フ', 'ト', 'ア', 'イ', 'ウ', 'エ', 'オ', 'ン', 'を', 'あ', 'い', 'う', 'え', 'お', '火', '大', 'シ', 'ツ', 'ロ', 'マ', 'ム', '父', 'ノ', 'ケ', 'サ', 'セ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 $(document).ready(function () {
     generateCopyright();
@@ -52,7 +52,8 @@ function generateNewAnimationElement(screenPosition, id) {
     div.setAttribute("id", id);
     div.setAttribute("style", style);
 
-    const text = document.createTextNode(getText());
+    const randomText = getRandomText();
+    const text = document.createTextNode(randomText);
     div.appendChild(text);
 
     return div;
@@ -86,7 +87,7 @@ function getAnimationDuration() {
     return getRandomIntNonZero(6) + 3;
 }
 
-function getText() {
+function getRandomText() {
     const textChoice = getRandomIntNonZero(3);
     if (textChoice === 3) {
         return 'Hello World...';
@@ -110,7 +111,6 @@ function attachEventListener(id) {
         this.remove();
         clearInterval(textChangeIntervals[id]);
         delete textChangeIntervals[id];
-        console.log('ID: ', id, 'deleted.');
         
         currentAnimationCount--;
         if (currentAnimationCount < 0) {
@@ -118,21 +118,21 @@ function attachEventListener(id) {
         }
     });
 
-    const intervalTimeout = getRandomArrayValue(timeouts);
-    const interval = setInterval(() => changeLetter(id, intervalTimeout), intervalTimeout);
+    const intervalTimeout = getRandomArrayValue(changeCharacterTimeouts);
+    const interval = setInterval(() => changeLetter(id), intervalTimeout);
 
     textChangeIntervals[id] = interval;
 }
 
-function changeLetter(id, intervalTimeout) {
+function changeLetter(id) {
     const element = $('#' + id);
     const innerHtml = element.text();
-    console.log('ID: ', id, 'Text: ', innerHtml, 'Timeout: ', intervalTimeout);
-    
+
     const characterToReplace = getRandomArrayValue(innerHtml);
-    const newInnerHtml = innerHtml.replace(characterToReplace, getRandomArrayValue(specialCharacters));
+    const randomSpecialCharacter = getRandomArrayValue(specialCharacters);
+    const newInnerHtml = innerHtml.replace(characterToReplace, randomSpecialCharacter);
+
     element.text(newInnerHtml);
-    console.log('ID: ', id, 'Text: ', newInnerHtml);
 }
 
 function getRandomArrayValue(array) {

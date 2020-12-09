@@ -47,6 +47,11 @@ header {
     padding: 0 5px;
 }
 
+.skills {
+    display: flex;
+    flex-direction: column; 
+}
+
 .profiles {
     display: flex;
     align-items: center;
@@ -77,6 +82,10 @@ footer {
 @media screen and (min-width: 1000px) {
     .profiles {
         justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .skills {
         flex-direction: row;
     }
 }

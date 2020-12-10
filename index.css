@@ -48,8 +48,8 @@ header {
 }
 
 .skills {
-    display: flex;
-    flex-direction: column; 
+    display: grid;
+    grid-template-columns: 100%;
 }
 
 .profiles {
@@ -86,7 +86,7 @@ footer {
     }
 
     .skills {
-        flex-direction: row;
+        grid-template-columns: 50% 50%; 
     }
 }
 
@@ -105,6 +105,10 @@ footer {
         grid-template-columns: 30% 40% 30%;
     }
 
+    .skills {
+        grid-template-columns: 100%; 
+    }
+
     div.text-scroll {
         position: absolute;
         animation-name: scroll;
@@ -112,5 +116,17 @@ footer {
         writing-mode: vertical-lr;
         text-orientation: upright;
         height: max-content;
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .skills {
+        grid-template-columns: 50% 50%; 
+    }
+}
+
+@media screen and (min-width: 3200px) {
+    .skills {
+        grid-template-columns: 25% 25% 25% 25%; 
     }
 }

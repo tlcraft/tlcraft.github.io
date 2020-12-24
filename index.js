@@ -169,3 +169,7 @@ function toggleButton() {
         startAnimationInterval();
     }
 }
+
+function toggleTvPower() {
+    alert('Powered TV');
+}

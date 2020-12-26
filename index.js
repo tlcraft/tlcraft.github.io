@@ -5,11 +5,11 @@ let animationInterval;
 const textChangeIntervals = {};
 const changeCharacterTimeouts = [500, 700, 1000, 1500];
 const specialCharacters = ['!', '#', '*', '|', '日', '本',　'木',　'気',　'こ', 'ん', 'に', 'ち', 'は', 'ト', 'ラ', 'ビ', 'ス', 'ク', 'ラ', 'フ', 'ト', 'ア', 'イ', 'ウ', 'エ', 'オ', 'ン', 'を', 'あ', 'い', 'う', 'え', 'お', '火', '大', 'シ', 'ツ', 'ロ', 'マ', 'ム', '父', 'ノ', 'ケ', 'サ', 'セ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+let isTvOn = false;
 
 $(document).ready(function () {
     generateCopyright();
     startAnimationInterval();
-    watchAnimationButton();
 });
 
 function generateCopyright() {
@@ -140,16 +140,13 @@ function getRandomArrayValue(array) {
     return array[randomIndex];
 }
 
-function watchAnimationButton() {
-    const button = document.getElementById('animation-toggle');
-    button.addEventListener('click', toggleButton);
-}
 
 function toggleButton() {
-    if (this.innerHTML === 'Turn Animation Off') {
+    const button = document.getElementById('animation-toggle');
+    if (button.innerHTML === 'Turn Animation Off') {
         clearInterval(animationInterval);
-        this.innerHTML = 'Turn Animation On';
-        this.setAttribute('aria-pressed', true);
+        button.innerHTML = 'Turn Animation On';
+        button.setAttribute('aria-pressed', true);
         currentAnimationCount = 0;
 
         const animations = document.getElementsByClassName('text-scroll');
@@ -164,12 +161,29 @@ function toggleButton() {
             }
         }
     } else {
-        this.innerHTML = 'Turn Animation Off';            
-        this.setAttribute('aria-pressed', false);
+        button.innerHTML = 'Turn Animation Off';            
+        button.setAttribute('aria-pressed', false);
         startAnimationInterval();
     }
 }
 
 function toggleTvPower() {
-    alert('Powered TV');
+    setTvState();
+    alert(`Turned TV ${getTvState()}`);
+}
+
+function setTvState() {
+    if(isTvOn) {
+        isTvOn = false;
+    } else {
+        isTvOn = true;
+    }
+}
+
+function getTvState() {
+    if(isTvOn) {
+        return 'On';
+    } else {
+        return 'Off';
+    }
 }

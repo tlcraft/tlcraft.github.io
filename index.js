@@ -169,7 +169,7 @@ function toggleAnimation() {
 
 function toggleTvPower() {
     setTvState();
-    alert(`Turned TV ${getTvState()}`);
+    animateTv();
 }
 
 function setTvState() {
@@ -180,10 +180,12 @@ function setTvState() {
     }
 }
 
-function getTvState() {
+function animateTv() {
+    const screen = document.getElementById('screen');
+
     if(isTvOn) {
-        return 'On';
+        screen.style.backgroundColor = 'transparent';
     } else {
-        return 'Off';
+        screen.style.backgroundColor = 'black';
     }
 }

@@ -141,7 +141,7 @@ function getRandomArrayValue(array) {
 }
 
 
-function toggleButton() {
+function toggleAnimation() {
     const button = document.getElementById('animation-toggle');
     if (button.innerHTML === 'Turn Animation Off') {
         clearInterval(animationInterval);

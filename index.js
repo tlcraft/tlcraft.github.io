@@ -184,8 +184,10 @@ function animateTv() {
     const screen = document.getElementById('screen');
 
     if(isTvOn) {
+        screen.classList.remove('animate-tv-off');
         screen.style.backgroundColor = 'transparent';
-    } else {
-        screen.style.backgroundColor = 'black';
+     } else {
+        screen.style.backgroundColor = '';
+        screen.classList.add('animate-tv-off');
     }
 }

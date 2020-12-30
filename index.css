@@ -118,6 +118,17 @@ footer {
     100% { top: 60%; opacity: 0%; }
 }
 
+@keyframes tvOff {
+    0% { background-color: transparent; }
+    100% { background-color: black; }
+}
+
+.animate-tv-off {
+    animation-name: tvOff;
+    animation-duration: 150ms;
+    animation-fill-mode: forwards;
+}
+
 @media screen and (min-width: 1000px) {
     .profiles {
         justify-content: space-between;

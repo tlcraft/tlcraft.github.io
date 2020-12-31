@@ -186,8 +186,26 @@ function animateTv() {
     if(isTvOn) {
         screen.classList.remove('animate-tv-off');
         screen.style.backgroundColor = 'transparent';
+        drawCircle();
      } else {
+        clearCanvas();
         screen.style.backgroundColor = '';
         screen.classList.add('animate-tv-off');
     }
+}
+
+function drawCircle() {
+    var canvas = document.getElementById("game-canvas");
+    var context = canvas.getContext("2d");
+    context.beginPath();
+    context.strokeStyle = "#FF0000";
+    context.arc(95, 50, 40, 0, 2 * Math.PI);
+    context.stroke();
+}
+
+function clearCanvas() {
+    var canvas = document.getElementById("game-canvas");
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.beginPath();
 }

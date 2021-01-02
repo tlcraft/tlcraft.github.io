@@ -186,7 +186,7 @@ function animateTv() {
     if(isTvOn) {
         screen.classList.remove('animate-tv-off');
         screen.style.backgroundColor = 'transparent';
-        drawCircle();
+        window.requestAnimationFrame(drawCircle);
      } else {
         clearCanvas();
         screen.style.backgroundColor = '';
@@ -194,17 +194,30 @@ function animateTv() {
     }
 }
 
+let x = 95;
+let y = 50;
 function drawCircle() {
-    var canvas = document.getElementById("game-canvas");
-    var context = canvas.getContext("2d");
+    const canvas = document.getElementById("game-canvas");
+    const context = canvas.getContext("2d");
+
+    context.globalCompositeOperation = 'destination-over';
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
     context.beginPath();
     context.strokeStyle = "#FF0000";
-    context.arc(95, 50, 40, 0, 2 * Math.PI);
+    context.arc(x, y, 40, 0, 2 * Math.PI);
     context.stroke();
+
+    x = x + 20;
+    y = y + 20;
+    console.log('X: ', x);
+    console.log('Y: ', y);
+
+    window.requestAnimationFrame(drawCircle);
 }
 
 function clearCanvas() {
-    var canvas = document.getElementById("game-canvas");
+    const canvas = document.getElementById("game-canvas");
     const context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();

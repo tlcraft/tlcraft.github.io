@@ -195,7 +195,11 @@ function animateTv() {
 }
 
 let x = 95;
+let xVector = 2;
 let y = 50;
+let yVector = 2;
+const RADIUS = 40;
+
 function drawCircle() {
     const canvas = document.getElementById("game-canvas");
     const context = canvas.getContext("2d");
@@ -205,15 +209,47 @@ function drawCircle() {
 
     context.beginPath();
     context.strokeStyle = "#FF0000";
-    context.arc(x, y, 40, 0, 2 * Math.PI);
+    context.arc(x, y, RADIUS, 0, 2 * Math.PI);
     context.stroke();
 
-    x = x + 20;
-    y = y + 20;
+    x = getX(canvas);
+    y = getY(canvas);
     console.log('X: ', x);
     console.log('Y: ', y);
 
     window.requestAnimationFrame(drawCircle);
+}
+
+function getX(canvas) {
+    x = x + xVector;
+
+    if (x <= RADIUS) {
+        x = RADIUS + (RADIUS - x);
+        xVector = xVector * -1;
+    }
+
+    if (x >= canvas.width - RADIUS) {
+        x = canvas.width - RADIUS - (x - canvas.width - RADIUS);        
+        xVector = xVector * -1;
+    }
+
+    return x;
+}
+
+function getY(canvas) {
+    y = y + yVector;
+
+    if (y <= RADIUS) {
+        y = RADIUS + (RADIUS - y);
+        yVector = yVector * -1;
+    }
+
+    if (y >= canvas.height - RADIUS) {
+        y = canvas.height - RADIUS - (y - canvas.height - RADIUS);        
+        yVector = yVector * -1;
+    }
+
+    return y;
 }
 
 function clearCanvas() {

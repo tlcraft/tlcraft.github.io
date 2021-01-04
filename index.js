@@ -208,7 +208,7 @@ function drawCircle() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     context.beginPath();
-    context.strokeStyle = "#FF0000";
+    context.strokeStyle = "#FFFFFF";
     context.arc(x, y, RADIUS, 0, 2 * Math.PI);
     context.stroke();
 
@@ -229,7 +229,7 @@ function getX(canvas) {
     }
 
     if (x >= canvas.width - RADIUS) {
-        x = canvas.width - RADIUS - (x - canvas.width - RADIUS);        
+        x = canvas.width - RADIUS;        
         xVector = xVector * -1;
     }
 
@@ -245,7 +245,7 @@ function getY(canvas) {
     }
 
     if (y >= canvas.height - RADIUS) {
-        y = canvas.height - RADIUS - (y - canvas.height - RADIUS);        
+        y = canvas.height - RADIUS;        
         yVector = yVector * -1;
     }
 

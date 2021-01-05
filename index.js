@@ -186,8 +186,9 @@ function animateTv() {
     if(isTvOn) {
         screen.classList.remove('animate-tv-off');
         screen.style.backgroundColor = 'transparent';
-        window.requestAnimationFrame(drawCircle);
+        requestId = window.requestAnimationFrame(drawCircle);
      } else {
+        window.cancelAnimationFrame(requestId);
         clearCanvas();
         screen.style.backgroundColor = '';
         screen.classList.add('animate-tv-off');
@@ -195,10 +196,11 @@ function animateTv() {
 }
 
 let x = 95;
-let xVector = 2;
+let xVector = 5;
 let y = 50;
 let yVector = 2;
 const RADIUS = 40;
+let requestId;
 
 function drawCircle() {
     const canvas = document.getElementById("game-canvas");
@@ -217,7 +219,7 @@ function drawCircle() {
     console.log('X: ', x);
     console.log('Y: ', y);
 
-    window.requestAnimationFrame(drawCircle);
+    requestId = window.requestAnimationFrame(drawCircle);
 }
 
 function getX(canvas) {

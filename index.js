@@ -210,9 +210,9 @@ function drawCircle() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     context.beginPath();
-    context.strokeStyle = "#FFFFFF";
+    context.fillStyle = "#FFFFFF";
     context.arc(x, y, RADIUS, 0, 2 * Math.PI);
-    context.stroke();
+    context.fill();
 
     x = getX(canvas);
     y = getY(canvas);

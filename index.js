@@ -216,8 +216,6 @@ function drawCircle() {
 
     x = getX(canvas);
     y = getY(canvas);
-    console.log('X: ', x);
-    console.log('Y: ', y);
 
     requestId = window.requestAnimationFrame(drawCircle);
 }

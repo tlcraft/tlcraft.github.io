@@ -221,35 +221,35 @@ function drawCircle() {
 }
 
 function calculateX(canvas) {
-    x = x + xVector;
+    let newX = x + xVector;
 
-    if (x <= RADIUS) {
-        x = RADIUS + (RADIUS - x);
+    if (newX <= RADIUS) {
+        newX = RADIUS + (RADIUS - newX);
         xVector = xVector * -1;
     }
 
-    if (x >= canvas.width - RADIUS) {
-        x = canvas.width - RADIUS;        
+    if (newX >= canvas.width - RADIUS) {
+        newX = canvas.width - RADIUS;        
         xVector = xVector * -1;
     }
 
-    return x;
+    return newX;
 }
 
 function calculateY(canvas) {
-    y = y + yVector;
+    let newY = y + yVector;
 
-    if (y <= RADIUS) {
-        y = RADIUS + (RADIUS - y);
+    if (newY <= RADIUS) {
+        newY = RADIUS + (RADIUS - newY);
         yVector = yVector * -1;
     }
 
-    if (y >= canvas.height - RADIUS) {
-        y = canvas.height - RADIUS;        
+    if (newY >= canvas.height - RADIUS) {
+        newY = canvas.height - RADIUS;        
         yVector = yVector * -1;
     }
 
-    return y;
+    return newY;
 }
 
 function clearCanvas() {

@@ -214,13 +214,13 @@ function drawCircle() {
     context.arc(x, y, RADIUS, 0, 2 * Math.PI);
     context.fill();
 
-    x = getX(canvas);
-    y = getY(canvas);
+    x = calculateX(canvas);
+    y = calculateY(canvas);
 
     requestId = window.requestAnimationFrame(drawCircle);
 }
 
-function getX(canvas) {
+function calculateX(canvas) {
     x = x + xVector;
 
     if (x <= RADIUS) {
@@ -236,7 +236,7 @@ function getX(canvas) {
     return x;
 }
 
-function getY(canvas) {
+function calculateY(canvas) {
     y = y + yVector;
 
     if (y <= RADIUS) {

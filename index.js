@@ -214,42 +214,31 @@ function drawCircle() {
     context.arc(x, y, RADIUS, 0, 2 * Math.PI);
     context.fill();
 
-    x = calculateX(canvas);
-    y = calculateY(canvas);
+    const updatedXValues = calculateNextPosition(x, xVector, canvas.width);
+    x = updatedXValues.newPosition;
+    xVector = updatedXValues.vector;
 
+    const updatedYValues = calculateNextPosition(y, yVector, canvas.height);
+    y = updatedYValues.newPosition;
+    yVector = updatedYValues.vector;
+    
     requestId = window.requestAnimationFrame(drawCircle);
 }
 
-function calculateX(canvas) {
-    let newX = x + xVector;
+function calculateNextPosition(currentPosition, vector, bound) {
+    let newPosition = currentPosition + vector;
 
-    if (newX <= RADIUS) {
-        newX = RADIUS + (RADIUS - newX);
-        xVector = xVector * -1;
+    if (newPosition <= RADIUS) {
+        newPosition = RADIUS + (RADIUS - newPosition);
+        vector = vector * -1;
     }
 
-    if (newX >= canvas.width - RADIUS) {
-        newX = canvas.width - RADIUS;        
-        xVector = xVector * -1;
+    if (newPosition >= bound - RADIUS) {
+        newPosition = bound - RADIUS;        
+        vector = vector * -1;
     }
 
-    return newX;
-}
-
-function calculateY(canvas) {
-    let newY = y + yVector;
-
-    if (newY <= RADIUS) {
-        newY = RADIUS + (RADIUS - newY);
-        yVector = yVector * -1;
-    }
-
-    if (newY >= canvas.height - RADIUS) {
-        newY = canvas.height - RADIUS;        
-        yVector = yVector * -1;
-    }
-
-    return newY;
+    return { newPosition, vector };
 }
 
 function clearCanvas() {

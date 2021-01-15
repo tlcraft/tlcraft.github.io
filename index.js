@@ -214,13 +214,13 @@ function drawCircle() {
     context.arc(x, y, RADIUS, 0, 2 * Math.PI);
     context.fill();
 
-    const updatedXValues = calculateNextPosition(x, xVector, canvas.width);
-    x = updatedXValues.newPosition;
-    xVector = updatedXValues.vector;
+    const xUpdatedValues = calculateNextPosition(x, xVector, canvas.width);
+    x = xUpdatedValues.newPosition;
+    xVector = xUpdatedValues.vector;
 
-    const updatedYValues = calculateNextPosition(y, yVector, canvas.height);
-    y = updatedYValues.newPosition;
-    yVector = updatedYValues.vector;
+    const yUpdatedValues = calculateNextPosition(y, yVector, canvas.height);
+    y = yUpdatedValues.newPosition;
+    yVector = yUpdatedValues.vector;
     
     requestId = window.requestAnimationFrame(drawCircle);
 }

@@ -196,9 +196,9 @@ function animateTv() {
 }
 
 let x = 95;
-let xVector = 5;
+let xVector = getRandomIntNonZero(4) + 1;
 let y = 50;
-let yVector = 2;
+let yVector = getRandomIntNonZero(4) + 1;
 const RADIUS = 40;
 let requestId;
 

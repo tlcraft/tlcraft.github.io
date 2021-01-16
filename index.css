@@ -63,6 +63,45 @@ header {
     margin: 20px;
 }
 
+.game {
+    margin-top: 75px;
+}
+
+.tv {
+    border: solid 5px black;
+    border-radius: 5px;
+    height: 250px;
+    width: 400px;
+    margin: auto;
+}
+
+.screen {
+    border: solid 3px black;
+    background-color: black;
+    border-radius: 5px;
+    height: 220px;
+    width: 370px;
+    margin: auto;
+    margin-top: 15px;
+}
+
+.stand {
+    border: solid 5px black;
+    border-top: solid 1px black;
+    height: 50px;
+    width: 350px;
+    margin: auto;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stand button {
+    border: solid 3px black;
+    border-radius: 50%;
+    height: 20px;
+}
+
 footer {
     font-size: 1em;
     text-align: center;
@@ -77,6 +116,17 @@ footer {
     0% { top: -500px; opacity: 100%; }
     70% { top: 50%; opacity: 0%; }
     100% { top: 60%; opacity: 0%; }
+}
+
+@keyframes tvOff {
+    0% { background-color: transparent; }
+    100% { background-color: black; }
+}
+
+.animate-tv-off {
+    animation-name: tvOff;
+    animation-duration: 150ms;
+    animation-fill-mode: forwards;
 }
 
 @media screen and (min-width: 1000px) {

@@ -5,11 +5,11 @@ let animationInterval;
 const textChangeIntervals = {};
 const changeCharacterTimeouts = [500, 700, 1000, 1500];
 const specialCharacters = ['!', '#', '*', '|', '日', '本',　'木',　'気',　'こ', 'ん', 'に', 'ち', 'は', 'ト', 'ラ', 'ビ', 'ス', 'ク', 'ラ', 'フ', 'ト', 'ア', 'イ', 'ウ', 'エ', 'オ', 'ン', 'を', 'あ', 'い', 'う', 'え', 'お', '火', '大', 'シ', 'ツ', 'ロ', 'マ', 'ム', '父', 'ノ', 'ケ', 'サ', 'セ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+let isTvOn = false;
 
 $(document).ready(function () {
     generateCopyright();
     startAnimationInterval();
-    watchAnimationButton();
 });
 
 function generateCopyright() {
@@ -140,16 +140,13 @@ function getRandomArrayValue(array) {
     return array[randomIndex];
 }
 
-function watchAnimationButton() {
-    const button = document.getElementById('animation-toggle');
-    button.addEventListener('click', toggleButton);
-}
 
-function toggleButton() {
-    if (this.innerHTML === 'Turn Animation Off') {
+function toggleAnimation() {
+    const button = document.getElementById('animation-toggle');
+    if (button.innerHTML === 'Turn Animation Off') {
         clearInterval(animationInterval);
-        this.innerHTML = 'Turn Animation On';
-        this.setAttribute('aria-pressed', true);
+        button.innerHTML = 'Turn Animation On';
+        button.setAttribute('aria-pressed', true);
         currentAnimationCount = 0;
 
         const animations = document.getElementsByClassName('text-scroll');
@@ -164,8 +161,89 @@ function toggleButton() {
             }
         }
     } else {
-        this.innerHTML = 'Turn Animation Off';            
-        this.setAttribute('aria-pressed', false);
+        button.innerHTML = 'Turn Animation Off';            
+        button.setAttribute('aria-pressed', false);
         startAnimationInterval();
     }
+}
+
+function toggleTvPower() {
+    setTvState();
+    animateTv();
+}
+
+function setTvState() {
+    if(isTvOn) {
+        isTvOn = false;
+    } else {
+        isTvOn = true;
+    }
+}
+
+function animateTv() {
+    const screen = document.getElementById('screen');
+
+    if(isTvOn) {
+        screen.classList.remove('animate-tv-off');
+        screen.style.backgroundColor = 'transparent';
+        requestId = window.requestAnimationFrame(drawCircle);
+     } else {
+        window.cancelAnimationFrame(requestId);
+        clearCanvas();
+        screen.style.backgroundColor = '';
+        screen.classList.add('animate-tv-off');
+    }
+}
+
+let x = 95;
+let xVector = getRandomIntNonZero(4) + 1;
+let y = 50;
+let yVector = getRandomIntNonZero(4) + 1;
+const RADIUS = 40;
+let requestId;
+
+function drawCircle() {
+    const canvas = document.getElementById("game-canvas");
+    const context = canvas.getContext("2d");
+
+    context.globalCompositeOperation = 'destination-over';
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    context.beginPath();
+    context.fillStyle = "#FFFFFF";
+    context.arc(x, y, RADIUS, 0, 2 * Math.PI);
+    context.fill();
+
+    const xUpdatedValues = calculateNextPosition(x, xVector, canvas.width);
+    x = xUpdatedValues.newPosition;
+    xVector = xUpdatedValues.vector;
+
+    const yUpdatedValues = calculateNextPosition(y, yVector, canvas.height);
+    y = yUpdatedValues.newPosition;
+    yVector = yUpdatedValues.vector;
+    
+    requestId = window.requestAnimationFrame(drawCircle);
+}
+
+function calculateNextPosition(currentPosition, vector, bound) {
+    let newPosition = currentPosition + vector;
+
+    if (newPosition <= RADIUS) {
+        newPosition = RADIUS + (RADIUS - newPosition);
+        vector = vector * -1;
+    }
+
+    if (newPosition >= bound - RADIUS) {
+        newPosition = bound - RADIUS;        
+        vector = vector * -1;
+    }
+
+    return { newPosition, vector };
+}
+
+function clearCanvas() {
+    const canvas = document.getElementById("game-canvas");
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.beginPath();
 }

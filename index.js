@@ -186,25 +186,63 @@ function animateTv() {
     if(isTvOn) {
         screen.classList.remove('animate-tv-off');
         screen.style.backgroundColor = 'transparent';
-        drawCircle();
+        requestId = window.requestAnimationFrame(drawCircle);
      } else {
+        window.cancelAnimationFrame(requestId);
         clearCanvas();
         screen.style.backgroundColor = '';
         screen.classList.add('animate-tv-off');
     }
 }
 
+let x = 95;
+let xVector = getRandomIntNonZero(4) + 1;
+let y = 50;
+let yVector = getRandomIntNonZero(4) + 1;
+const RADIUS = 40;
+let requestId;
+
 function drawCircle() {
-    var canvas = document.getElementById('game-canvas');
-    var context = canvas.getContext('2d');
+    const canvas = document.getElementById('game-canvas');
+    const context = canvas.getContext('2d');
+
+    context.globalCompositeOperation = 'destination-over';
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
     context.beginPath();
-    context.fillStyle = 'white';
-    context.arc(50, 150, 20, 0, 2 * Math.PI);
+    context.fillStyle = '#FFFFFF';
+    context.arc(x, y, RADIUS, 0, 2 * Math.PI);
     context.fill();
+
+    const xUpdatedValues = calculateNextPosition(x, xVector, canvas.width);
+    x = xUpdatedValues.newPosition;
+    xVector = xUpdatedValues.vector;
+
+    const yUpdatedValues = calculateNextPosition(y, yVector, canvas.height);
+    y = yUpdatedValues.newPosition;
+    yVector = yUpdatedValues.vector;
+    
+    requestId = window.requestAnimationFrame(drawCircle);
+}
+
+function calculateNextPosition(currentPosition, vector, bound) {
+    let newPosition = currentPosition + vector;
+
+    if (newPosition <= RADIUS) {
+        newPosition = RADIUS + (RADIUS - newPosition);
+        vector = vector * -1;
+    }
+
+    if (newPosition >= bound - RADIUS) {
+        newPosition = bound - RADIUS;        
+        vector = vector * -1;
+    }
+
+    return { newPosition, vector };
 }
 
 function clearCanvas() {
-    var canvas = document.getElementById('game-canvas');
+    const canvas = document.getElementById('game-canvas');
     const context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();

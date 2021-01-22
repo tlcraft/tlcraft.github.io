@@ -195,11 +195,11 @@ function animateTv() {
     }
 }
 
-let x = getRandomIntNonZero(290) + 40;
-let xVector = getRandomIntNonZero(4) + 1;
-let y = getRandomIntNonZero(140) + 40;
-let yVector = getRandomIntNonZero(4) + 1;
 const RADIUS = 40;
+let x = getRandomIntNonZero(290) + 40;
+let y = getRandomIntNonZero(140) + 40;
+let xVector = getRandomIntNonZero(4) + 1;
+let yVector = getRandomIntNonZero(4) + 1;
 let requestId;
 
 function drawCircle() {

@@ -13,7 +13,7 @@ $(document).ready(function () {
 });
 
 function generateCopyright() {
-    $("footer #copyrightDate").text(new Date().getFullYear());
+    $('footer #copyrightDate').text(new Date().getFullYear());
 }
 
 function startAnimationInterval() {
@@ -29,7 +29,7 @@ function startAnimationInterval() {
 
 function startAnimation() {
     const screenPosition = getLeftOrRight();
-    const id = "text-scroll-" + totalLifetimeAnimationCount;
+    const id = 'text-scroll-' + totalLifetimeAnimationCount;
 
     const div = generateNewAnimationElement(screenPosition, id);
     const container = document.getElementById(screenPosition + '-scroll-container')
@@ -47,10 +47,10 @@ function getLeftOrRight() {
 function generateNewAnimationElement(screenPosition, id) {
     const style = getAnimationStyle(screenPosition);
 
-    const div = document.createElement("div");
-    div.setAttribute("class", "text-scroll");
-    div.setAttribute("id", id);
-    div.setAttribute("style", style);
+    const div = document.createElement('div');
+    div.setAttribute('class', 'text-scroll');
+    div.setAttribute('id', id);
+    div.setAttribute('style', style);
 
     const randomText = getRandomText();
     const text = document.createTextNode(randomText);
@@ -62,7 +62,7 @@ function generateNewAnimationElement(screenPosition, id) {
 function getAnimationStyle(screenPosition) {
     const leftPercentage = getLeftPercentage(screenPosition);
     const animationDuration = getAnimationDuration();
-    return "left: " + leftPercentage + "%; animation-duration: " + animationDuration + "s;";
+    return 'left: ' + leftPercentage + '%; animation-duration: ' + animationDuration + 's;';
 }
 
 function getLeftPercentage(screenPosition) {
@@ -107,7 +107,7 @@ function getRandomIntIncludingZero(max) {
 }
 
 function attachEventListener(id) {    
-    $('#' + id).one("animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd", function() { 
+    $('#' + id).one('animationend webkitAnimationEnd oAnimationEnd MSAnimationEnd', function() { 
         this.remove();
         clearInterval(textChangeIntervals[id]);
         delete textChangeIntervals[id];
@@ -195,22 +195,22 @@ function animateTv() {
     }
 }
 
-let x = 95;
-let xVector = getRandomIntNonZero(4) + 1;
-let y = 50;
-let yVector = getRandomIntNonZero(4) + 1;
 const RADIUS = 40;
+let x = getRandomIntNonZero(290) + 40;
+let y = getRandomIntNonZero(140) + 40;
+let xVector = getRandomIntNonZero(4) + 1;
+let yVector = getRandomIntNonZero(4) + 1;
 let requestId;
 
 function drawCircle() {
-    const canvas = document.getElementById("game-canvas");
-    const context = canvas.getContext("2d");
+    const canvas = document.getElementById('game-canvas');
+    const context = canvas.getContext('2d');
 
     context.globalCompositeOperation = 'destination-over';
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     context.beginPath();
-    context.fillStyle = "#FFFFFF";
+    context.fillStyle = '#FFFFFF';
     context.arc(x, y, RADIUS, 0, 2 * Math.PI);
     context.fill();
 
@@ -242,7 +242,7 @@ function calculateNextPosition(currentPosition, vector, bound) {
 }
 
 function clearCanvas() {
-    const canvas = document.getElementById("game-canvas");
+    const canvas = document.getElementById('game-canvas');
     const context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();

@@ -241,6 +241,14 @@ function calculateNextPosition(currentPosition, vector, bound) {
     return { newPosition, vector };
 }
 
+function leftButtonPress() {
+    xVector *= -1;
+}
+
+function rightButtonPress() {
+    yVector *= -1;
+}
+
 function clearCanvas() {
     const canvas = document.getElementById('game-canvas');
     const context = canvas.getContext('2d');

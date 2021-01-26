@@ -242,11 +242,15 @@ function calculateNextPosition(currentPosition, vector, bound) {
 }
 
 function leftButtonPress() {
-    xVector *= -1;
+    if(isTvOn) {
+        xVector *= -1;
+    }
 }
 
 function rightButtonPress() {
-    yVector *= -1;
+    if(isTvOn) {
+        yVector *= -1;
+    }
 }
 
 function clearCanvas() {

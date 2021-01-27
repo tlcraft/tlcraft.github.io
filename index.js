@@ -198,8 +198,8 @@ function animateTv() {
 const RADIUS = 20;
 let x = getRandomIntNonZero(290) + RADIUS;
 let y = getRandomIntNonZero(140) + RADIUS;
-let xVector = getRandomIntNonZero(4) + 3;
-let yVector = getRandomIntNonZero(4) + 3;
+let xVector = getRandomIntNonZero(4) + 1;
+let yVector = getRandomIntNonZero(4) + 1;
 let requestId;
 
 function drawCircle() {

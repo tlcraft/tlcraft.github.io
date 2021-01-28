@@ -209,10 +209,7 @@ function drawCircle() {
     context.globalCompositeOperation = 'destination-over';
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    context.beginPath();
-    context.fillStyle = '#FFFFFF';
-    context.arc(x, y, RADIUS, 0, 2 * Math.PI);
-    context.fill();
+    drawPlayerBall(context);
 
     const xUpdatedValues = calculateNextPosition(x, xVector, canvas.width);
     x = xUpdatedValues.newPosition;
@@ -239,6 +236,13 @@ function calculateNextPosition(currentPosition, vector, bound) {
     }
 
     return { newPosition, vector };
+}
+
+function drawPlayerBall(context) {
+    context.beginPath();
+    context.fillStyle = '#FFFFFF';
+    context.arc(x, y, RADIUS, 0, 2 * Math.PI);
+    context.fill();
 }
 
 function leftButtonPress() {

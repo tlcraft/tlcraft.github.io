@@ -195,9 +195,9 @@ function animateTv() {
     }
 }
 
-const RADIUS = 40;
-let x = getRandomIntNonZero(290) + 40;
-let y = getRandomIntNonZero(140) + 40;
+const RADIUS = 20;
+let x = getRandomIntNonZero(290) + RADIUS;
+let y = getRandomIntNonZero(140) + RADIUS;
 let xVector = getRandomIntNonZero(4) + 1;
 let yVector = getRandomIntNonZero(4) + 1;
 let requestId;
@@ -239,6 +239,18 @@ function calculateNextPosition(currentPosition, vector, bound) {
     }
 
     return { newPosition, vector };
+}
+
+function leftButtonPress() {
+    if(isTvOn) {
+        xVector *= -1;
+    }
+}
+
+function rightButtonPress() {
+    if(isTvOn) {
+        yVector *= -1;
+    }
 }
 
 function clearCanvas() {

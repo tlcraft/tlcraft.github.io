@@ -210,6 +210,7 @@ function drawCircle() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 
     drawPlayerBall(context);
+    drawTarget(context);
 
     const xUpdatedValues = calculateNextPosition(x, xVector, canvas.width);
     x = xUpdatedValues.newPosition;
@@ -243,6 +244,15 @@ function drawPlayerBall(context) {
     context.fillStyle = '#FFFFFF';
     context.arc(x, y, RADIUS, 0, 2 * Math.PI);
     context.fill();
+    context.closePath();
+}
+
+function drawTarget(context) {
+    context.beginPath();
+    context.fillStyle = '#000000';
+    context.arc(50, 50, RADIUS, 0, 2 * Math.PI);
+    context.fill();
+    context.closePath();
 }
 
 function leftButtonPress() {

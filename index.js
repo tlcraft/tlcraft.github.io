@@ -201,6 +201,7 @@ let y = getRandomIntNonZero(140) + RADIUS;
 let xVector = getRandomIntNonZero(4) + 1;
 let yVector = getRandomIntNonZero(4) + 1;
 let requestId;
+let target;
 
 function drawCircle() {
     const canvas = document.getElementById('game-canvas');
@@ -209,6 +210,7 @@ function drawCircle() {
     context.globalCompositeOperation = 'destination-over';
     context.clearRect(0, 0, canvas.width, canvas.height);
 
+    generateTarget();
     drawPlayerBall(context);
     drawTarget(context);
 
@@ -247,12 +249,23 @@ function drawPlayerBall(context) {
     context.closePath();
 }
 
+function generateTarget() {
+    if(!target) {
+        target = {
+            x: getRandomIntNonZero(290) + RADIUS,
+            y: getRandomIntNonZero(140) + RADIUS
+        };
+    }
+}
+
 function drawTarget(context) {
-    context.beginPath();
-    context.fillStyle = '#000000';
-    context.arc(50, 50, RADIUS, 0, 2 * Math.PI);
-    context.fill();
-    context.closePath();
+    if(target) {
+        context.beginPath();
+        context.fillStyle = '#000000';
+        context.arc(target.x, target.y, RADIUS, 0, 2 * Math.PI);
+        context.fill();
+        context.closePath();
+    }
 }
 
 function leftButtonPress() {

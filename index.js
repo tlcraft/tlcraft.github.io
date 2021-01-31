@@ -222,6 +222,8 @@ function drawCircle() {
     y = yUpdatedValues.newPosition;
     yVector = yUpdatedValues.vector;
     
+    detectCollision();
+
     requestId = window.requestAnimationFrame(drawCircle);
 }
 
@@ -239,6 +241,18 @@ function calculateNextPosition(currentPosition, vector, bound) {
     }
 
     return { newPosition, vector };
+}
+
+function detectCollision() {
+    // See: https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+
+    var dx = x - target.x;
+    var dy = y - target.y;
+    var distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < RADIUS + RADIUS) {
+        console.log('Collision!');
+    }
 }
 
 function drawPlayerBall(context) {

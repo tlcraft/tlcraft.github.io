@@ -251,7 +251,7 @@ function detectCollision() {
     var distance = Math.sqrt(dx * dx + dy * dy);
 
     if (distance < RADIUS + RADIUS) {
-        console.log('Collision!');
+        target = null;
     }
 }
 

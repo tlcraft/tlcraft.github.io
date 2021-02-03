@@ -197,8 +197,8 @@ function animateTv() {
 
 const PLAYER_PUCK_RADIUS = 20;
 const TARGET_PUCK_RADIUS = 10;
-let x = getRandomIntNonZero(290) + PLAYER_PUCK_RADIUS;
-let y = getRandomIntNonZero(140) + PLAYER_PUCK_RADIUS;
+let x = getRandomIntNonZero(330) + PLAYER_PUCK_RADIUS;
+let y = getRandomIntNonZero(180) + PLAYER_PUCK_RADIUS;
 let xVector = getRandomIntNonZero(4) + 1;
 let yVector = getRandomIntNonZero(4) + 1;
 let requestId;
@@ -268,8 +268,8 @@ function drawPlayerBall(context) {
 function generateTarget() {
     if(!target) {
         target = {
-            x: getRandomIntNonZero(300) + TARGET_PUCK_RADIUS,
-            y: getRandomIntNonZero(150) + TARGET_PUCK_RADIUS
+            x: getRandomIntNonZero(350) + TARGET_PUCK_RADIUS,
+            y: getRandomIntNonZero(200) + TARGET_PUCK_RADIUS
         };
     }
 }

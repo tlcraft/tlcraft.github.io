@@ -250,8 +250,8 @@ function detectCollision() {
         var dx = x - target.x;
         var dy = y - target.y;
         var distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < PLAYER_PUCK_RADIUS + TARGET_PUCK_RADIUS) {
+        
+        if (distance < PLAYER_PUCK_RADIUS + TARGET_PUCK_RADIUS) {
             target = null;
         }
     }

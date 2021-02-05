@@ -195,12 +195,14 @@ function animateTv() {
     }
 }
 
-const RADIUS = 20;
-let x = getRandomIntNonZero(290) + RADIUS;
-let y = getRandomIntNonZero(140) + RADIUS;
+const PLAYER_PUCK_RADIUS = 20;
+const TARGET_PUCK_RADIUS = 10;
+let x = getRandomIntNonZero(330) + PLAYER_PUCK_RADIUS;
+let y = getRandomIntNonZero(180) + PLAYER_PUCK_RADIUS;
 let xVector = getRandomIntNonZero(4) + 1;
 let yVector = getRandomIntNonZero(4) + 1;
 let requestId;
+let target;
 
 function drawCircle() {
     const canvas = document.getElementById('game-canvas');
@@ -209,10 +211,9 @@ function drawCircle() {
     context.globalCompositeOperation = 'destination-over';
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    context.beginPath();
-    context.fillStyle = '#FFFFFF';
-    context.arc(x, y, RADIUS, 0, 2 * Math.PI);
-    context.fill();
+    generateTarget();
+    drawPlayerBall(context);
+    drawTarget(context);
 
     const xUpdatedValues = calculateNextPosition(x, xVector, canvas.width);
     x = xUpdatedValues.newPosition;
@@ -222,23 +223,65 @@ function drawCircle() {
     y = yUpdatedValues.newPosition;
     yVector = yUpdatedValues.vector;
     
+    detectCollision();
+
     requestId = window.requestAnimationFrame(drawCircle);
 }
 
 function calculateNextPosition(currentPosition, vector, bound) {
     let newPosition = currentPosition + vector;
 
-    if (newPosition <= RADIUS) {
-        newPosition = RADIUS + (RADIUS - newPosition);
+    if (newPosition <= PLAYER_PUCK_RADIUS) {
+        newPosition = PLAYER_PUCK_RADIUS + (PLAYER_PUCK_RADIUS - newPosition);
         vector = vector * -1;
     }
 
-    if (newPosition >= bound - RADIUS) {
-        newPosition = bound - RADIUS;        
+    if (newPosition >= bound - PLAYER_PUCK_RADIUS) {
+        newPosition = bound - PLAYER_PUCK_RADIUS;        
         vector = vector * -1;
     }
 
     return { newPosition, vector };
+}
+
+function detectCollision() {
+    // See: https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
+    if(target) {
+        var dx = x - target.x;
+        var dy = y - target.y;
+        var distance = Math.sqrt(dx * dx + dy * dy);
+        
+        if (distance < PLAYER_PUCK_RADIUS + TARGET_PUCK_RADIUS) {
+            target = null;
+        }
+    }
+}
+
+function drawPlayerBall(context) {
+    context.beginPath();
+    context.fillStyle = '#FFFFFF';
+    context.arc(x, y, PLAYER_PUCK_RADIUS, 0, 2 * Math.PI);
+    context.fill();
+    context.closePath();
+}
+
+function generateTarget() {
+    if(!target) {
+        target = {
+            x: getRandomIntNonZero(350) + TARGET_PUCK_RADIUS,
+            y: getRandomIntNonZero(200) + TARGET_PUCK_RADIUS
+        };
+    }
+}
+
+function drawTarget(context) {
+    if(target) {
+        context.beginPath();
+        context.fillStyle = '#000000';
+        context.arc(target.x, target.y, TARGET_PUCK_RADIUS, 0, 2 * Math.PI);
+        context.fill();
+        context.closePath();
+    }
 }
 
 function leftButtonPress() {

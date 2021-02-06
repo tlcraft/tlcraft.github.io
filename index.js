@@ -203,6 +203,7 @@ let xVector = getRandomIntNonZero(4) + 1;
 let yVector = getRandomIntNonZero(4) + 1;
 let requestId;
 let target;
+let score = 0;
 
 function drawCircle() {
     const canvas = document.getElementById('game-canvas');
@@ -254,6 +255,7 @@ function detectCollision() {
         
         if (distance < PLAYER_PUCK_RADIUS + TARGET_PUCK_RADIUS) {
             target = null;
+            score++;
         }
     }
 }
@@ -287,7 +289,7 @@ function drawTarget(context) {
 
 function drawScore(context) {
     context.font = '24px serif';
-    context.fillText('Score: ', 5, 25);
+    context.fillText('Score: ' + score, 5, 25);
 }
 
 function leftButtonPress() {
@@ -307,4 +309,5 @@ function clearCanvas() {
     const context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
+    score = 0;
 }

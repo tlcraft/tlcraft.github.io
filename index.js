@@ -214,6 +214,7 @@ function drawCircle() {
     generateTarget();
     drawPlayerBall(context);
     drawTarget(context);
+    drawScore(context);
 
     const xUpdatedValues = calculateNextPosition(x, xVector, canvas.width);
     x = xUpdatedValues.newPosition;
@@ -282,6 +283,11 @@ function drawTarget(context) {
         context.fill();
         context.closePath();
     }
+}
+
+function drawScore(context) {
+    context.font = '24px serif';
+    context.fillText('Score: ', 5, 25);
 }
 
 function leftButtonPress() {

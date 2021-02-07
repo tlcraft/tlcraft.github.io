@@ -310,4 +310,9 @@ function clearCanvas() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
     score = 0;
+    x = getRandomIntNonZero(330) + PLAYER_PUCK_RADIUS;
+    y = getRandomIntNonZero(180) + PLAYER_PUCK_RADIUS;
+    xVector = getRandomIntNonZero(4) + 1;
+    yVector = getRandomIntNonZero(4) + 1;
+    target = null;
 }

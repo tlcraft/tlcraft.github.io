@@ -212,7 +212,7 @@ function drawCircle() {
     context.globalCompositeOperation = 'destination-over';
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    generateTarget();
+    generateTarget(canvas);
     drawPlayerBall(context);
     drawTarget(context);
     drawScore(context);
@@ -268,11 +268,11 @@ function drawPlayerBall(context) {
     context.closePath();
 }
 
-function generateTarget() {
+function generateTarget(canvas) {
     if(!target) {
         target = {
-            x: getRandomIntNonZero(350) + TARGET_PUCK_RADIUS,
-            y: getRandomIntNonZero(200) + TARGET_PUCK_RADIUS
+            x: getRandomIntNonZero(canvas.width - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS,
+            y: getRandomIntNonZero(canvas.height - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS
         };
     }
 }

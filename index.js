@@ -197,11 +197,11 @@ function animateTv() {
 
 const PLAYER_PUCK_RADIUS = 20;
 const TARGET_PUCK_RADIUS = 10;
-let x = getRandomIntNonZero(330) + PLAYER_PUCK_RADIUS;
-let y = getRandomIntNonZero(180) + PLAYER_PUCK_RADIUS;
+
 let xVector = getRandomIntNonZero(4) + 1;
 let yVector = getRandomIntNonZero(4) + 1;
 let requestId;
+let playerPuck;
 let target;
 let score = 0;
 
@@ -212,17 +212,18 @@ function drawCircle() {
     context.globalCompositeOperation = 'destination-over';
     context.clearRect(0, 0, canvas.width, canvas.height);
 
+    generatePlayer(canvas);
     generateTarget(canvas);
     drawPlayerBall(context);
     drawTarget(context);
     drawScore(context);
 
-    const xUpdatedValues = calculateNextPosition(x, xVector, canvas.width);
-    x = xUpdatedValues.newPosition;
+    const xUpdatedValues = calculateNextPosition(playerPuck.x, xVector, canvas.width);
+    playerPuck.x = xUpdatedValues.newPosition;
     xVector = xUpdatedValues.vector;
 
-    const yUpdatedValues = calculateNextPosition(y, yVector, canvas.height);
-    y = yUpdatedValues.newPosition;
+    const yUpdatedValues = calculateNextPosition(playerPuck.y, yVector, canvas.height);
+    playerPuck.y = yUpdatedValues.newPosition;
     yVector = yUpdatedValues.vector;
     
     detectCollision();
@@ -248,9 +249,9 @@ function calculateNextPosition(currentPosition, vector, bound) {
 
 function detectCollision() {
     // See: https://developer.mozilla.org/en-US/docs/Games/Techniques/2D_collision_detection
-    if(target) {
-        var dx = x - target.x;
-        var dy = y - target.y;
+    if(playerPuck && target) {
+        var dx = playerPuck.x - target.x;
+        var dy = playerPuck.y - target.y;
         var distance = Math.sqrt(dx * dx + dy * dy);
         
         if (distance < PLAYER_PUCK_RADIUS + TARGET_PUCK_RADIUS) {
@@ -263,9 +264,18 @@ function detectCollision() {
 function drawPlayerBall(context) {
     context.beginPath();
     context.fillStyle = '#FFFFFF';
-    context.arc(x, y, PLAYER_PUCK_RADIUS, 0, 2 * Math.PI);
+    context.arc(playerPuck.x, playerPuck.y, PLAYER_PUCK_RADIUS, 0, 2 * Math.PI);
     context.fill();
     context.closePath();
+}
+
+function generatePlayer(canvas) {
+    if(!playerPuck) {
+        playerPuck = {
+            x: getRandomIntNonZero(canvas.width - (2 * PLAYER_PUCK_RADIUS)) + PLAYER_PUCK_RADIUS,
+            y: getRandomIntNonZero(canvas.height - (2 * PLAYER_PUCK_RADIUS)) + PLAYER_PUCK_RADIUS
+        };
+    }
 }
 
 function generateTarget(canvas) {
@@ -310,9 +320,8 @@ function clearCanvas() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
     score = 0;
-    x = getRandomIntNonZero(canvas.width - (2 * PLAYER_PUCK_RADIUS)) + PLAYER_PUCK_RADIUS;
-    y = getRandomIntNonZero(canvas.height - (2 * PLAYER_PUCK_RADIUS)) + PLAYER_PUCK_RADIUS;
     xVector = getRandomIntNonZero(4) + 1;
     yVector = getRandomIntNonZero(4) + 1;
     target = null;
+    playerPuck = null;
 }

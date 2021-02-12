@@ -212,9 +212,9 @@ function drawCircle() {
     context.globalCompositeOperation = 'destination-over';
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    generatePlayer(canvas);
+    generatePlayerPuck(canvas);
     generateTarget(canvas);
-    drawPlayerBall(context);
+    drawPlayerPuck(context);
     drawTarget(context);
     drawScore(context);
 
@@ -261,7 +261,7 @@ function detectCollision() {
     }
 }
 
-function drawPlayerBall(context) {
+function drawPlayerPuck(context) {
     context.beginPath();
     context.fillStyle = '#FFFFFF';
     context.arc(playerPuck.x, playerPuck.y, PLAYER_PUCK_RADIUS, 0, 2 * Math.PI);
@@ -269,7 +269,7 @@ function drawPlayerBall(context) {
     context.closePath();
 }
 
-function generatePlayer(canvas) {
+function generatePlayerPuck(canvas) {
     if(!playerPuck) {
         playerPuck = {
             x: getRandomIntNonZero(canvas.width - (2 * PLAYER_PUCK_RADIUS)) + PLAYER_PUCK_RADIUS,

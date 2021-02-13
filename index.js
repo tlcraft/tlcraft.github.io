@@ -205,6 +205,30 @@ let playerPuck;
 let target;
 let score = 0;
 
+function clearCanvas() {
+    const canvas = document.getElementById('game-canvas');
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.beginPath();
+    score = 0;
+    xVector = getRandomIntNonZero(4) + 1;
+    yVector = getRandomIntNonZero(4) + 1;
+    target = null;
+    playerPuck = null;
+}
+
+function leftButtonPress() {
+    if(isTvOn) {
+        xVector *= -1;
+    }
+}
+
+function rightButtonPress() {
+    if(isTvOn) {
+        yVector *= -1;
+    }
+}
+
 function drawCircle() {
     const canvas = document.getElementById('game-canvas');
     const context = canvas.getContext('2d');
@@ -229,6 +253,47 @@ function drawCircle() {
     detectCollision();
 
     requestId = window.requestAnimationFrame(drawCircle);
+}
+
+function generatePlayerPuck(canvas) {
+    if(!playerPuck) {
+        playerPuck = {
+            x: getRandomIntNonZero(canvas.width - (2 * PLAYER_PUCK_RADIUS)) + PLAYER_PUCK_RADIUS,
+            y: getRandomIntNonZero(canvas.height - (2 * PLAYER_PUCK_RADIUS)) + PLAYER_PUCK_RADIUS
+        };
+    }
+}
+
+function generateTarget(canvas) {
+    if(!target) {
+        target = {
+            x: getRandomIntNonZero(canvas.width - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS,
+            y: getRandomIntNonZero(canvas.height - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS
+        };
+    }
+}
+
+function drawPlayerPuck(context) {
+    context.beginPath();
+    context.fillStyle = '#FFFFFF';
+    context.arc(playerPuck.x, playerPuck.y, PLAYER_PUCK_RADIUS, 0, 2 * Math.PI);
+    context.fill();
+    context.closePath();
+}
+
+function drawTarget(context) {
+    if(target) {
+        context.beginPath();
+        context.fillStyle = '#000000';
+        context.arc(target.x, target.y, TARGET_PUCK_RADIUS, 0, 2 * Math.PI);
+        context.fill();
+        context.closePath();
+    }
+}
+
+function drawScore(context) {
+    context.font = '24px serif';
+    context.fillText('Score: ' + score, 5, 25);
 }
 
 function calculateNextPosition(currentPosition, vector, bound) {
@@ -259,69 +324,4 @@ function detectCollision() {
             score++;
         }
     }
-}
-
-function drawPlayerPuck(context) {
-    context.beginPath();
-    context.fillStyle = '#FFFFFF';
-    context.arc(playerPuck.x, playerPuck.y, PLAYER_PUCK_RADIUS, 0, 2 * Math.PI);
-    context.fill();
-    context.closePath();
-}
-
-function generatePlayerPuck(canvas) {
-    if(!playerPuck) {
-        playerPuck = {
-            x: getRandomIntNonZero(canvas.width - (2 * PLAYER_PUCK_RADIUS)) + PLAYER_PUCK_RADIUS,
-            y: getRandomIntNonZero(canvas.height - (2 * PLAYER_PUCK_RADIUS)) + PLAYER_PUCK_RADIUS
-        };
-    }
-}
-
-function generateTarget(canvas) {
-    if(!target) {
-        target = {
-            x: getRandomIntNonZero(canvas.width - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS,
-            y: getRandomIntNonZero(canvas.height - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS
-        };
-    }
-}
-
-function drawTarget(context) {
-    if(target) {
-        context.beginPath();
-        context.fillStyle = '#000000';
-        context.arc(target.x, target.y, TARGET_PUCK_RADIUS, 0, 2 * Math.PI);
-        context.fill();
-        context.closePath();
-    }
-}
-
-function drawScore(context) {
-    context.font = '24px serif';
-    context.fillText('Score: ' + score, 5, 25);
-}
-
-function leftButtonPress() {
-    if(isTvOn) {
-        xVector *= -1;
-    }
-}
-
-function rightButtonPress() {
-    if(isTvOn) {
-        yVector *= -1;
-    }
-}
-
-function clearCanvas() {
-    const canvas = document.getElementById('game-canvas');
-    const context = canvas.getContext('2d');
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.beginPath();
-    score = 0;
-    xVector = getRandomIntNonZero(4) + 1;
-    yVector = getRandomIntNonZero(4) + 1;
-    target = null;
-    playerPuck = null;
 }

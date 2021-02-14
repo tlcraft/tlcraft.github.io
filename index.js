@@ -197,6 +197,7 @@ function animateTv() {
 
 const PLAYER_PUCK_RADIUS = 20;
 const TARGET_PUCK_RADIUS = 10;
+const SCORE_OFFSET = 30;
 
 let xVector = getRandomIntNonZero(4) + 1;
 let yVector = getRandomIntNonZero(4) + 1;
@@ -240,7 +241,7 @@ function drawCircle() {
     generateTarget(canvas);
     drawPlayerPuck(context);
     drawTarget(context);
-    drawScore(context);
+    drawScore(context, canvas.width);
 
     const xUpdatedValues = calculateNextPosition(playerPuck.x, xVector, canvas.width);
     playerPuck.x = xUpdatedValues.newPosition;
@@ -291,9 +292,14 @@ function drawTarget(context) {
     }
 }
 
-function drawScore(context) {
+function drawScore(context, width) {
     context.font = '24px serif';
     context.fillText('Score: ' + score, 5, 25);
+
+    context.beginPath();
+    context.moveTo(0, SCORE_OFFSET);
+    context.lineTo(width, SCORE_OFFSET);
+    context.stroke();
 }
 
 function calculateNextPosition(currentPosition, vector, bound) {

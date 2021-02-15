@@ -247,7 +247,7 @@ function drawCircle() {
     playerPuck.x = xUpdatedValues.newPosition;
     xVector = xUpdatedValues.vector;
 
-    const yUpdatedValues = calculateNextPosition(playerPuck.y, yVector, canvas.height);
+    const yUpdatedValues = calculateNextPosition(playerPuck.y, yVector, canvas.height, SCORE_OFFSET);
     playerPuck.y = yUpdatedValues.newPosition;
     yVector = yUpdatedValues.vector;
     
@@ -269,7 +269,7 @@ function generateTarget(canvas) {
     if(!target) {
         target = {
             x: getRandomIntNonZero(canvas.width - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS,
-            y: getRandomIntNonZero(canvas.height - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS
+            y: getRandomIntNonZero(canvas.height - SCORE_OFFSET - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS + SCORE_OFFSET
         };
     }
 }
@@ -302,11 +302,11 @@ function drawScore(context, width) {
     context.stroke();
 }
 
-function calculateNextPosition(currentPosition, vector, bound) {
+function calculateNextPosition(currentPosition, vector, bound, offset = 0) {
     let newPosition = currentPosition + vector;
 
-    if (newPosition <= PLAYER_PUCK_RADIUS) {
-        newPosition = PLAYER_PUCK_RADIUS + (PLAYER_PUCK_RADIUS - newPosition);
+    if (newPosition <= PLAYER_PUCK_RADIUS + offset) {
+        newPosition = PLAYER_PUCK_RADIUS + offset + (PLAYER_PUCK_RADIUS + offset - newPosition);
         vector = vector * -1;
     }
 

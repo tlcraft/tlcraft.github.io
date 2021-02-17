@@ -186,7 +186,7 @@ function animateTv() {
     if(isTvOn) {
         screen.classList.remove('animate-tv-off');
         screen.style.backgroundColor = 'transparent';
-        requestId = window.requestAnimationFrame(drawCircle);
+        requestId = window.requestAnimationFrame(runGame);
      } else {
         window.cancelAnimationFrame(requestId);
         clearCanvas();
@@ -230,7 +230,7 @@ function rightButtonPress() {
     }
 }
 
-function drawCircle() {
+function runGame() {
     const canvas = document.getElementById('game-canvas');
     const context = canvas.getContext('2d');
 
@@ -253,7 +253,7 @@ function drawCircle() {
     
     detectCollision();
 
-    requestId = window.requestAnimationFrame(drawCircle);
+    requestId = window.requestAnimationFrame(runGame);
 }
 
 function generatePlayerPuck(canvas) {
@@ -275,11 +275,13 @@ function generateTarget(canvas) {
 }
 
 function drawPlayerPuck(context) {
-    context.beginPath();
-    context.fillStyle = '#FFFFFF';
-    context.arc(playerPuck.x, playerPuck.y, PLAYER_PUCK_RADIUS, 0, 2 * Math.PI);
-    context.fill();
-    context.closePath();
+    if(playerPuck) {
+        context.beginPath();
+        context.fillStyle = '#FFFFFF';
+        context.arc(playerPuck.x, playerPuck.y, PLAYER_PUCK_RADIUS, 0, 2 * Math.PI);
+        context.fill();
+        context.closePath();
+    }
 }
 
 function drawTarget(context) {

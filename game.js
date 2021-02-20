@@ -1,3 +1,5 @@
+import { getRandomIntNonZero } from './utilities.js';
+
 const PLAYER_PUCK_RADIUS = 20;
 const TARGET_PUCK_RADIUS = 10;
 const SCORE_OFFSET = 30;
@@ -10,9 +12,21 @@ let target;
 let score = 0;
 let isTvOn = false;
 
-function toggleTvPower() {
+export function toggleTvPower() {
     setTvState();
     animateTv();
+}
+
+export function leftButtonPress() {
+    if(isTvOn) {
+        xVector *= -1;
+    }
+}
+
+export function rightButtonPress() {
+    if(isTvOn) {
+        yVector *= -1;
+    }
 }
 
 function setTvState() {
@@ -48,18 +62,6 @@ function clearCanvas() {
     yVector = getRandomIntNonZero(4) + 1;
     target = null;
     playerPuck = null;
-}
-
-function leftButtonPress() {
-    if(isTvOn) {
-        xVector *= -1;
-    }
-}
-
-function rightButtonPress() {
-    if(isTvOn) {
-        yVector *= -1;
-    }
 }
 
 function runGame() {

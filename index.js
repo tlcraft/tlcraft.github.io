@@ -1,3 +1,6 @@
+import { getRandomIntNonZero, getRandomIntIncludingZero } from './utilities.js';
+import { toggleTvPower, leftButtonPress, rightButtonPress } from './game.js';
+
 let currentAnimationCount = 0;
 let totalLifetimeAnimationCount = 0;
 const MAX_PARALLEL_ANIMATIONS = 5;
@@ -7,9 +10,17 @@ const changeCharacterTimeouts = [500, 700, 1000, 1500];
 const specialCharacters = ['!', '#', '*', '|', '日', '本',　'木',　'気',　'こ', 'ん', 'に', 'ち', 'は', 'ト', 'ラ', 'ビ', 'ス', 'ク', 'ラ', 'フ', 'ト', 'ア', 'イ', 'ウ', 'エ', 'オ', 'ン', 'を', 'あ', 'い', 'う', 'え', 'お', '火', '大', 'シ', 'ツ', 'ロ', 'マ', 'ム', '父', 'ノ', 'ケ', 'サ', 'セ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 $(document).ready(function () {
+    initialize();
     generateCopyright();
     startAnimationInterval();
 });
+
+function initialize() {
+    window.toggleTvPower = toggleTvPower;
+    window.toggleAnimation = toggleAnimation;
+    window.leftButtonPress = leftButtonPress;
+    window.rightButtonPress = rightButtonPress;
+}
 
 function generateCopyright() {
     $('footer #copyrightDate').text(new Date().getFullYear());
@@ -95,14 +106,6 @@ function getRandomText() {
     } else {
         return (Math.random() + 1).toString(36).substr(2, 10);  
     }
-}
-
-function getRandomIntNonZero(max) {
-    return Math.floor(Math.random() * Math.floor(max)) + 1;
-}
-
-function getRandomIntIncludingZero(max) {
-    return Math.floor(Math.random() * Math.floor(max));
 }
 
 function attachEventListener(id) {    

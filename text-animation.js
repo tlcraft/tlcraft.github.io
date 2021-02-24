@@ -1,4 +1,4 @@
-import { getRandomIntNonZero, getRandomIntIncludingZero } from './utilities.js';
+import { getRandomIntNonZero, getRandomArrayValue } from './utilities.js';
 
 let currentAnimationCount = 0;
 let totalLifetimeAnimationCount = 0;
@@ -143,9 +143,4 @@ function changeLetter(id) {
     const newInnerHtml = innerHtml.replace(characterToReplace, randomSpecialCharacter);
 
     element.text(newInnerHtml);
-}
-
-function getRandomArrayValue(array) {
-    const randomIndex = getRandomIntIncludingZero(array.length);
-    return array[randomIndex];
 }

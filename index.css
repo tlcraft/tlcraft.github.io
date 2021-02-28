@@ -30,19 +30,6 @@ header {
     background-color: #008ac5;
 }
 
-.animation-toggle {
-    position: relative;
-    top: 5px;
-    left: 60%;
-    border: solid 5px white;
-    background-color: #008ac5;
-    color: white;
-    font-size: .6em;
-    font-weight: bold;
-    width: 250px;
-    padding: 4px;
-}
-
 .content { 
     padding: 0 5px;
 }
@@ -73,12 +60,6 @@ footer {
     margin-top: 10px;
 }
 
-@keyframes scroll {
-    0% { top: -500px; opacity: 100%; }
-    70% { top: 50%; opacity: 0%; }
-    100% { top: 60%; opacity: 0%; }
-}
-
 @media screen and (min-width: 1000px) {
     .profiles {
         justify-content: space-between;
@@ -90,16 +71,6 @@ footer {
     }
 }
 
-@media screen and (max-width: 1499px) {
-    div.text-scroll {
-        display: none;
-    }
-
-    .animation-toggle {
-        display: none;
-    }
-}
-
 @media screen and (min-width: 1500px) {
     body {
         grid-template-columns: 30% 40% 30%;
@@ -107,15 +78,6 @@ footer {
 
     .skills {
         grid-template-columns: 100%; 
-    }
-
-    div.text-scroll {
-        position: absolute;
-        animation-name: scroll;
-        animation-timing-function: linear;
-        writing-mode: vertical-lr;
-        text-orientation: upright;
-        height: max-content;
     }
 }
 

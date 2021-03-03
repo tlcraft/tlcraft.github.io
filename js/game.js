@@ -10,6 +10,8 @@ let requestId;
 let playerPuck;
 let target;
 let score = 0;
+let time = 0;
+let timeInterval;
 let isTvOn = false;
 
 export function toggleTvPower() {
@@ -43,8 +45,10 @@ function animateTv() {
     if(isTvOn) {
         screen.classList.remove('animate-tv-off');
         screen.style.backgroundColor = 'transparent';
+        timeInterval = setInterval(() => time++, 1000);
         requestId = window.requestAnimationFrame(runGame);
      } else {
+        clearInterval(timeInterval);
         window.cancelAnimationFrame(requestId);
         clearCanvas();
         screen.style.backgroundColor = '';
@@ -58,6 +62,7 @@ function clearCanvas() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
     score = 0;
+    time = 0;
     xVector = getRandomIntNonZero(4) + 1;
     yVector = getRandomIntNonZero(4) + 1;
     target = null;
@@ -141,7 +146,7 @@ function drawScore(context, width) {
 
 function drawTime(context) {
     context.font = '24px serif';
-    context.fillText('Time: ', 150, 25);
+    context.fillText('Time: ' + time, 150, 25);
 }
 
 function calculateNextPosition(currentPosition, vector, bound, offset = 0) {
@@ -170,6 +175,9 @@ function detectCollision() {
         if (distance < PLAYER_PUCK_RADIUS + TARGET_PUCK_RADIUS) {
             target = null;
             score++;
+            clearInterval(timeInterval);
+            time = 0;
+            timeInterval = setInterval(() => time++, 1000);
         }
     }
 }

@@ -1,0 +1,39 @@
+.animation-toggle {
+    position: relative;
+    top: 5px;
+    left: 60%;
+    border: solid 5px white;
+    background-color: #008ac5;
+    color: white;
+    font-size: .6em;
+    font-weight: bold;
+    width: 250px;
+    padding: 4px;
+}
+
+@keyframes scroll {
+    0% { top: -500px; opacity: 100%; }
+    70% { top: 50%; opacity: 0%; }
+    100% { top: 60%; opacity: 0%; }
+}
+
+@media screen and (max-width: 1499px) {
+    div.text-scroll {
+        display: none;
+    }
+
+    .animation-toggle {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    div.text-scroll {
+        position: absolute;
+        animation-name: scroll;
+        animation-timing-function: linear;
+        writing-mode: vertical-lr;
+        text-orientation: upright;
+        height: max-content;
+    }
+}

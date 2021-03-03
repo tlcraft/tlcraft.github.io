@@ -1,0 +1,94 @@
+body {
+    padding: 25px;
+    background-color: #008ac5;
+    color: white;
+    font-size: 2em;
+    font-weight: bold;
+    display: grid;
+    align-items: center;
+    grid-template-columns: 10% 80% 10%;
+}
+
+h1, h2 {
+    margin-top: 80px;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: #D20014;
+}
+
+header {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 50px;
+    width: 100%;
+    background-color: #008ac5;
+}
+
+.content { 
+    padding: 0 5px;
+}
+
+.skills {
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.profiles {
+    display: flex;
+    align-items: center;
+    flex-direction: column;    
+    text-align: center;
+}
+
+.profiles a {
+    margin: 20px;
+}
+
+footer {
+    font-size: 1em;
+    text-align: center;
+    margin-top: 80px;
+}
+
+.copyright {
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 1000px) {
+    .profiles {
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .skills {
+        grid-template-columns: 50% 50%; 
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    body {
+        grid-template-columns: 30% 40% 30%;
+    }
+
+    .skills {
+        grid-template-columns: 100%; 
+    }
+}
+
+@media screen and (min-width: 2000px) {
+    .skills {
+        grid-template-columns: 50% 50%; 
+    }
+}
+
+@media screen and (min-width: 3200px) {
+    .skills {
+        grid-template-columns: 25% 25% 25% 25%; 
+    }
+}

@@ -76,6 +76,7 @@ function runGame() {
     drawPlayerPuck(context);
     drawTarget(context);
     drawScore(context, canvas.width);
+    drawTime(context);
 
     const xUpdatedValues = calculateNextPosition(playerPuck.x, xVector, canvas.width);
     playerPuck.x = xUpdatedValues.newPosition;
@@ -136,6 +137,11 @@ function drawScore(context, width) {
     context.moveTo(0, SCORE_OFFSET);
     context.lineTo(width, SCORE_OFFSET);
     context.stroke();
+}
+
+function drawTime(context) {
+    context.font = '24px serif';
+    context.fillText('Time: ', 150, 25);
 }
 
 function calculateNextPosition(currentPosition, vector, bound, offset = 0) {

@@ -135,7 +135,7 @@ function drawTarget(context) {
 }
 
 function drawScore(context, width) {
-    context.font = '24px serif';
+    context.font = '24px Courier New';
     context.fillText('Score: ' + score, 5, 25);
 
     context.beginPath();
@@ -145,7 +145,7 @@ function drawScore(context, width) {
 }
 
 function drawTime(context) {
-    context.font = '24px serif';
+    context.font = '24px Courier New';
     context.fillText('Time: ' + time, 150, 25);
 }
 

@@ -3,6 +3,7 @@ import { getRandomIntNonZero } from './utilities.js';
 const PLAYER_PUCK_RADIUS = 20;
 const TARGET_PUCK_RADIUS = 10;
 const SCORE_OFFSET = 30;
+const FONT = '24px Courier New';
 
 let xVector = getRandomIntNonZero(4) + 1;
 let yVector = getRandomIntNonZero(4) + 1;
@@ -135,7 +136,7 @@ function drawTarget(context) {
 }
 
 function drawScore(context, width) {
-    context.font = '24px Courier New';
+    context.font = FONT;
     context.fillText('Score: ' + score, 5, 25);
 
     context.beginPath();
@@ -145,7 +146,7 @@ function drawScore(context, width) {
 }
 
 function drawTime(context) {
-    context.font = '24px Courier New';
+    context.font = FONT;
     context.fillText('Time: ' + time, 150, 25);
 }
 

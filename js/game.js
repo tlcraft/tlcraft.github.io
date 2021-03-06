@@ -12,6 +12,7 @@ let playerPuck;
 let target;
 let score = 0;
 let time = 0;
+let bestTime = Number.MAX_VALUE;
 let timeInterval;
 let isTvOn = false;
 
@@ -177,8 +178,15 @@ function detectCollision() {
             target = null;
             score++;
             clearInterval(timeInterval);
+            setBestTime();
             time = 0;
             timeInterval = setInterval(() => time++, 1000);
         }
+    }
+}
+
+function setBestTime() {
+    if(time < bestTime) {
+        bestTime = time;
     }
 }

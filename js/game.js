@@ -3,7 +3,7 @@ import { getRandomIntNonZero } from './utilities.js';
 const PLAYER_PUCK_RADIUS = 20;
 const TARGET_PUCK_RADIUS = 10;
 const SCORE_OFFSET = 30;
-const FONT = '24px Courier New';
+const FONT = '20px Courier New';
 
 let xVector = getRandomIntNonZero(4) + 1;
 let yVector = getRandomIntNonZero(4) + 1;
@@ -148,7 +148,9 @@ function drawScore(context, width) {
 
 function drawTime(context) {
     context.font = FONT;
-    context.fillText('Time: ' + time, 150, 25);
+    const currentBestTime = bestTime !== Number.MAX_VALUE ? bestTime : 'n/a';
+    context.fillText('Time: ' + time, 140, 25);    
+    context.fillText('Best: ' + currentBestTime, 260, 25);
 }
 
 function calculateNextPosition(currentPosition, vector, bound, offset = 0) {

@@ -116,6 +116,13 @@ function generateTarget(canvas) {
     }
 }
 
+function getDistanceBetweenTargetAndPuck() {
+    const xDifference = playerPuck.x - target.x;
+    const yDifference = playerPuck.y - target.y;
+    const squares = (xDifference * xDifference) + (yDifference * yDifference);
+    return Math.sqrt(squares);
+}
+
 function drawPlayerPuck(context) {
     if(playerPuck) {
         context.beginPath();

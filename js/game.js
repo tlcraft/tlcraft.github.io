@@ -109,10 +109,12 @@ function generatePlayerPuck(canvas) {
 
 function generateTarget(canvas) {
     if(!target) {
-        target = {
-            x: getRandomIntNonZero(canvas.width - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS,
-            y: getRandomIntNonZero(canvas.height - SCORE_OFFSET - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS + SCORE_OFFSET
-        };
+        do {
+            target = {
+                x: getRandomIntNonZero(canvas.width - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS,
+                y: getRandomIntNonZero(canvas.height - SCORE_OFFSET - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS + SCORE_OFFSET
+            };
+        } while(getDistanceBetweenTargetAndPuck() < 100)
     }
 }
 

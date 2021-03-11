@@ -4,6 +4,7 @@ const PLAYER_PUCK_RADIUS = 20;
 const TARGET_PUCK_RADIUS = 10;
 const SCORE_OFFSET = 30;
 const FONT = '20px Courier New';
+const SEPARATION_DISTANCE = 200;
 
 let xVector = getRandomIntNonZero(4) + 1;
 let yVector = getRandomIntNonZero(4) + 1;
@@ -114,7 +115,7 @@ function generateTarget(canvas) {
                 x: getRandomIntNonZero(canvas.width - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS,
                 y: getRandomIntNonZero(canvas.height - SCORE_OFFSET - (2 * TARGET_PUCK_RADIUS)) + TARGET_PUCK_RADIUS + SCORE_OFFSET
             };
-        } while(getDistanceBetweenTargetAndPuck() < 200)
+        } while(getDistanceBetweenTargetAndPuck() < SEPARATION_DISTANCE)
     }
 }
 

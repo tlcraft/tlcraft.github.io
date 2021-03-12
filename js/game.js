@@ -12,7 +12,7 @@ let requestId;
 let playerPuck;
 let target;
 let score = 0;
-let time = 0;
+let startTime = null;
 let bestTime = Number.MAX_VALUE;
 let timeInterval;
 let isTvOn = false;
@@ -48,7 +48,8 @@ function animateTv() {
     if(isTvOn) {
         screen.classList.remove('animate-tv-off');
         screen.style.backgroundColor = 'transparent';
-        timeInterval = setInterval(() => time++, 1000);
+        startTime = Date.now();
+        timeInterval = setInterval(calculateTime, 100);
         requestId = window.requestAnimationFrame(runGame);
      } else {
         clearInterval(timeInterval);
@@ -65,7 +66,7 @@ function clearCanvas() {
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.beginPath();
     score = 0;
-    time = 0;
+    startTime = null;
     xVector = getRandomIntNonZero(4) + 1;
     yVector = getRandomIntNonZero(4) + 1;
     target = null;
@@ -159,7 +160,7 @@ function drawScore(context, width) {
 function drawTime(context) {
     context.font = FONT;
     const currentBestTime = bestTime !== Number.MAX_VALUE ? bestTime : 'n/a';
-    context.fillText('Time: ' + time, 140, 25);    
+    context.fillText('Time: ' + calculateTime(), 140, 25);    
     context.fillText('Best: ' + currentBestTime, 260, 25);
 }
 
@@ -191,14 +192,19 @@ function detectCollision() {
             score++;
             clearInterval(timeInterval);
             setBestTime();
-            time = 0;
-            timeInterval = setInterval(() => time++, 1000);
+            startTime = Date.now();
+            timeInterval = setInterval(calculateTime, 100);
         }
     }
 }
 
+function calculateTime() {
+    var elapsedTime = Date.now() - startTime;
+    return (elapsedTime / 1000).toFixed(2);
+}
+
 function setBestTime() {
-    if(time < bestTime) {
-        bestTime = time;
+    if(calculateTime() < bestTime) {
+        bestTime = calculateTime();
     }
 }

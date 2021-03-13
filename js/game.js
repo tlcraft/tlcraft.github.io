@@ -160,8 +160,8 @@ function drawScore(context, width) {
 function drawTime(context) {
     context.font = FONT;
     const currentBestTime = bestTime !== Number.MAX_VALUE ? bestTime : 'n/a';
-    context.fillText('Time: ' + calculateTime(), 140, 25);    
-    context.fillText('Best: ' + currentBestTime, 260, 25);
+    context.fillText('Time: ' + calculateTime(), 115, 25);    
+    context.fillText('Best: ' + currentBestTime, 250, 25);
 }
 
 function calculateNextPosition(currentPosition, vector, bound, offset = 0) {

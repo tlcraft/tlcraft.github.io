@@ -19,7 +19,7 @@ export function startAnimationInterval() {
     }, 750);
 }
 
-export function toggleAnimation() {
+export function toggleTextAnimation() {
     const button = document.getElementById('animation-toggle');
     if (button.innerHTML === 'Turn Animation Off') {
         clearInterval(animationInterval);

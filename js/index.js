@@ -1,5 +1,5 @@
 import { toggleTvPower, leftButtonPress, rightButtonPress } from './game.js';
-import { startAnimationInterval, toggleAnimation } from './text-animation.js';
+import { startAnimationInterval, toggleTextAnimation } from './text-animation.js';
 
 $(document).ready(function () {
     initialize();
@@ -9,7 +9,7 @@ $(document).ready(function () {
 
 function initialize() {
     window.toggleTvPower = toggleTvPower;
-    window.toggleAnimation = toggleAnimation;
+    window.toggleTextAnimation = toggleTextAnimation;
     window.leftButtonPress = leftButtonPress;
     window.rightButtonPress = rightButtonPress;
 }

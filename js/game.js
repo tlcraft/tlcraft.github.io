@@ -17,6 +17,17 @@ let bestTime = Number.MAX_VALUE;
 let timeInterval;
 let isTvOn = false;
 
+export function toggleGameAnimation() {
+    const button = document.getElementById('animation-toggle');
+    const game = document.getElementById('game');
+
+    if (button.innerHTML === 'Turn Animation Off') {
+        game.style.display = 'block';
+    } else {
+        game.style.display = 'none';
+    }
+}
+
 export function toggleTvPower() {
     setTvState();
     animateTv();

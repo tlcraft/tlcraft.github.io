@@ -10,7 +10,7 @@
         <link rel="icon" type="image/png" href="favicon.png" />
     </head>
     <body>
-        <header><button id="animation-toggle" type="button" tabindex="0" class="animation-toggle" aria-pressed="false" onclick="toggleTextAnimation()">Turn Animation Off</button></header>
+        <header><button id="animation-toggle" type="button" tabindex="0" class="animation-toggle" aria-pressed="false" onclick="toggleTextAnimation();toggleGameAnimation()">Turn Animation Off</button></header>
         <section id="right-scroll-container" class="scroll-container"></section>
         <section class="content">
             <h1>Hello World!</h1>
@@ -83,7 +83,7 @@
                     <a href="https://twitter.com/@travislcraft">Twitter</a>
                 </p>
             </div>
-            <div class="game">
+            <div class="game" id="game">
                 <div class="tv">
                     <div class="screen" id="screen">
                         <canvas id="game-canvas" width="370" height="220"></canvas>

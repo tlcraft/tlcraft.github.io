@@ -25,6 +25,9 @@ export function toggleGameAnimation() {
         game.style.display = 'block';
     } else {
         game.style.display = 'none';
+        if(isTvOn) {
+            toggleTvPower();
+        }
     }
 }
 

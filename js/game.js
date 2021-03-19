@@ -81,6 +81,7 @@ function clearCanvas() {
     context.beginPath();
     score = 0;
     startTime = null;
+    bestTime = Number.MAX_VALUE;
     xVector = getRandomIntNonZero(4) + 1;
     yVector = getRandomIntNonZero(4) + 1;
     target = null;

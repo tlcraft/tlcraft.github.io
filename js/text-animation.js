@@ -27,10 +27,8 @@ export function toggleTextAnimation() {
         button.setAttribute('aria-pressed', true);
         currentAnimationCount = 0;
 
-        const animations = document.getElementsByClassName('text-scroll');
-        for (let animation of animations) {             
-            animation.remove();
-        }
+        const animations = $('.text-scroll');
+        animations.remove();
 
         for (const interval in textChangeIntervals) {
             if (textChangeIntervals.hasOwnProperty(interval)) {

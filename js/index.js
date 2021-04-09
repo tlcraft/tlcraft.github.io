@@ -1,5 +1,6 @@
 import { toggleTvPower, leftButtonPress, rightButtonPress, toggleGameAnimation } from './game.js';
 import { startAnimationInterval, toggleTextAnimation } from './text-animation.js';
+import { toggleThreeScene } from './three-scene.js';
 import * as THREE from './lib/three/build/three.module.js';
 
 $(document).ready(function () {
@@ -15,6 +16,7 @@ function initialize() {
     window.leftButtonPress = leftButtonPress;
     window.rightButtonPress = rightButtonPress;
     window.toggleGameAnimation = toggleGameAnimation;
+    window.toggleThreeScene = toggleThreeScene;
 }
 
 function generateCopyright() {

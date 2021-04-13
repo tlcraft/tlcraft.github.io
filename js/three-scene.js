@@ -13,11 +13,11 @@ export function toggleThreeScene() {
 
 export function createThreeScene() {
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0x008ac5 );
     const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
-    const renderer = new THREE.WebGLRenderer();
+    const renderer = new THREE.WebGLRenderer({alpha: true});
     renderer.setSize( 200, 200 );
+
     const threeDiv = document.getElementById('three');
     threeDiv.appendChild( renderer.domElement );
 

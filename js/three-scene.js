@@ -1,16 +1,5 @@
 import * as THREE from './lib/three/build/three.module.js';
 
-export function toggleThreeScene() {
-    const button = document.getElementById('animation-toggle');
-    const three = document.getElementById('three');
-
-    if (button.innerHTML === 'Turn Animation Off') {
-        three.style.display = 'block';
-    } else {
-        three.style.display = 'none';
-    }
-}
-
 export function createThreeScene() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );

@@ -90,22 +90,24 @@
                     <a href="https://twitter.com/@travislcraft">Twitter</a>
                 </p>
             </div>
-            <p>I also use this page to play around with JavaScript. Check out my little creations below!</p>
-            <div class="game" id="game">
-                <div class="tv">
-                    <div class="screen" id="screen">
-                        <canvas id="game-canvas" width="370" height="220"></canvas>
+            <div id="creations">
+                <p>I also use this page to play around with JavaScript. Check out my little creations below!</p>
+                <div class="game" id="game">
+                    <div class="tv">
+                        <div class="screen" id="screen">
+                            <canvas id="game-canvas" width="370" height="220"></canvas>
+                        </div>
+                    </div>
+                    <div class="stand">
+                        <button onclick="toggleTvPower()"></button>
+                    </div>
+                    <div class="controller">
+                        <button onclick="leftButtonPress()">X</button>
+                        <button onclick="rightButtonPress()">Y</button>
                     </div>
                 </div>
-                <div class="stand">
-                    <button onclick="toggleTvPower()"></button>
-                </div>
-                <div class="controller">
-                    <button onclick="leftButtonPress()">X</button>
-                    <button onclick="rightButtonPress()">Y</button>
-                </div>
+                <div id="three" class="three"></div>
             </div>
-            <div id="three" class="three"></div>
             <footer>
                 <hr/>
                 <a href="https://travislcraft.com">travislcraft</a>

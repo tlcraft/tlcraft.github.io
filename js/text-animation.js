@@ -19,12 +19,9 @@ export function startAnimationInterval() {
     }, 750);
 }
 
-export function toggleTextAnimation() {
-    const button = document.getElementById('animation-toggle');
-    if (button.innerHTML === 'Turn Animation Off') {
+export function toggleTextAnimation(isAnimationRunning) {
+    if (isAnimationRunning) {
         clearInterval(animationInterval);
-        button.innerHTML = 'Turn Animation On';
-        button.setAttribute('aria-pressed', true);
         currentAnimationCount = 0;
 
         const animations = $('.text-scroll');
@@ -37,8 +34,6 @@ export function toggleTextAnimation() {
             }
         }
     } else {
-        button.innerHTML = 'Turn Animation Off';            
-        button.setAttribute('aria-pressed', false);
         startAnimationInterval();
     }
 }

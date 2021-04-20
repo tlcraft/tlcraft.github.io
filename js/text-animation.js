@@ -20,7 +20,7 @@ export function startAnimationInterval() {
 }
 
 export function toggleTextAnimation(isAnimationRunning) {
-    if (isAnimationRunning) {
+    if (!isAnimationRunning) {
         clearInterval(animationInterval);
         currentAnimationCount = 0;
 

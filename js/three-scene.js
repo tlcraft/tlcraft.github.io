@@ -14,6 +14,11 @@ export function createThreeScene() {
     const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
     const cube = new THREE.Mesh( geometry, material );
 
+    var edgesGeometry = new THREE.EdgesGeometry( cube.geometry );
+    var lineBasicMaterial = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 2 } );
+    var edges = new THREE.LineSegments( edgesGeometry, lineBasicMaterial );
+    cube.add( edges );
+
     scene.add( cube );
 
     camera.position.z = 5;

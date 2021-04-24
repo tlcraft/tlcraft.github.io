@@ -18,7 +18,7 @@ export function createThreeScene() {
     cube.add( edges );
 
     scene.add( cube );
-    camera.position.z = 5;
+    camera.position.z = 2;
 
     const animate = function () {
         requestAnimationFrame( animate );

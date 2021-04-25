@@ -10,11 +10,8 @@ export function createThreeScene() {
     const threeDiv = document.getElementById('three');
     threeDiv.appendChild( renderer.domElement );
 
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
-    const cube = new THREE.Mesh( geometry, material );
-
-    const edges = generateBoxEdges(cube);
+    const cube = generateCube();
+    const edges = generateCubeEdges(cube);
     cube.add( edges );
 
     scene.add( cube );
@@ -33,7 +30,14 @@ export function createThreeScene() {
     animate();
 }
 
-function generateBoxEdges(cube) {
+function generateCube() {
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const cube = new THREE.Mesh( geometry, material );
+    return cube;
+}
+
+function generateCubeEdges(cube) {
     var edgesGeometry = new THREE.EdgesGeometry( cube.geometry );
     var lineBasicMaterial = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 2 } );
     var edges = new THREE.LineSegments( edgesGeometry, lineBasicMaterial );

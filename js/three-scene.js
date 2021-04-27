@@ -3,9 +3,7 @@ import * as THREE from './lib/three/build/three.module.js';
 export function createThreeScene() {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
-
-    const renderer = new THREE.WebGLRenderer({alpha: true});
-    renderer.setSize( 300, 300 );
+    const renderer = generateRenderer();
 
     const threeDiv = document.getElementById('three');
     threeDiv.appendChild( renderer.domElement );
@@ -28,6 +26,12 @@ export function createThreeScene() {
     };
 
     animate();
+}
+
+function generateRenderer() {
+    const renderer = new THREE.WebGLRenderer({alpha: true});
+    renderer.setSize( 300, 300 );
+    return renderer;
 }
 
 function generateCube() {

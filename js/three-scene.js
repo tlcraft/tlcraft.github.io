@@ -2,7 +2,7 @@ import * as THREE from './lib/three/build/three.module.js';
 
 export function createThreeScene() {
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    const camera = generateCamera();
     const renderer = generateRenderer();
 
     const threeDiv = document.getElementById('three');
@@ -11,9 +11,7 @@ export function createThreeScene() {
     const cube = generateCube();
     const edges = generateCubeEdges(cube);
     cube.add( edges );
-
     scene.add( cube );
-    camera.position.z = 2;
 
     const animate = function () {
         requestAnimationFrame( animate );
@@ -26,6 +24,12 @@ export function createThreeScene() {
     };
 
     animate();
+}
+
+function generateCamera() {
+    const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
+    camera.position.z = 2;
+    return camera;
 }
 
 function generateRenderer() {

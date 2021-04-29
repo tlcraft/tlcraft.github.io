@@ -4,9 +4,7 @@ export function createThreeScene() {
     const scene = new THREE.Scene();
     const camera = generateCamera();
     const renderer = generateRenderer();
-
-    const threeDiv = document.getElementById('three');
-    threeDiv.appendChild( renderer.domElement );
+    addRendererToDom(renderer);
 
     const cube = generateCube();
     const edges = generateCubeEdges(cube);
@@ -36,6 +34,11 @@ function generateRenderer() {
     const renderer = new THREE.WebGLRenderer({alpha: true});
     renderer.setSize( 300, 300 );
     return renderer;
+}
+
+function addRendererToDom(renderer) {
+    const threeDiv = document.getElementById('three');
+    threeDiv.appendChild( renderer.domElement );
 }
 
 function generateCube() {

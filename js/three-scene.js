@@ -11,16 +11,7 @@ export function createThreeScene() {
     cube.add( edges );
     scene.add( cube );
 
-    const animate = function () {
-        window.requestAnimationFrame( animate );
-
-        cube.rotation.x += 0.03;
-        cube.rotation.y += 0.01;
-        cube.rotation.z += 0.02;
-
-        renderer.render( scene, camera );
-    };
-
+    const animate = () => animation(animate, renderer, scene, camera, cube);
     animate();
 }
 
@@ -54,3 +45,13 @@ function generateCubeEdges(cube) {
     var edges = new THREE.LineSegments( edgesGeometry, lineBasicMaterial );
     return edges;
 }
+
+function animation(animate, renderer, scene, camera, cube) {
+    window.requestAnimationFrame( animate );
+
+    cube.rotation.x += 0.03;
+    cube.rotation.y += 0.01;
+    cube.rotation.z += 0.02;
+
+    renderer.render( scene, camera );
+};

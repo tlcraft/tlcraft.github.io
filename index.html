@@ -6,11 +6,12 @@
         <title>Travis L Craft - About Me</title>
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" type="text/css" href="css/game.css">
+        <link rel="stylesheet" type="text/css" href="css/three-scene.css">
         <link rel="stylesheet" type="text/css" href="css/text-animation.css">
         <link rel="icon" type="image/png" href="favicon.png" />
     </head>
     <body>
-        <header><button id="animation-toggle" type="button" tabindex="0" class="animation-toggle" aria-pressed="false" onclick="toggleTextAnimation();toggleGameAnimation()">Turn Animation Off</button></header>
+        <header><button id="animation-toggle" type="button" tabindex="0" class="animation-toggle" aria-pressed="false" onclick="toggleAnimation()">Turn Animation Off</button></header>
         <section id="right-scroll-container" class="scroll-container"></section>
         <section class="content">
             <h1>Hello World!</h1>
@@ -89,20 +90,23 @@
                     <a href="https://twitter.com/@travislcraft">Twitter</a>
                 </p>
             </div>
-            <p>I also use this page to play around with JavaScript. Check out my little creations below!</p>
-            <div class="game" id="game">
-                <div class="tv">
-                    <div class="screen" id="screen">
-                        <canvas id="game-canvas" width="370" height="220"></canvas>
+            <div id="creations">
+                <p>I also use this page to play around with JavaScript. Check out my little creations below!</p>
+                <div class="game" id="game">
+                    <div class="tv">
+                        <div class="screen" id="screen">
+                            <canvas id="game-canvas" width="370" height="220"></canvas>
+                        </div>
+                    </div>
+                    <div class="stand">
+                        <button onclick="toggleTvPower()"></button>
+                    </div>
+                    <div class="controller">
+                        <button onclick="leftButtonPress()">X</button>
+                        <button onclick="rightButtonPress()">Y</button>
                     </div>
                 </div>
-                <div class="stand">
-                    <button onclick="toggleTvPower()"></button>
-                </div>
-                <div class="controller">
-                    <button onclick="leftButtonPress()">X</button>
-                    <button onclick="rightButtonPress()">Y</button>
-                </div>
+                <div id="three" class="three"></div>
             </div>
             <footer>
                 <hr/>

@@ -8,8 +8,10 @@ export function createThreeScene() {
 
     const cube = generateCube();
     const edges = generateCubeEdges(cube);
+    const light = new THREE.AmbientLight( 0xbbbbbb );
     cube.add( edges );
     scene.add( cube );
+    scene.add( light );
 
     const animate = () => animation(animate, renderer, scene, camera, cube);
     animate();
@@ -34,7 +36,7 @@ function addRendererToDom(renderer) {
 
 function generateCube() {
     const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const material = new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
     const cube = new THREE.Mesh( geometry, material );
     return cube;
 }

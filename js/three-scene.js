@@ -25,7 +25,7 @@ function generateCamera() {
 }
 
 function generateRenderer() {
-    const renderer = new THREE.WebGLRenderer({alpha: true});
+    const renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
     renderer.setSize( 300, 300 );
     return renderer;
 }

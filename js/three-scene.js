@@ -6,6 +6,7 @@ export function createThreeScene() {
     const renderer = generateRenderer();
     addRendererToDom(renderer);
 
+    const clock = new THREE.Clock();
     const cube = generateCube();
     const edges = generateCubeEdges(cube);
     const light = new THREE.AmbientLight( 0xbbbbbb );
@@ -13,7 +14,7 @@ export function createThreeScene() {
     scene.add( cube );
     scene.add( light );
 
-    const animate = () => animation(animate, renderer, scene, camera, cube);
+    const animate = () => animation(animate, renderer, scene, camera, cube, clock);
     animate();
 }
 
@@ -48,12 +49,14 @@ function generateCubeEdges(cube) {
     return edges;
 }
 
-function animation(animate, renderer, scene, camera, cube) {
+function animation(animate, renderer, scene, camera, cube, clock) {
     window.requestAnimationFrame( animate );
 
-    cube.rotation.x += 0.03;
-    cube.rotation.y += 0.01;
-    cube.rotation.z += 0.02;
+    const delta = clock.getDelta();
+    cube.rotation.x += 0.3 * delta;
+    cube.rotation.y += 0.1 * delta;
+    cube.rotation.z += 0.2 * delta;
+
 
     renderer.render( scene, camera );
 };

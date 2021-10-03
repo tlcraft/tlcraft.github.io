@@ -6,12 +6,15 @@ export function createThreeScene() {
     const renderer = generateRenderer();
     addRendererToDom(renderer);
 
+    const clock = new THREE.Clock();
     const cube = generateCube();
     const edges = generateCubeEdges(cube);
+    const light = new THREE.AmbientLight( 0xbbbbbb );
     cube.add( edges );
     scene.add( cube );
+    scene.add( light );
 
-    const animate = () => animation(animate, renderer, scene, camera, cube);
+    const animate = () => animation(animate, renderer, scene, camera, cube, clock);
     animate();
 }
 
@@ -22,7 +25,7 @@ function generateCamera() {
 }
 
 function generateRenderer() {
-    const renderer = new THREE.WebGLRenderer({alpha: true});
+    const renderer = new THREE.WebGLRenderer({alpha: true, antialias: true});
     renderer.setSize( 300, 300 );
     return renderer;
 }
@@ -34,7 +37,7 @@ function addRendererToDom(renderer) {
 
 function generateCube() {
     const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const material = new THREE.MeshLambertMaterial( { color: 0x00ff00 } );
     const cube = new THREE.Mesh( geometry, material );
     return cube;
 }
@@ -46,12 +49,14 @@ function generateCubeEdges(cube) {
     return edges;
 }
 
-function animation(animate, renderer, scene, camera, cube) {
+function animation(animate, renderer, scene, camera, cube, clock) {
     window.requestAnimationFrame( animate );
 
-    cube.rotation.x += 0.03;
-    cube.rotation.y += 0.01;
-    cube.rotation.z += 0.02;
+    const delta = clock.getDelta();
+    cube.rotation.x += 0.3 * delta;
+    cube.rotation.y += 0.1 * delta;
+    cube.rotation.z += 0.2 * delta;
+
 
     renderer.render( scene, camera );
 };

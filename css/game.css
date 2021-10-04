@@ -33,7 +33,7 @@
 
 .stand button {
     border: solid 3px black;
-    border-radius: 50%;
+    border-radius: 25%;
     height: 20px;
 }
 

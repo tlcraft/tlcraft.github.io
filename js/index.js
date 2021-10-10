@@ -21,11 +21,14 @@ function generateCopyright() {
 function toggleAnimation() {
     const button = document.getElementById('animation-toggle');
     isAnimationRunning = !isAnimationRunning;
-
+    const threeScene = document.getElementById('three');
+    
     if (isAnimationRunning) {
+        threeScene.style.display = 'block';
         button.innerHTML = 'Turn Animation Off';            
         button.setAttribute('aria-pressed', false);
     } else {
+        threeScene.style.display = 'none';
         button.innerHTML = 'Turn Animation On';
         button.setAttribute('aria-pressed', true);
     }

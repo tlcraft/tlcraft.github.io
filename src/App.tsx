@@ -2,8 +2,8 @@ import './App.css';
 
 function App() {
   return (
-    <div className="app">
-      <section></section>
+    <div className="app grid grid-cols-3 gap-4">
+      <section className="left"></section>
       <section>
         <div className="hero">
           <h1>Hello World!</h1>
@@ -21,7 +21,7 @@ function App() {
           <div className="skills">
               <div className="card">
                   <h3>AWS</h3>
-                  <ul>
+                  <ul className="list-disc">
                       <li>Lambda</li>
                       <li>Step Functions</li>
                       <li>DynamoDB</li>
@@ -35,7 +35,7 @@ function App() {
               </div>
               <div className="card">
                   <h3>Microsoft</h3>
-                  <ul>
+                  <ul className="list-disc">
                       <li>TypeScript</li>
                       <li>ASP.NET Web API and MVC</li>
                       <li>SQL Server</li>
@@ -49,7 +49,7 @@ function App() {
               </div>
               <div className="card">
                   <h3>Other Technologies</h3>
-                  <ul>
+                  <ul className="list-disc">
                       <li>Python</li>
                       <li>Node.js</li>
                       <li>Angular 2+</li>
@@ -68,7 +68,7 @@ function App() {
               </div>
               <div className="card">
                   <h3>Tools</h3>
-                  <ul>
+                  <ul className="list-disc">
                       <li>VS Code</li>
                       <li>Visual Studio</li>
                       <li>SQL Server Management Studio</li>
@@ -93,7 +93,7 @@ function App() {
             <h3 id="copyright" className="copyright">Copyright &copy; 2016-{getCopyrightYear()}</h3>
         </footer>
       </section>
-      <section></section>
+      <section className="right"></section>
     </div>
   );
 }

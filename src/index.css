@@ -25,3 +25,7 @@ p {
 a:hover {
   color: #D20014;
 }
+
+h1 {
+  font-size: 3em;
+}

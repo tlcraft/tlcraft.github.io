@@ -2,10 +2,6 @@
   align-items: center;
 }
 
-.left, .right {
-  width: auto;
-}
-
 footer {
   font-size: 0.75em;
   text-align: center;

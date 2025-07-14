@@ -5,7 +5,7 @@ import { faBluesky, faGithub, faStackOverflow, faTwitter, faLinkedin } from '@fo
 function App() {
   return (
     <div className="app grid grid-cols-3 gap-4">
-      <section className="left"></section>
+      <section></section>
       <section>
         <div className="hero">
           <h1>Hello World!</h1>
@@ -101,7 +101,7 @@ function App() {
             <h3 id="copyright" className="copyright">Copyright &copy; 2016-{getCopyrightYear()}</h3>
         </footer>
       </section>
-      <section className="right"></section>
+      <section></section>
     </div>
   );
 }

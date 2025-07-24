@@ -1,8 +1,7 @@
-import type { NextConfig } from 'next'
- 
+import type { NextConfig } from "next";
+
 const nextConfig: NextConfig = {
-  output: 'export', // Outputs a Single-Page Application (SPA), can change to leverage Next.js features
-  distDir: 'build', // Changes the build output directory to `build`
-}
- 
-export default nextConfig
+  /* config options here */
+};
+
+export default nextConfig;

@@ -1,3 +1,4 @@
+import "@/app/globals.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBluesky, faGithub, faStackOverflow, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 
@@ -5,7 +6,7 @@ function Footer() {
   return (
     <footer>
         <hr/>
-        <p className="profiles">
+        <p className="profiles social">
             <a href="https://github.com/tlcraft" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://bsky.app/profile/travislcraft.bsky.social" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faBluesky} /></a>
             <a href="https://www.linkedin.com/in/travislcraft/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>

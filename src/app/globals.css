@@ -21,6 +21,10 @@
 @layer components {
   .social {
     @apply flex items-center flex-col text-center;
+
+    a {
+      @apply m-[20px];
+    }
   }
 }
 

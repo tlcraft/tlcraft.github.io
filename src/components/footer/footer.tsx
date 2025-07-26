@@ -6,7 +6,7 @@ function Footer() {
   return (
     <footer>
         <hr/>
-        <p className="profiles social">
+        <p className="social">
             <a href="https://github.com/tlcraft" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
             <a href="https://bsky.app/profile/travislcraft.bsky.social" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faBluesky} /></a>
             <a href="https://www.linkedin.com/in/travislcraft/" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faLinkedin} /></a>

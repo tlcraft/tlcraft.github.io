@@ -1,0 +1,64 @@
+@import "tailwindcss";
+@import "@fortawesome/fontawesome-svg-core/styles.css";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+@layer components {
+  .social {
+    @apply flex items-center flex-col text-center;
+
+    a {
+      @apply m-[20px];
+    }
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  @layer components {
+    .social {
+      @apply flex-row justify-between;
+    }
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  background-color: #008ac5;
+  color: white;
+  font-size: 2em;
+}
+
+div {
+  margin-top: 20px;
+}
+
+p {
+  margin-top: 10px;
+}
+
+a:hover {
+  color: #D20014;
+}
+
+h1 {
+  font-size: 3em;
+}

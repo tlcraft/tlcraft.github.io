@@ -1,6 +1,6 @@
 function Technologies() {
   return (
-    <div className="technologies">
+    <div className="technologies" id="technologies">
         <h2>Technical experience</h2>
         <div className="skills">
             <div className="card">

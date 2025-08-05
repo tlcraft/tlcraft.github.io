@@ -1,6 +1,6 @@
 function About() {
   return (
-    <div className="hero">
+    <div className="hero" id="about">
     <h1>Hello World!</h1>
     <p>My name is Travis Craft and I&apos;m a full stack software engineer. My experience has revolved around .NET and AWS using agile practices (such as Scrum, SAFe, and Kanban).</p>
     <p>I like using SOLID principles and functional concepts to write clean code, and I learn a little more about software engineering each day as I work toward Microsoft and AWS certifications.</p>

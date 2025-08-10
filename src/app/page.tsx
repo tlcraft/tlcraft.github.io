@@ -13,6 +13,7 @@ export default function Home() {
 
   const marqueeProps: MarqueeProps = {
     items: technologies,
+    leftToRight: true,
   };
 
   return (

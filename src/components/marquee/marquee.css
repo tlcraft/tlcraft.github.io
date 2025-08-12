@@ -1,3 +1,7 @@
+.paused {
+    animation-play-state: paused!important;
+}
+
 .marquee {
     animation: marquee 10s linear infinite
 }

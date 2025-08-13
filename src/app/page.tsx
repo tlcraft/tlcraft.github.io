@@ -4,15 +4,24 @@ import Footer from "@/components/footer/footer";
 import Header from "@/components/header/header";
 import Marquee, { MarqueeProps } from "@/components/marquee/marquee";
 import Technologies from "@/components/technologies/technologies";
-import { faHtml5, faReact, faAngular, faAws, faPython, faCss3, faTrello, IconDefinition } from '@fortawesome/free-brands-svg-icons';
+import { faHtml5, faReact, faAngular, faAws, faPython, faCss3, faTrello, IconDefinition, faJira, faGithub, faGitlab, faBitbucket, faNpm, faLess, faSass, faBootstrap, faNode, faMicrosoft, faAtlassian, faConfluence, faGitAlt, faJs, faJenkins } from '@fortawesome/free-brands-svg-icons';
 
 export default function Home() {
   const technologies: IconDefinition[] = [
-    faHtml5, faReact, faAngular, faAws, faPython, faCss3, faTrello
+    faHtml5, faReact, faAngular, faPython, faCss3, faLess, faSass, faBootstrap, faNode, faJs
   ];
 
-  const marqueeProps: MarqueeProps = {
+  const tools: IconDefinition[] = [
+    faAws, faTrello, faGitAlt, faJira, faGithub, faGitlab, faBitbucket, faNpm, faMicrosoft, faConfluence, faAtlassian, faJenkins
+  ];
+
+  const technologyMarqueeProps: MarqueeProps = {
     items: technologies,
+    leftToRight: false,
+  };
+
+  const toolMarqueeProps: MarqueeProps = {
+    items: tools,
     leftToRight: true,
   };
 
@@ -23,7 +32,8 @@ export default function Home() {
         <Header />
         <About />
         <Technologies />
-        <Marquee {...marqueeProps} />
+        <Marquee {...technologyMarqueeProps} />
+        <Marquee {...toolMarqueeProps} />
         <Footer />
       </section>
       <section></section>

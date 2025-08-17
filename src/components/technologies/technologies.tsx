@@ -2,6 +2,7 @@ import Marquee, { MarqueeProps } from "@/components/marquee/marquee";
 import { faHtml5, faReact, faAngular, faAws, faPython, faCss3, faTrello, IconDefinition, faJira, faGithub, faGitlab, faBitbucket, faNpm, faLess, faSass, faBootstrap, faNode, faMicrosoft, faAtlassian, faConfluence, faGitAlt, faJs, faJenkins } from '@fortawesome/free-brands-svg-icons';
 import { faDd } from '@/icons/ddIcon';
 import { faTs } from '@/icons/tsIcon';
+import { faVscode } from '@/icons/vscodeIcon';
 
 function Technologies() {
     const technologies: IconDefinition[] = [
@@ -9,7 +10,7 @@ function Technologies() {
     ];
 
     const tools: IconDefinition[] = [
-        faAws, faTrello, faGitAlt, faJira, faGithub, faGitlab, faBitbucket, faNpm, faMicrosoft, faConfluence, faAtlassian, faJenkins, faDd
+        faAws, faTrello, faGitAlt, faJira, faGithub, faGitlab, faBitbucket, faNpm, faMicrosoft, faConfluence, faAtlassian, faJenkins, faDd, faVscode
     ];
 
     const technologyMarqueeProps: MarqueeProps = {
@@ -70,7 +71,6 @@ function Technologies() {
                     <div className="card">
                         <h3>Tools</h3>
                         <ul className="list-disc">
-                            <li>VS Code</li>
                             <li>Visual Studio</li>
                             <li>SQL Server Management Studio</li>
                             <li>DBeaver</li>

@@ -3,10 +3,11 @@ import { faHtml5, faReact, faAngular, faAws, faPython, faCss3, faTrello, IconDef
 import { faDd } from '@/icons/ddIcon';
 import { faTs } from '@/icons/tsIcon';
 import { faVscode } from '@/icons/vscodeIcon';
+import { faDatabase } from '@fortawesome/free-solid-svg-icons';
 
 function Technologies() {
     const technologies: IconDefinition[] = [
-        faHtml5, faReact, faAngular, faPython, faCss3, faLess, faSass, faBootstrap, faNode, faJs, faTs
+        faHtml5, faReact, faAngular, faPython, faCss3, faLess, faSass, faBootstrap, faNode, faJs, faTs, faDatabase
     ];
 
     const tools: IconDefinition[] = [

@@ -3,11 +3,11 @@
 }
 
 .marquee {
-    animation: marquee 10s linear infinite
+    animation: marquee 15s linear infinite
 }
 
 .marquee2 {
-    animation: marquee2 10s linear infinite;
+    animation: marquee2 15s linear infinite;
 }
 
 @keyframes marquee {
@@ -31,11 +31,11 @@
 }
 
 .marqueeLeftToRight {
-    animation: marqueeLeftToRight 10s linear infinite
+    animation: marqueeLeftToRight 15s linear infinite
 }
 
 .marqueeLeftToRight2 {
-    animation: marqueeLeftToRight2 10s linear infinite;
+    animation: marqueeLeftToRight2 15s linear infinite;
 }
 
 @keyframes marqueeLeftToRight {

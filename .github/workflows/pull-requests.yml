@@ -18,7 +18,9 @@ jobs:
       - name: Start
         run: |
             echo "Verifying Install and Build"
+            echo Node Version:
             node -v
+            echo npm Version:
             npm -v
 
       - name: Install dependencies

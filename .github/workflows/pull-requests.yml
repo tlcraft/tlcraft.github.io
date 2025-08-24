@@ -16,7 +16,10 @@ jobs:
           node-version: '20'
 
       - name: Start
-        run: echo "Verifying Install and Build"
+        run: |
+            echo "Verifying Install and Build"
+            echo node -v
+            echo npm -v
 
       - name: Install dependencies
         run: npm install

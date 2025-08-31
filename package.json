@@ -9,6 +9,7 @@
     "start": "npx serve@latest out",
     "lint": "next lint",
     "test": "vitest",
+    "test:once": "vitest run",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage"
   },

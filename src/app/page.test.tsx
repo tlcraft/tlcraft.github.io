@@ -17,9 +17,4 @@ describe("PageTests", () => {
       render(<Page />);
       expect(screen.getByRole('link', { name: "Technologies" })).toBeDefined();
     });
-
-    it('should pass', () => {
-      render(<Page />);
-      expect(false).toBe(true);
-    });
 });

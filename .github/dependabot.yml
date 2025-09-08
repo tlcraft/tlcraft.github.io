@@ -11,4 +11,5 @@ updates:
     schedule:
       interval: weekly
       time: '10:00'
+    versioning-strategy: increase
     open-pull-requests-limit: 10

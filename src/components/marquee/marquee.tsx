@@ -7,19 +7,19 @@ import { useState } from 'react';
 export interface MarqueeProps {
     items: IconDefinition[];
     leftToRight?: boolean;
+    styles?: string;
 }
 
 // Reference: https://codepen.io/olavih/pen/rNWGPda
 function Marquee(marqueeProps: MarqueeProps) {
-    const { items } = marqueeProps;
-    const { leftToRight } = marqueeProps;
+    const { items, leftToRight, styles } = marqueeProps;
     const marqueeClass = leftToRight ? 'marqueeLeftToRight' : 'marquee';
     const marqueeClass2 = leftToRight ? 'marqueeLeftToRight2' : 'marquee2';
 
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <article className="overflow-hidden whitespace-nowrap w-full flex" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} >
+        <article className={`overflow-hidden whitespace-nowrap w-full flex ${styles}`} onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} >
             <div className="relative">
                 <ul className={ `${marqueeClass} flex list-none pl-0 text-center ${ isHovered ? 'paused' : '' }` }>
                     { 

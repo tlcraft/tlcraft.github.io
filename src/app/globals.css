@@ -26,6 +26,10 @@
       @apply m-[20px];
     }
   }
+
+  .blue-bg {
+    @apply bg-[#008ac5] text-white;
+  }
 }
 
 @media screen and (min-width: 1000px) {

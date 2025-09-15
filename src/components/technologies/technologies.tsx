@@ -17,16 +17,18 @@ function Technologies() {
     const technologyMarqueeProps: MarqueeProps = {
         items: technologies,
         leftToRight: false,
+        styles: 'blue-bg'
     };
 
     const toolMarqueeProps: MarqueeProps = {
         items: tools,
         leftToRight: true,
+        styles: 'blue-bg'
     };
 
     return (
         <>
-            <div className="technologies" id="technologies">
+            <div className="technologies blue-bg" id="technologies">
                 <h2>Technical experience</h2>
                 <div className="skills">
                     <div className="card">

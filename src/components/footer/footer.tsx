@@ -7,7 +7,6 @@ function Footer() {
   return (
     <footer>
         <LayoutContainer className="py-8">
-            <hr/>
             <div className="social">
                 <a href="https://github.com/tlcraft" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faGithub} /></a>
                 <a href="https://bsky.app/profile/travislcraft.bsky.social" target="_blank" rel="noreferrer"><FontAwesomeIcon icon={faBluesky} /></a>

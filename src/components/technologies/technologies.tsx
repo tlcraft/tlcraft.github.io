@@ -4,6 +4,7 @@ import { faDd } from '@/icons/ddIcon';
 import { faTs } from '@/icons/tsIcon';
 import { faVscode } from '@/icons/vscodeIcon';
 import { faDatabase } from '@fortawesome/free-solid-svg-icons';
+import LayoutContainer from "@/components/theme/LayoutContainer";
 
 function Technologies() {
     const technologies: IconDefinition[] = [
@@ -26,7 +27,7 @@ function Technologies() {
 
     return (
         <section className="w-full bg-[#008ac5] text-white" id="technologies">
-            <div className="mx-auto max-w-screen-xl px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+            <LayoutContainer className="py-12 space-y-8">
                 <div className="technologies">
                     <h2>Technical experience</h2>
                     <div className="skills">
@@ -87,7 +88,7 @@ function Technologies() {
                 </div>
                 <Marquee {...technologyMarqueeProps} />
                 <Marquee {...toolMarqueeProps} />
-            </div>
+            </LayoutContainer>
         </section>
     );
 }

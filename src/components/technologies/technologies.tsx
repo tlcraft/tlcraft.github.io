@@ -33,7 +33,7 @@ function Technologies() {
                     <div className="skills">
                         <div className="card">
                             <h3>AWS</h3>
-                            <ul className="list-disc">
+                            <ul className="list-disc ps-6">
                                 <li>Lambda</li>
                                 <li>Step Functions</li>
                                 <li>DynamoDB</li>
@@ -47,7 +47,7 @@ function Technologies() {
                         </div>
                         <div className="card">
                             <h3>Microsoft</h3>
-                            <ul className="list-disc">
+                            <ul className="list-disc ps-6">
                                 <li>TypeScript</li>
                                 <li>ASP.NET Web API and MVC</li>
                                 <li>SQL Server</li>
@@ -61,7 +61,7 @@ function Technologies() {
                         </div>
                         <div className="card">
                             <h3>Other Technologies</h3>
-                            <ul className="list-disc">
+                            <ul className="list-disc ps-6">
                                 <li>Jest / Jasmine</li>
                                 <li>jQuery</li>
                                 <li>RESTful APIs</li>
@@ -73,7 +73,7 @@ function Technologies() {
                         </div>
                         <div className="card">
                             <h3>Tools</h3>
-                            <ul className="list-disc">
+                            <ul className="list-disc ps-6">
                                 <li>Visual Studio</li>
                                 <li>SQL Server Management Studio</li>
                                 <li>DBeaver</li>

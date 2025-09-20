@@ -27,13 +27,13 @@ function Technologies() {
 
     return (
         <section className="w-full bg-[#008ac5] text-white" id="technologies">
-            <LayoutContainer className="py-12 space-y-8">
+            <LayoutContainer className="py-12 space-y-8 2xl:max-w-6xl">
                 <div className="technologies">
-                    <h2>Technical experience</h2>
-                    <div className="skills">
-                        <div className="card">
-                            <h3>AWS</h3>
-                            <ul className="list-disc ps-6">
+                    <h2 className="text-2xl font-semibold tracking-tight">Technical experience</h2>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+                        <div className="rounded-xl bg-white/10 ring-1 ring-white/15 p-5 shadow-sm overflow-hidden">
+                            <h3 className="text-lg font-semibold">AWS</h3>
+                            <ul className="mt-3 list-disc list-inside sm:list-outside lg:list-inside sm:ps-5 space-y-1 break-words text-base md:text-lg">
                                 <li>Lambda</li>
                                 <li>Step Functions</li>
                                 <li>DynamoDB</li>
@@ -45,9 +45,9 @@ function Technologies() {
                                 <li>CLI</li>
                             </ul>
                         </div>
-                        <div className="card">
-                            <h3>Microsoft</h3>
-                            <ul className="list-disc ps-6">
+                        <div className="rounded-xl bg-white/10 ring-1 ring-white/15 p-5 shadow-sm overflow-hidden">
+                            <h3 className="text-lg font-semibold">Microsoft</h3>
+                            <ul className="mt-3 list-disc list-inside sm:list-outside lg:list-inside sm:ps-5 space-y-1 break-words text-base md:text-lg">
                                 <li>TypeScript</li>
                                 <li>ASP.NET Web API and MVC</li>
                                 <li>SQL Server</li>
@@ -59,9 +59,9 @@ function Technologies() {
                                 <li>TFS</li>
                             </ul>
                         </div>
-                        <div className="card">
-                            <h3>Other Technologies</h3>
-                            <ul className="list-disc ps-6">
+                        <div className="rounded-xl bg-white/10 ring-1 ring-white/15 p-5 shadow-sm overflow-hidden">
+                            <h3 className="text-lg font-semibold">Other Technologies</h3>
+                            <ul className="mt-3 list-disc list-inside sm:list-outside lg:list-inside sm:ps-5 space-y-1 break-words text-base md:text-lg">
                                 <li>Jest / Jasmine</li>
                                 <li>jQuery</li>
                                 <li>RESTful APIs</li>
@@ -71,9 +71,9 @@ function Technologies() {
                                 <li>Terraform</li>
                             </ul>
                         </div>
-                        <div className="card">
-                            <h3>Tools</h3>
-                            <ul className="list-disc ps-6">
+                        <div className="rounded-xl bg-white/10 ring-1 ring-white/15 p-5 shadow-sm overflow-hidden">
+                            <h3 className="text-lg font-semibold">Tools</h3>
+                            <ul className="mt-3 list-disc list-inside sm:list-outside lg:list-inside sm:ps-5 space-y-1 break-words text-base md:text-lg">
                                 <li>Visual Studio</li>
                                 <li>SQL Server Management Studio</li>
                                 <li>DBeaver</li>

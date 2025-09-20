@@ -12,7 +12,7 @@ export interface MarqueeProps {
 
 // Reference: https://codepen.io/olavih/pen/rNWGPda
 function Marquee(marqueeProps: MarqueeProps) {
-    const { items, leftToRight, styles } = marqueeProps;
+    const { items, leftToRight, styles = '' } = marqueeProps;
     const marqueeClass = leftToRight ? 'marqueeLeftToRight' : 'marquee';
     const marqueeClass2 = leftToRight ? 'marqueeLeftToRight2' : 'marquee2';
 

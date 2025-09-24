@@ -18,6 +18,11 @@
   }
 }
 
+@layer base {
+  a { @apply transition-colors; }
+  a:hover { @apply text-[#D20014]; }
+}
+
 @layer components {
   .social {
     @apply flex items-center flex-col text-center;
@@ -53,10 +58,6 @@ div {
 
 p {
   margin-top: 10px;
-}
-
-a:hover {
-  color: #D20014;
 }
 
 h1 {

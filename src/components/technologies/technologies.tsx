@@ -30,7 +30,7 @@ function Technologies() {
             <LayoutContainer className="py-12 space-y-8 2xl:max-w-6xl">
                 <div className="technologies">
                     <h2 className="text-2xl font-semibold tracking-tight">Technical experience</h2>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 mt-4">
                         <div className="rounded-xl bg-white/10 ring-1 ring-white/15 p-5 shadow-sm overflow-hidden">
                             <h3 className="text-lg font-semibold">AWS</h3>
                             <ul className="mt-3 list-disc list-inside sm:list-outside lg:list-inside sm:ps-5 space-y-1 break-words text-base md:text-lg">

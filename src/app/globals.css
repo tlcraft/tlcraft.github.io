@@ -18,6 +18,11 @@
   }
 }
 
+@layer base {
+  a { @apply transition-colors; }
+  a:hover { @apply text-[#D20014]; }
+}
+
 @layer components {
   .social {
     @apply flex items-center flex-col text-center;
@@ -42,21 +47,13 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  background-color: #008ac5;
-  color: white;
+  background-color: white;
+  color: #008ac5;
   font-size: 2em;
-}
-
-div {
-  margin-top: 20px;
 }
 
 p {
   margin-top: 10px;
-}
-
-a:hover {
-  color: #D20014;
 }
 
 h1 {

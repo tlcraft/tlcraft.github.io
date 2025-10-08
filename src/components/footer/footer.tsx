@@ -6,7 +6,7 @@ import LayoutContainer from "@/components/theme/LayoutContainer";
 function Footer() {
   return (
     <footer>
-        <LayoutContainer className="py-8">
+        <LayoutContainer className="py-8 text-2xl text-center">
             <div className="social">
                 <a href="https://github.com/tlcraft" target="_blank" rel="noreferrer" aria-hidden="true"><FontAwesomeIcon icon={faGithub} /><span className="sr-only">GitHub</span></a>
                 <a href="https://bsky.app/profile/travislcraft.bsky.social" target="_blank" rel="noreferrer" aria-hidden="true"><FontAwesomeIcon icon={faBluesky} /><span className="sr-only">Bluesky</span></a>
@@ -15,7 +15,7 @@ function Footer() {
                 <a href="https://stackoverflow.com/users/8094831/green-maru" target="_blank" rel="noreferrer" aria-hidden="true"><FontAwesomeIcon icon={faStackOverflow} /><span className="sr-only">Stack Overflow</span></a>
             </div>
             <a href="https://travislcraft.com">travislcraft.com</a>
-            <h3 id="copyright" className="copyright">Copyright &copy; 2016-{getCopyrightYear()}</h3>
+            <p id="copyright" className="copyright">Copyright &copy; 2016-{getCopyrightYear()}</p>
         </LayoutContainer>
     </footer>
   );

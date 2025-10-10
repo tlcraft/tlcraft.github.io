@@ -15,7 +15,7 @@ function Footer() {
                 <a href="https://stackoverflow.com/users/8094831/green-maru" target="_blank" rel="noreferrer" aria-hidden="true"><FontAwesomeIcon icon={faStackOverflow} /><span className="sr-only">Stack Overflow</span></a>
             </div>
             <a href="https://travislcraft.com">travislcraft.com</a>
-            <p id="copyright" className="copyright">Copyright &copy; 2016-{getCopyrightYear()}</p>
+            <div id="copyright" className="copyright">Copyright &copy; 2016-{getCopyrightYear()}</div>
         </LayoutContainer>
     </footer>
   );

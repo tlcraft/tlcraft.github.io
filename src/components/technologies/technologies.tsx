@@ -49,7 +49,8 @@ function Technologies() {
                             <h3 className="text-lg font-semibold">Microsoft</h3>
                             <ul className="mt-3 list-disc list-inside sm:list-outside lg:list-inside sm:ps-5 space-y-1 break-words text-base md:text-lg">
                                 <li>TypeScript</li>
-                                <li>ASP.NET Web API and MVC</li>
+                                <li>ASP.NET Web API</li>
+                                <li>ASP.NET MVC</li>
                                 <li>SQL Server</li>
                                 <li>Entity Framework</li>
                                 <li>C#</li>
@@ -74,8 +75,9 @@ function Technologies() {
                         <div className="rounded-xl bg-white/10 ring-1 ring-white/15 p-5 shadow-sm overflow-hidden">
                             <h3 className="text-lg font-semibold">Tools</h3>
                             <ul className="mt-3 list-disc list-inside sm:list-outside lg:list-inside sm:ps-5 space-y-1 break-words text-base md:text-lg">
+                                <li>VS Code</li>
                                 <li>Visual Studio</li>
-                                <li>SQL Server Management Studio</li>
+                                <li>SSMS</li>
                                 <li>DBeaver</li>
                                 <li>TablePlus</li>
                                 <li>NoSQL Workbench</li>

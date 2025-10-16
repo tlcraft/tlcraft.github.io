@@ -63,7 +63,10 @@ function Technologies() {
                         <div className="rounded-xl bg-white/10 ring-1 ring-white/15 p-5 shadow-sm overflow-hidden">
                             <h3 className="text-lg font-semibold">Other Technologies</h3>
                             <ul className="mt-3 list-disc list-inside sm:list-outside lg:list-inside sm:ps-5 space-y-1 break-words text-base md:text-lg">
-                                <li>Jest / Jasmine</li>
+                                <li>Vitest</li>
+                                <li>Jest</li>
+                                <li>Jasmine</li>
+                                <li>Robot Framework</li>
                                 <li>jQuery</li>
                                 <li>RESTful APIs</li>
                                 <li>GraphQL</li>

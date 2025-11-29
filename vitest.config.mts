@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitest/config';
+import { configDefaults, coverageConfigDefaults } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
@@ -9,5 +10,23 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: "./src/testSetup",
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
+    exclude: [
+      ...configDefaults.exclude,
+      '**/old/**',
+      '**/out/**',
+      '**/coverage/**',
+      '**/*.config.*',
+      '**/testSetup.ts'
+    ],
+    coverage: {
+      exclude: [
+        ...coverageConfigDefaults.exclude,
+        '**/old/**',
+        '**/out/**',
+        '**/coverage/**',
+        '**/*.config.*',
+        '**/testSetup.ts'
+      ]
+    }
   },
 });

@@ -5,6 +5,8 @@ Check it out here: [https://travislcraft.com/](https://travislcraft.com/)
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+[![Install and Build](https://github.com/tlcraft/tlcraft.github.io/actions/workflows/pull-requests.yml/badge.svg)](https://github.com/tlcraft/tlcraft.github.io/actions/workflows/pull-requests.yml) [![Deploy to GitHub Pages](https://github.com/tlcraft/tlcraft.github.io/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/tlcraft/tlcraft.github.io/actions/workflows/deploy.yml) [![pages-build-deployment](https://github.com/tlcraft/tlcraft.github.io/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/tlcraft/tlcraft.github.io/actions/workflows/pages/pages-build-deployment)
+
 ## Contents
 
 - [Gettings Started](#getting-started)

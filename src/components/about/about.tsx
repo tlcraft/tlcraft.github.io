@@ -6,8 +6,9 @@ function About() {
       <LayoutContainer className="py-8 lg:py-12">
         <div className="hero">
           <h1>Hello World!</h1>
-          <p>My name is Travis Craft and I&apos;m a full stack software engineer. My experience has revolved around .NET and AWS using agile practices (such as Scrum, SAFe, and Kanban).</p>
+          <p>My name is Travis Craft and I&apos;m a generalist full stack software engineer. My experience has revolved around .NET and AWS using agile practices (such as Scrum, SAFe, and Kanban).</p>
           <p>I like using SOLID principles and functional concepts to write clean code, and I learn a little more about software engineering each day as I work toward Microsoft and AWS certifications.</p>
+          <p>Other interests include XP practices, iteration and collaboration, emerging AI patterns such as RAG and MCP, event source systems, and domain-driven design.</p>
           <p>
               I run a software engineering Meetup group in my community. We hold presentations, lightning talks and have an ongoing book club. We also have monthly lunch meetings.
           </p>

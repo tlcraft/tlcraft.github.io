@@ -41,7 +41,7 @@
     "tailwindcss": "^4.1.17",
     "typescript": "^5",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^3.2.4"
+    "vitest": "^4.0.15"
   },
   "optionalDependencies": {
     "lightningcss-linux-x64-gnu": "^1.30.2"

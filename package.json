@@ -37,7 +37,7 @@
     "@vitest/ui": "^3.2.4",
     "eslint": "^9.39.1",
     "eslint-config-next": "^16.0.7",
-    "jsdom": "^27.2.0",
+    "jsdom": "^27.3.0",
     "tailwindcss": "^4.1.17",
     "typescript": "^5",
     "vite-tsconfig-paths": "^5.1.4",

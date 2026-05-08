@@ -16,13 +16,13 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.1.0",
-    "@fortawesome/free-brands-svg-icons": "^7.1.0",
+    "@fortawesome/free-brands-svg-icons": "^7.2.0",
     "@fortawesome/free-solid-svg-icons": "^7.1.0",
-    "@fortawesome/react-fontawesome": "^3.2.0",
+    "@fortawesome/react-fontawesome": "^3.3.1",
     "@testing-library/jest-dom": "^6.9.1",
     "next": "16.2.3",
-    "react": "19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
   },
   "devDependencies": {
     "@next/eslint-plugin-next": "^16.1.6",
@@ -33,15 +33,15 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^5.1.3",
-    "@vitest/coverage-v8": "^4.0.18",
-    "@vitest/ui": "^4.0.18",
-    "eslint": "^10.0.0",
-    "eslint-config-next": "^16.1.6",
+    "@vitest/coverage-v8": "^4.1.4",
+    "@vitest/ui": "^4.1.4",
+    "eslint": "^10.2.1",
+    "eslint-config-next": "^16.2.4",
     "jsdom": "28.0.0",
-    "tailwindcss": "^4.1.18",
-    "typescript": "^5",
+    "tailwindcss": "^4.2.2",
+    "typescript": "^6",
     "vite-tsconfig-paths": "^6.0.5",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.4"
   },
   "optionalDependencies": {
     "lightningcss-linux-x64-gnu": "^1.31.1"

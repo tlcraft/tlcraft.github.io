@@ -26,7 +26,7 @@ jobs:
             npm -v
 
       - name: Install dependencies
-        run: npm install --frozen-lockfile --ignore-scripts
+        run: npm ci --ignore-scripts
 
       - name: Lint
         run: npm run lint

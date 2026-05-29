@@ -19,6 +19,7 @@ export default defineConfig({
       '**/testSetup.ts'
     ],
     coverage: {
+      reporter: ['lcov', 'text'],
       exclude: [
         ...coverageConfigDefaults.exclude,
         '**/old/**',

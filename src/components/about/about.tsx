@@ -1,6 +1,8 @@
 import LayoutContainer from "@/components/theme/LayoutContainer";
 
 function About() {
+  const userId = '12345';
+  const secretPassword = 'SuperSecretValue';
   return (
     <section id="about">
       <LayoutContainer className="py-8 lg:py-12">

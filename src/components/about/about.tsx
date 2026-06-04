@@ -1,8 +1,7 @@
 import LayoutContainer from "@/components/theme/LayoutContainer";
 
 function About() {
-  const x = 0;
-  const y = 1 / x;
+  const y = 1 / 0;
   return (
     <section id="about">
       <LayoutContainer className="py-8 lg:py-12">

@@ -9,6 +9,8 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     pool: 'threads',
+    isolate: false,
+    maxWorkers: 1,
     setupFiles: "./src/testSetup",
     include: ['**/*.{test,spec}.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     exclude: [

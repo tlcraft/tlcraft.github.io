@@ -1,7 +1,7 @@
-import "@/app/globals.css";
+import '@/app/globals.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBluesky, faGithub, faStackOverflow, faTwitter, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import LayoutContainer from "@/components/theme/LayoutContainer";
+import LayoutContainer from '@/components/theme/LayoutContainer';
 
 function Footer() {
   return (

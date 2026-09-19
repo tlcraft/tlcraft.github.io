@@ -1,6 +1,6 @@
-import LayoutContainer from "@/components/theme/LayoutContainer";
+import LayoutContainer from '@/components/theme/LayoutContainer';
 import { faMeetup, faGithub } from '@fortawesome/free-brands-svg-icons';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 function Meetup() {
   return (

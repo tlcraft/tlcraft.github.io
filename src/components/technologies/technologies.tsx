@@ -1,10 +1,10 @@
-import Marquee, { MarqueeProps } from "@/components/marquee/marquee";
+import Marquee, { MarqueeProps } from '@/components/marquee/marquee';
 import { faHtml5, faReact, faAngular, faAws, faPython, faCss3, faTrello, IconDefinition, faJira, faGithub, faGitlab, faBitbucket, faNpm, faLess, faSass, faBootstrap, faNode, faMicrosoft, faAtlassian, faConfluence, faGitAlt, faJs, faJenkins } from '@fortawesome/free-brands-svg-icons';
 import { faDd } from '@/icons/ddIcon';
 import { faTs } from '@/icons/tsIcon';
 import { faVscode } from '@/icons/vscodeIcon';
 import { faDatabase } from '@fortawesome/free-solid-svg-icons';
-import LayoutContainer from "@/components/theme/LayoutContainer";
+import LayoutContainer from '@/components/theme/LayoutContainer';
 
 function Technologies() {
     const technologies: IconDefinition[] = [

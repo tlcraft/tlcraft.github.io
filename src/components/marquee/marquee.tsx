@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import './marquee.css';
 import { IconDefinition } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

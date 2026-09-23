@@ -1,4 +1,4 @@
-import LayoutContainer from "@/components/theme/LayoutContainer";
+import LayoutContainer from '@/components/theme/LayoutContainer';
 
 function About() {
   return (

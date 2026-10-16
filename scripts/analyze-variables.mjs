@@ -210,7 +210,7 @@ for (const record of variableSymbols.values()) {
 
 report.sort((a, b) => b.liveTimeInclusive - a.liveTimeInclusive || b.maxSpan - a.maxSpan || a.file.localeCompare(b.file));
 
-const outputPath = path.join(workspaceRoot, 'variable-metrics.json');
+const outputPath = path.join(workspaceRoot, 'out/variable-metrics.json');
 fs.writeFileSync(outputPath, JSON.stringify(report, null, 2));
 
 console.log(`Wrote ${report.length} variable metrics to ${path.relative(workspaceRoot, outputPath)}.`);

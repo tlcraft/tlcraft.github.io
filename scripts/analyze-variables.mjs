@@ -2,7 +2,38 @@ import fs from 'node:fs';
 import path from 'node:path';
 import ts from 'typescript';
 
+function parseThresholdArgs(argv) {
+  const thresholds = {
+    maxLiveTime: undefined,
+    maxSpan: undefined,
+    maxAvgSpan: undefined,
+  };
+
+  for (const arg of argv) {
+    if (arg.startsWith('--max-live-time=')) {
+      thresholds.maxLiveTime = Number(arg.slice('--max-live-time='.length));
+      continue;
+    }
+
+    if (arg.startsWith('--max-span=')) {
+      thresholds.maxSpan = Number(arg.slice('--max-span='.length));
+      continue;
+    }
+
+    if (arg.startsWith('--max-avg-span=')) {
+      thresholds.maxAvgSpan = Number(arg.slice('--max-avg-span='.length));
+    }
+  }
+
+  return thresholds;
+}
+
+function isValidThreshold(value) {
+  return Number.isFinite(value) && value >= 0;
+}
+
 const workspaceRoot = process.cwd();
+const thresholds = parseThresholdArgs(process.argv.slice(2));
 const tsconfigPath = ts.findConfigFile(workspaceRoot, ts.sys.fileExists, 'tsconfig.json');
 
 if (!tsconfigPath) {
@@ -211,10 +242,45 @@ for (const record of variableSymbols.values()) {
 report.sort((a, b) => b.liveTimeInclusive - a.liveTimeInclusive || b.maxSpan - a.maxSpan || a.file.localeCompare(b.file));
 
 const outputPath = path.join(workspaceRoot, 'out/variable-metrics.json');
+fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, JSON.stringify(report, null, 2));
 
 console.log(`Wrote ${report.length} variable metrics to ${path.relative(workspaceRoot, outputPath)}.`);
 console.log('Top 10 by live time (inclusive lines):');
 for (const item of report.slice(0, 10)) {
   console.log(`- ${item.variable} (${item.file}:${item.declarationLine}) live=${item.liveTimeInclusive}, maxSpan=${item.maxSpan}`);
+}
+
+const failures = [];
+
+if (isValidThreshold(thresholds.maxLiveTime)) {
+  for (const item of report) {
+    if (item.liveTimeInclusive > thresholds.maxLiveTime) {
+      failures.push(`live-time: ${item.variable} (${item.file}:${item.declarationLine}) is ${item.liveTimeInclusive}, threshold is ${thresholds.maxLiveTime}`);
+    }
+  }
+}
+
+if (isValidThreshold(thresholds.maxSpan)) {
+  for (const item of report) {
+    if (item.maxSpan > thresholds.maxSpan) {
+      failures.push(`max-span: ${item.variable} (${item.file}:${item.declarationLine}) is ${item.maxSpan}, threshold is ${thresholds.maxSpan}`);
+    }
+  }
+}
+
+if (isValidThreshold(thresholds.maxAvgSpan)) {
+  for (const item of report) {
+    if (item.avgSpan > thresholds.maxAvgSpan) {
+      failures.push(`avg-span: ${item.variable} (${item.file}:${item.declarationLine}) is ${item.avgSpan}, threshold is ${thresholds.maxAvgSpan}`);
+    }
+  }
+}
+
+if (failures.length > 0) {
+  console.error('\nVariable metric threshold violations:');
+  for (const failure of failures) {
+    console.error(`- ${failure}`);
+  }
+  process.exitCode = 1;
 }

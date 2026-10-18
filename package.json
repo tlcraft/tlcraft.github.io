@@ -13,6 +13,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "analyze:variables": "node scripts/analyze-variables.mjs",
+    "analyze:variables:check": "node scripts/analyze-variables.mjs --max-live-time=80 --max-span=60 --max-avg-span=20",
     "test": "vitest",
     "test:once": "vitest run",
     "test:ui": "vitest --ui",

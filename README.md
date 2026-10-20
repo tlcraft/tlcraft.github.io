@@ -12,6 +12,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 - [Gettings Started](#getting-started)
 - [Learn More](#learn-more)
 - [Deployment](#deployment)
+- [Variable Metrics Analyzer](#variable-metrics-analyzer)
 
 ## Getting Started
 
@@ -43,3 +44,34 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 This repo uses [GitHub Actions](https://github.com/features/actions) to deploy to [GitHub Pages](https://pages.github.com/) using  James Ives' [deploy action project](https://github.com/JamesIves/github-pages-deploy-action).
 
 Learn more from James here: https://jamesiv.es/blog/github/actions/2022/01/23/deploying-to-github-pages-with-github-actions
+
+## Variable Metrics Analyzer
+
+This project includes a variable metrics analyzer that measures:
+- Span: number of lines between consecutive references to the same variable
+- Live Time: number of lines from first reference to last reference (inclusive)
+
+Declarations are counted as references, so declaration lines are included in live-time calculations.
+
+### Commands
+
+- npm run analyze:variables
+  - Generates a metrics report at out/variable-metrics.json
+  - Prints the top 10 variables by live time in the console
+
+- npm run analyze:variables:check
+  - Runs the analyzer with thresholds and fails with exit code 1 when violations are found
+  - Current thresholds:
+    - max live time: 80
+    - max span: 60
+    - max average span: 20
+
+### Custom threshold flags
+
+You can run the script directly and override thresholds:
+- node scripts/analyze-variables.mjs --max-live-time=100 --max-span=70 --max-avg-span=25
+
+### Notes
+
+- The analyzer only scans source files under src
+- Output is written to out, which is ignored by git

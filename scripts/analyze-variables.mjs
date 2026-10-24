@@ -220,7 +220,7 @@ for (const record of variableSymbols.values()) {
 
   const spans = computeSpans(lines);
   const first = lines[0];
-  const last = lines[lines.length - 1];
+  const last = lines.at(-1);
   const liveTimeInclusive = last - first + 1;
   const liveTimeDistance = last - first;
   const avgSpan = spans.length > 0 ? Number((spans.reduce((sum, value) => sum + value, 0) / spans.length).toFixed(2)) : 0;

@@ -79,7 +79,7 @@ const maxOutputsRule = {
       ArrowFunctionExpression: enterFunction,
       ReturnStatement() {
         // Only increment the active function on top of the stack.
-        const current = functionStack[functionStack.length - 1];
+        const current = functionStack.at(-1);
 
         if (current) {
           current.returns += 1;

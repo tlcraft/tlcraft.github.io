@@ -15,6 +15,7 @@
     "lint:plus": "npm run lint && npm run analyze:variables:check",
     "analyze:variables": "node scripts/analyze-variables.mjs",
     "analyze:variables:check": "node scripts/analyze-variables.mjs --max-live-time=80 --max-span=60 --max-avg-span=20",
+    "test:analyzer": "vitest run scripts/analyze-variables.test.ts eslint/rules/max-outputs.test.ts",
     "test": "vitest",
     "test:once": "vitest run",
     "test:ui": "vitest --ui",

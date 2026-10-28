@@ -1,27 +1,6 @@
 const DEFAULT_MAX_OUTPUTS = 1;
 
-function getFunctionName(node) {
-  if (node.type === 'FunctionDeclaration' && node.id?.name) {
-    return node.id.name;
-  }
-
-  if ((node.type === 'FunctionExpression' || node.type === 'ArrowFunctionExpression') && node.parent) {
-    if (node.parent.type === 'VariableDeclarator' && node.parent.id?.type === 'Identifier') {
-      return node.parent.id.name;
-    }
-
-    if (node.parent.type === 'Property' && node.parent.key?.type === 'Identifier') {
-      return node.parent.key.name;
-    }
-
-    if (node.parent.type === 'AssignmentExpression' && node.parent.left?.type === 'Identifier') {
-      return node.parent.left.name;
-    }
-  }
-
-  return 'anonymous function';
-}
-
+/** @type {import('eslint').Rule.RuleModule} */
 const maxOutputsRule = {
   meta: {
     type: 'suggestion',
@@ -92,5 +71,27 @@ const maxOutputsRule = {
     };
   },
 };
+
+function getFunctionName(node) {
+  if (node.type === 'FunctionDeclaration' && node.id?.name) {
+    return node.id.name;
+  }
+
+  if ((node.type === 'FunctionExpression' || node.type === 'ArrowFunctionExpression') && node.parent) {
+    if (node.parent.type === 'VariableDeclarator' && node.parent.id?.type === 'Identifier') {
+      return node.parent.id.name;
+    }
+
+    if (node.parent.type === 'Property' && node.parent.key?.type === 'Identifier') {
+      return node.parent.key.name;
+    }
+
+    if (node.parent.type === 'AssignmentExpression' && node.parent.left?.type === 'Identifier') {
+      return node.parent.left.name;
+    }
+  }
+
+  return 'anonymous function';
+}
 
 export default maxOutputsRule;

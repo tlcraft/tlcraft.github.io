@@ -1,17 +1,33 @@
 import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
+import sonarjs from 'eslint-plugin-sonarjs';
+import maxOutputsRule from './eslint/rules/max-outputs.mjs';
 
 const eslintConfig = defineConfig([
   ...nextVitals,
   globalIgnores(['node_modules/**', '.next/**', 'out/**', 'old/**', 'coverage/**', 'next-env.d.ts']),
   {
-    files: ['src/**/*.{js,jsx,ts,tsx}'],
+    plugins: {
+      local: {
+        rules: {
+          'max-outputs': maxOutputsRule,
+        },
+      },
+      sonarjs,
+    },
+  },
+  {
+    files: ['src/**/*.{js,jsx,ts,tsx}', 'scripts/**/*.{js,mjs,cjs,ts,mts,cts}'],
     rules: {
       quotes: ['error', 'single'], // Requires single quotes for consistency.
       complexity: ['warn', 10], // Warns when a function has too many decision paths.
       'max-lines-per-function': ['warn', { max: 60, skipBlankLines: true, skipComments: true }], // Warns when a function gets too long.
       'max-depth': ['warn', 4], // Warns when nesting gets too deep.
       'max-params': ['warn', 4], // Warns when a function takes too many parameters.
+      'local/max-outputs': ['warn', { max: 5 }], // Warns when a function has too many return statements.
+      'sonarjs/cognitive-complexity': ['warn', 15], // Matches SonarQube's cognitive complexity signal.
+      'sonarjs/no-identical-functions': 'warn', // Catches duplicated function implementations.
+      'sonarjs/no-collapsible-if': 'warn', // Flags nested if statements that can be simplified.
     },
   },
   {
@@ -22,6 +38,7 @@ const eslintConfig = defineConfig([
       'max-lines-per-function': ['warn', { max: 120, skipBlankLines: true, skipComments: true }], // Allows longer test helpers and setups.
       'max-depth': ['warn', 5], // Allows a bit more nesting in test code.
       'max-params': 'off', // Test helpers may need extra parameters.
+      'local/max-outputs': 'off', // Tests often use multiple early returns for readability.
     },
   },
 ])

@@ -255,32 +255,38 @@ function logSummary(logger, workspaceRoot, outputPath, report) {
   }
 }
 
+function appendThresholdFailures(report, rule, failures) {
+  const { threshold, metricKey, label } = rule;
+
+  if (!isValidThreshold(threshold)) {
+    return;
+  }
+
+  for (const item of report) {
+    if (item[metricKey] > threshold) {
+      failures.push(`${label}: ${item.variable} (${item.file}:${item.declarationLine}) is ${item[metricKey]}, threshold is ${threshold}`);
+    }
+  }
+}
+
 function collectThresholdFailures(report, thresholds) {
   const failures = [];
 
-  if (isValidThreshold(thresholds.maxLiveTime)) {
-    for (const item of report) {
-      if (item.liveTimeInclusive > thresholds.maxLiveTime) {
-        failures.push(`live-time: ${item.variable} (${item.file}:${item.declarationLine}) is ${item.liveTimeInclusive}, threshold is ${thresholds.maxLiveTime}`);
-      }
-    }
-  }
-
-  if (isValidThreshold(thresholds.maxSpan)) {
-    for (const item of report) {
-      if (item.maxSpan > thresholds.maxSpan) {
-        failures.push(`max-span: ${item.variable} (${item.file}:${item.declarationLine}) is ${item.maxSpan}, threshold is ${thresholds.maxSpan}`);
-      }
-    }
-  }
-
-  if (isValidThreshold(thresholds.maxAvgSpan)) {
-    for (const item of report) {
-      if (item.avgSpan > thresholds.maxAvgSpan) {
-        failures.push(`avg-span: ${item.variable} (${item.file}:${item.declarationLine}) is ${item.avgSpan}, threshold is ${thresholds.maxAvgSpan}`);
-      }
-    }
-  }
+  appendThresholdFailures(report, {
+    threshold: thresholds.maxLiveTime,
+    metricKey: 'liveTimeInclusive',
+    label: 'live-time',
+  }, failures);
+  appendThresholdFailures(report, {
+    threshold: thresholds.maxSpan,
+    metricKey: 'maxSpan',
+    label: 'max-span',
+  }, failures);
+  appendThresholdFailures(report, {
+    threshold: thresholds.maxAvgSpan,
+    metricKey: 'avgSpan',
+    label: 'avg-span',
+  }, failures);
 
   return failures;
 }

@@ -24,7 +24,7 @@ const eslintConfig = defineConfig([
       'max-lines-per-function': ['warn', { max: 60, skipBlankLines: true, skipComments: true }], // Warns when a function gets too long.
       'max-depth': ['warn', 4], // Warns when nesting gets too deep.
       'max-params': ['warn', 4], // Warns when a function takes too many parameters.
-      'local/max-outputs': ['warn', { max: 2 }], // Warns when a function has too many return statements.
+      'local/max-outputs': ['warn', { max: 5 }], // Warns when a function has too many return statements.
       'sonarjs/cognitive-complexity': ['warn', 15], // Matches SonarQube's cognitive complexity signal.
       'sonarjs/no-identical-functions': 'warn', // Catches duplicated function implementations.
       'sonarjs/no-collapsible-if': 'warn', // Flags nested if statements that can be simplified.

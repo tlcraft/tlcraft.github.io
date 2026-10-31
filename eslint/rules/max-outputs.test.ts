@@ -72,4 +72,43 @@ describe('max-outputs rule', () => {
     expect(text).toContain('inner has 2 return statements; maximum allowed is 1.');
     expect(text).toContain('outer has 2 return statements; maximum allowed is 1.');
   });
+
+  it('should use variable names for object property functions', async () => {
+    const messages = await lintWithRule(`
+      const handlers = {
+        pick(flag) {
+          if (flag) return 1;
+          return 2;
+        }
+      };
+    `, 1);
+
+    expect(messages).toHaveLength(1);
+    expect(messages[0].message).toContain('pick has 2 return statements; maximum allowed is 1.');
+  });
+
+  it('should use assignment target names for assigned function expressions', async () => {
+    const messages = await lintWithRule(`
+      let choose;
+      choose = function (flag) {
+        if (flag) return 1;
+        return 2;
+      };
+    `, 1);
+
+    expect(messages).toHaveLength(1);
+    expect(messages[0].message).toContain('choose has 2 return statements; maximum allowed is 1.');
+  });
+
+  it('should report anonymous function when no supported parent naming exists', async () => {
+    const messages = await lintWithRule(`
+      (function (flag) {
+        if (flag) return 1;
+        return 2;
+      })(true);
+    `, 1);
+
+    expect(messages).toHaveLength(1);
+    expect(messages[0].message).toContain('anonymous function has 2 return statements; maximum allowed is 1.');
+  });
 });

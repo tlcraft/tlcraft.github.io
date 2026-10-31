@@ -322,7 +322,7 @@ export function analyzeVariables(options = {}) {
   };
 }
 
-function runCli() {
+export function runCli() {
   try {
     const result = analyzeVariables({
       workspaceRoot: process.cwd(),

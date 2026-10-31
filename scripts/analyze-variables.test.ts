@@ -4,6 +4,8 @@ import path from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { afterEach, describe, expect, it } from 'vitest';
 
+import { computeSpans, parseThresholdArgs, runCli } from './analyze-variables.mjs';
+
 const scriptPath = path.resolve(process.cwd(), 'scripts/analyze-variables.mjs');
 
 function writeFixtureProject(root: string): void {
@@ -69,6 +71,25 @@ afterEach(() => {
 });
 
 describe('analyze-variables script', () => {
+  it('should parse all threshold arguments', () => {
+    const thresholds = parseThresholdArgs([
+      '--max-live-time=10',
+      '--max-span=4',
+      '--max-avg-span=2.5',
+    ]);
+
+    expect(thresholds).toEqual({
+      maxLiveTime: 10,
+      maxSpan: 4,
+      maxAvgSpan: 2.5,
+    });
+  });
+
+  it('should compute spans between consecutive references', () => {
+    expect(computeSpans([3, 5, 10])).toEqual([1, 4]);
+    expect(computeSpans([7])).toEqual([]);
+  });
+
   it('should be executable in-process for coverage attribution', async () => {
     const tempProject = createTempProject();
     tempDirs.push(tempProject);
@@ -91,6 +112,26 @@ describe('analyze-variables script', () => {
     expect(path.basename(result.outputPath)).toBe('variable-metrics.json');
     expect(logs.some((message) => message.includes('Wrote'))).toBe(true);
     expect(errors).toHaveLength(0);
+  });
+
+  it('should include avg-span violations when threshold is exceeded', async () => {
+    const tempProject = createTempProject();
+    tempDirs.push(tempProject);
+
+    const { analyzeVariables } = await import('./analyze-variables.mjs');
+    const errors: string[] = [];
+
+    const result = analyzeVariables({
+      workspaceRoot: tempProject,
+      argv: ['--max-avg-span=0.5'],
+      logger: {
+        log: () => undefined,
+        error: (message: string) => errors.push(message),
+      },
+    });
+
+    expect(result.failures.some((failure) => failure.startsWith('avg-span: value'))).toBe(true);
+    expect(errors.some((message) => message.includes('Variable metric threshold violations'))).toBe(true);
   });
 
   it('should write metrics to out/variable-metrics.json with expected calculations', () => {
@@ -132,5 +173,51 @@ describe('analyze-variables script', () => {
     const result = runAnalyzer(tempProject, ['--max-live-time=not-a-number']);
 
     expect(result.status).toBe(0);
+  });
+
+  it('should set exitCode to 1 in runCli when thresholds fail', () => {
+    const tempProject = createTempProject();
+    tempDirs.push(tempProject);
+
+    const originalCwd = process.cwd();
+    const originalArgv = [...process.argv];
+    const originalExitCode = process.exitCode;
+
+    try {
+      process.chdir(tempProject);
+      process.argv = [originalArgv[0], scriptPath, '--max-live-time=4'];
+      process.exitCode = 0;
+
+      runCli();
+
+      expect(process.exitCode).toBe(1);
+    } finally {
+      process.chdir(originalCwd);
+      process.argv = originalArgv;
+      process.exitCode = originalExitCode;
+    }
+  });
+
+  it('should set exitCode to 1 in runCli when analysis throws', () => {
+    const tempProject = fs.mkdtempSync(path.join(os.tmpdir(), 'variable-metrics-no-config-'));
+    tempDirs.push(tempProject);
+
+    const originalCwd = process.cwd();
+    const originalArgv = [...process.argv];
+    const originalExitCode = process.exitCode;
+
+    try {
+      process.chdir(tempProject);
+      process.argv = [originalArgv[0], scriptPath];
+      process.exitCode = 0;
+
+      runCli();
+
+      expect(process.exitCode).toBe(1);
+    } finally {
+      process.chdir(originalCwd);
+      process.argv = originalArgv;
+      process.exitCode = originalExitCode;
+    }
   });
 });

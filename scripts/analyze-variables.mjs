@@ -43,13 +43,62 @@ export function computeSpans(sortedLines) {
   return spans;
 }
 
-export function analyzeVariables(options = {}) {
-  const workspaceRoot = options.workspaceRoot ?? process.cwd();
-  const argv = options.argv ?? process.argv.slice(2);
-  const logger = options.logger ?? console;
-  const thresholds = parseThresholdArgs(argv);
-  const tsconfigPath = ts.findConfigFile(workspaceRoot, ts.sys.fileExists, 'tsconfig.json');
+function getLine(sourceFile, position) {
+  return sourceFile.getLineAndCharacterOfPosition(position).line + 1;
+}
 
+function isUserSourceFile(sourceFile) {
+  if (sourceFile.isDeclarationFile) {
+    return false;
+  }
+
+  const normalized = sourceFile.fileName.split(path.sep).join('/');
+  return normalized.includes('/src/');
+}
+
+function collectBindingIdentifiers(nameNode, output) {
+  if (ts.isIdentifier(nameNode)) {
+    output.push(nameNode);
+    return;
+  }
+
+  if (ts.isObjectBindingPattern(nameNode) || ts.isArrayBindingPattern(nameNode)) {
+    for (const element of nameNode.elements) {
+      if (ts.isBindingElement(element)) {
+        collectBindingIdentifiers(element.name, output);
+      }
+    }
+  }
+}
+
+function resolveSymbol(symbol, checker) {
+  if (!symbol) {
+    return undefined;
+  }
+
+  if (symbol.flags & ts.SymbolFlags.Alias) {
+    try {
+      return checker.getAliasedSymbol(symbol);
+    } catch {
+      return symbol;
+    }
+  }
+
+  return symbol;
+}
+
+function makeSymbolKey(symbol) {
+  const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
+  if (!declaration) {
+    return undefined;
+  }
+
+  const sourceFile = declaration.getSourceFile();
+  return `${sourceFile.fileName}:${declaration.pos}:${symbol.getName()}`;
+}
+
+function createProgramAndChecker(workspaceRoot) {
+  const tsconfigPath = ts.findConfigFile(workspaceRoot, ts.sys.fileExists, 'tsconfig.json');
   if (!tsconfigPath) {
     throw new Error('Could not find tsconfig.json in the current workspace.');
   }
@@ -69,74 +118,23 @@ export function analyzeVariables(options = {}) {
     rootNames: parsedConfig.fileNames,
     options: parsedConfig.options,
   });
-  const checker = program.getTypeChecker();
 
+  return {
+    program,
+    checker: program.getTypeChecker(),
+  };
+}
+
+function collectVariableSymbols(program, checker, workspaceRoot) {
   const variableSymbols = new Map();
 
-  function isUserSourceFile(sourceFile) {
-    if (sourceFile.isDeclarationFile) {
-      return false;
-    }
-
-    const normalized = sourceFile.fileName.split(path.sep).join('/');
-    return normalized.includes('/src/');
-  }
-
-  function getLine(sourceFile, position) {
-    return sourceFile.getLineAndCharacterOfPosition(position).line + 1;
-  }
-
-  function collectBindingIdentifiers(nameNode, output) {
-    if (ts.isIdentifier(nameNode)) {
-      output.push(nameNode);
-      return;
-    }
-
-    if (ts.isObjectBindingPattern(nameNode) || ts.isArrayBindingPattern(nameNode)) {
-      for (const element of nameNode.elements) {
-        if (ts.isBindingElement(element)) {
-          collectBindingIdentifiers(element.name, output);
-        }
-      }
-    }
-  }
-
-  function resolveSymbol(symbol) {
-    if (!symbol) {
-      return undefined;
-    }
-
-    if (symbol.flags & ts.SymbolFlags.Alias) {
-      try {
-        return checker.getAliasedSymbol(symbol);
-      } catch {
-        return symbol;
-      }
-    }
-
-    return symbol;
-  }
-
-  function makeSymbolKey(symbol) {
-    const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
-
-    if (!declaration) {
-      return undefined;
-    }
-
-    const sourceFile = declaration.getSourceFile();
-    return `${sourceFile.fileName}:${declaration.pos}:${symbol.getName()}`;
-  }
-
   function registerVariableIdentifier(identifier) {
-    const symbol = resolveSymbol(checker.getSymbolAtLocation(identifier));
-
+    const symbol = resolveSymbol(checker.getSymbolAtLocation(identifier), checker);
     if (!symbol) {
       return;
     }
 
     const key = makeSymbolKey(symbol);
-
     if (!key || variableSymbols.has(key)) {
       return;
     }
@@ -177,21 +175,12 @@ export function analyzeVariables(options = {}) {
     ts.forEachChild(node, firstPassCollectDeclarations);
   }
 
-  for (const sourceFile of program.getSourceFiles()) {
-    if (!isUserSourceFile(sourceFile)) {
-      continue;
-    }
-
-    firstPassCollectDeclarations(sourceFile);
-  }
-
   function secondPassCollectReferences(node) {
     if (ts.isIdentifier(node)) {
-      const symbol = resolveSymbol(checker.getSymbolAtLocation(node));
+      const symbol = resolveSymbol(checker.getSymbolAtLocation(node), checker);
       if (symbol) {
         const key = makeSymbolKey(symbol);
         const record = key ? variableSymbols.get(key) : undefined;
-
         if (record) {
           const sourceFile = node.getSourceFile();
           record.referenceLines.add(getLine(sourceFile, node.getStart()));
@@ -203,13 +192,21 @@ export function analyzeVariables(options = {}) {
   }
 
   for (const sourceFile of program.getSourceFiles()) {
-    if (!isUserSourceFile(sourceFile)) {
-      continue;
+    if (isUserSourceFile(sourceFile)) {
+      firstPassCollectDeclarations(sourceFile);
     }
-
-    secondPassCollectReferences(sourceFile);
   }
 
+  for (const sourceFile of program.getSourceFiles()) {
+    if (isUserSourceFile(sourceFile)) {
+      secondPassCollectReferences(sourceFile);
+    }
+  }
+
+  return variableSymbols;
+}
+
+function buildVariableReport(variableSymbols) {
   const report = [];
 
   for (const record of variableSymbols.values()) {
@@ -240,17 +237,25 @@ export function analyzeVariables(options = {}) {
   }
 
   report.sort((a, b) => b.liveTimeInclusive - a.liveTimeInclusive || b.maxSpan - a.maxSpan || a.file.localeCompare(b.file));
+  return report;
+}
 
+function writeReportToDisk(workspaceRoot, report) {
   const outputPath = path.join(workspaceRoot, 'out/variable-metrics.json');
   fs.mkdirSync(path.dirname(outputPath), { recursive: true });
   fs.writeFileSync(outputPath, JSON.stringify(report, null, 2));
+  return outputPath;
+}
 
+function logSummary(logger, workspaceRoot, outputPath, report) {
   logger.log(`Wrote ${report.length} variable metrics to ${path.relative(workspaceRoot, outputPath)}.`);
   logger.log('Top 10 by live time (inclusive lines):');
   for (const item of report.slice(0, 10)) {
     logger.log(`- ${item.variable} (${item.file}:${item.declarationLine}) live=${item.liveTimeInclusive}, maxSpan=${item.maxSpan}`);
   }
+}
 
+function collectThresholdFailures(report, thresholds) {
   const failures = [];
 
   if (isValidThreshold(thresholds.maxLiveTime)) {
@@ -277,12 +282,32 @@ export function analyzeVariables(options = {}) {
     }
   }
 
-  if (failures.length > 0) {
-    logger.error('\nVariable metric threshold violations:');
-    for (const failure of failures) {
-      logger.error(`- ${failure}`);
-    }
+  return failures;
+}
+
+function logFailures(logger, failures) {
+  if (failures.length === 0) {
+    return;
   }
+
+  logger.error('\nVariable metric threshold violations:');
+  for (const failure of failures) {
+    logger.error(`- ${failure}`);
+  }
+}
+
+export function analyzeVariables(options = {}) {
+  const workspaceRoot = options.workspaceRoot ?? process.cwd();
+  const argv = options.argv ?? process.argv.slice(2);
+  const logger = options.logger ?? console;
+  const thresholds = parseThresholdArgs(argv);
+  const { program, checker } = createProgramAndChecker(workspaceRoot);
+  const variableSymbols = collectVariableSymbols(program, checker, workspaceRoot);
+  const report = buildVariableReport(variableSymbols);
+  const outputPath = writeReportToDisk(workspaceRoot, report);
+  logSummary(logger, workspaceRoot, outputPath, report);
+  const failures = collectThresholdFailures(report, thresholds);
+  logFailures(logger, failures);
 
   return {
     report,

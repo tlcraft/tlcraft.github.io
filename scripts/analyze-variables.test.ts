@@ -69,6 +69,30 @@ afterEach(() => {
 });
 
 describe('analyze-variables script', () => {
+  it('should be executable in-process for coverage attribution', async () => {
+    const tempProject = createTempProject();
+    tempDirs.push(tempProject);
+
+    const { analyzeVariables } = await import('./analyze-variables.mjs');
+    const logs: string[] = [];
+    const errors: string[] = [];
+
+    const result = analyzeVariables({
+      workspaceRoot: tempProject,
+      argv: [],
+      logger: {
+        log: (message: string) => logs.push(message),
+        error: (message: string) => errors.push(message),
+      },
+    });
+
+    expect(result.failures).toHaveLength(0);
+    expect(result.report.length).toBeGreaterThan(0);
+    expect(path.basename(result.outputPath)).toBe('variable-metrics.json');
+    expect(logs.some((message) => message.includes('Wrote'))).toBe(true);
+    expect(errors).toHaveLength(0);
+  });
+
   it('should write metrics to out/variable-metrics.json with expected calculations', () => {
     const tempProject = createTempProject();
     tempDirs.push(tempProject);

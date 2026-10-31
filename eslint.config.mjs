@@ -1,5 +1,6 @@
 import { defineConfig, globalIgnores } from 'eslint/config';
 import nextVitals from 'eslint-config-next/core-web-vitals';
+import sonarjs from 'eslint-plugin-sonarjs';
 import maxOutputsRule from './eslint/rules/max-outputs.mjs';
 
 const eslintConfig = defineConfig([
@@ -12,10 +13,11 @@ const eslintConfig = defineConfig([
           'max-outputs': maxOutputsRule,
         },
       },
+      sonarjs,
     },
   },
   {
-    files: ['src/**/*.{js,jsx,ts,tsx}'],
+    files: ['src/**/*.{js,jsx,ts,tsx}', 'scripts/**/*.{js,mjs,cjs,ts,mts,cts}'],
     rules: {
       quotes: ['error', 'single'], // Requires single quotes for consistency.
       complexity: ['warn', 10], // Warns when a function has too many decision paths.
@@ -23,6 +25,9 @@ const eslintConfig = defineConfig([
       'max-depth': ['warn', 4], // Warns when nesting gets too deep.
       'max-params': ['warn', 4], // Warns when a function takes too many parameters.
       'local/max-outputs': ['warn', { max: 2 }], // Warns when a function has too many return statements.
+      'sonarjs/cognitive-complexity': ['warn', 15], // Matches SonarQube's cognitive complexity signal.
+      'sonarjs/no-identical-functions': 'warn', // Catches duplicated function implementations.
+      'sonarjs/no-collapsible-if': 'warn', // Flags nested if statements that can be simplified.
     },
   },
   {

@@ -125,83 +125,88 @@ function createProgramAndChecker(workspaceRoot) {
   };
 }
 
+function registerVariableIdentifier(identifier, checker, variableSymbols, workspaceRoot) {
+  const symbol = resolveSymbol(checker.getSymbolAtLocation(identifier), checker);
+  if (!symbol) {
+    return;
+  }
+
+  const key = makeSymbolKey(symbol);
+  if (!key || variableSymbols.has(key)) {
+    return;
+  }
+
+  const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
+  if (!declaration) {
+    return;
+  }
+
+  const sourceFile = declaration.getSourceFile();
+
+  variableSymbols.set(key, {
+    key,
+    name: symbol.getName(),
+    declaredIn: path.relative(workspaceRoot, sourceFile.fileName),
+    declarationLine: getLine(sourceFile, declaration.getStart()),
+    referenceLines: new Set(),
+  });
+}
+
+function firstPassCollectDeclarations(node, registerIdentifier) {
+  if (ts.isVariableDeclaration(node) || ts.isParameter(node) || ts.isBindingElement(node)) {
+    const identifiers = [];
+    collectBindingIdentifiers(node.name, identifiers);
+    for (const identifier of identifiers) {
+      registerIdentifier(identifier);
+    }
+  }
+
+  if (ts.isCatchClause(node) && node.variableDeclaration) {
+    const identifiers = [];
+    collectBindingIdentifiers(node.variableDeclaration.name, identifiers);
+    for (const identifier of identifiers) {
+      registerIdentifier(identifier);
+    }
+  }
+
+  ts.forEachChild(node, (child) => firstPassCollectDeclarations(child, registerIdentifier));
+}
+
+function secondPassCollectReferences(node, checker, variableSymbols) {
+  if (ts.isIdentifier(node)) {
+    const symbol = resolveSymbol(checker.getSymbolAtLocation(node), checker);
+    if (symbol) {
+      const key = makeSymbolKey(symbol);
+      const record = key ? variableSymbols.get(key) : undefined;
+      if (record) {
+        const sourceFile = node.getSourceFile();
+        record.referenceLines.add(getLine(sourceFile, node.getStart()));
+      }
+    }
+  }
+
+  ts.forEachChild(node, (child) => secondPassCollectReferences(child, checker, variableSymbols));
+}
+
+function visitUserSourceFiles(program, visitor) {
+  for (const sourceFile of program.getSourceFiles()) {
+    if (isUserSourceFile(sourceFile)) {
+      visitor(sourceFile);
+    }
+  }
+}
+
 function collectVariableSymbols(program, checker, workspaceRoot) {
   const variableSymbols = new Map();
+  const registerIdentifier = (identifier) => registerVariableIdentifier(identifier, checker, variableSymbols, workspaceRoot);
 
-  function registerVariableIdentifier(identifier) {
-    const symbol = resolveSymbol(checker.getSymbolAtLocation(identifier), checker);
-    if (!symbol) {
-      return;
-    }
+  visitUserSourceFiles(program, (sourceFile) => {
+    firstPassCollectDeclarations(sourceFile, registerIdentifier);
+  });
 
-    const key = makeSymbolKey(symbol);
-    if (!key || variableSymbols.has(key)) {
-      return;
-    }
-
-    const declaration = symbol.valueDeclaration ?? symbol.declarations?.[0];
-    if (!declaration) {
-      return;
-    }
-
-    const sourceFile = declaration.getSourceFile();
-
-    variableSymbols.set(key, {
-      key,
-      name: symbol.getName(),
-      declaredIn: path.relative(workspaceRoot, sourceFile.fileName),
-      declarationLine: getLine(sourceFile, declaration.getStart()),
-      referenceLines: new Set(),
-    });
-  }
-
-  function firstPassCollectDeclarations(node) {
-    if (ts.isVariableDeclaration(node) || ts.isParameter(node) || ts.isBindingElement(node)) {
-      const identifiers = [];
-      collectBindingIdentifiers(node.name, identifiers);
-      for (const identifier of identifiers) {
-        registerVariableIdentifier(identifier);
-      }
-    }
-
-    if (ts.isCatchClause(node) && node.variableDeclaration) {
-      const identifiers = [];
-      collectBindingIdentifiers(node.variableDeclaration.name, identifiers);
-      for (const identifier of identifiers) {
-        registerVariableIdentifier(identifier);
-      }
-    }
-
-    ts.forEachChild(node, firstPassCollectDeclarations);
-  }
-
-  function secondPassCollectReferences(node) {
-    if (ts.isIdentifier(node)) {
-      const symbol = resolveSymbol(checker.getSymbolAtLocation(node), checker);
-      if (symbol) {
-        const key = makeSymbolKey(symbol);
-        const record = key ? variableSymbols.get(key) : undefined;
-        if (record) {
-          const sourceFile = node.getSourceFile();
-          record.referenceLines.add(getLine(sourceFile, node.getStart()));
-        }
-      }
-    }
-
-    ts.forEachChild(node, secondPassCollectReferences);
-  }
-
-  for (const sourceFile of program.getSourceFiles()) {
-    if (isUserSourceFile(sourceFile)) {
-      firstPassCollectDeclarations(sourceFile);
-    }
-  }
-
-  for (const sourceFile of program.getSourceFiles()) {
-    if (isUserSourceFile(sourceFile)) {
-      secondPassCollectReferences(sourceFile);
-    }
-  }
+  visitUserSourceFiles(program, (sourceFile) => {
+    secondPassCollectReferences(sourceFile, checker, variableSymbols);
+  });
 
   return variableSymbols;
 }

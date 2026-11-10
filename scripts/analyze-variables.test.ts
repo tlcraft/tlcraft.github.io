@@ -58,6 +58,26 @@ function createTempProject(): string {
   return tempRoot;
 }
 
+function runCliAndGetExitCode(cwd: string, args: string[] = []): number | undefined {
+  const originalCwd = process.cwd();
+  const originalArgv = [...process.argv];
+  const originalExitCode = process.exitCode;
+
+  try {
+    process.chdir(cwd);
+    process.argv = [originalArgv[0], scriptPath, ...args];
+    process.exitCode = 0;
+
+    runCli();
+
+    return process.exitCode;
+  } finally {
+    process.chdir(originalCwd);
+    process.argv = originalArgv;
+    process.exitCode = originalExitCode;
+  }
+}
+
 function getVariableEntry(report: Array<Record<string, unknown>>, variableName: string) {
   return report.find((item) => item.variable === variableName);
 }
@@ -179,45 +199,17 @@ describe('analyze-variables script', () => {
     const tempProject = createTempProject();
     tempDirs.push(tempProject);
 
-    const originalCwd = process.cwd();
-    const originalArgv = [...process.argv];
-    const originalExitCode = process.exitCode;
+    const exitCode = runCliAndGetExitCode(tempProject, ['--max-live-time=4']);
 
-    try {
-      process.chdir(tempProject);
-      process.argv = [originalArgv[0], scriptPath, '--max-live-time=4'];
-      process.exitCode = 0;
-
-      runCli();
-
-      expect(process.exitCode).toBe(1);
-    } finally {
-      process.chdir(originalCwd);
-      process.argv = originalArgv;
-      process.exitCode = originalExitCode;
-    }
+    expect(exitCode).toBe(1);
   });
 
   it('should set exitCode to 1 in runCli when analysis throws', () => {
     const tempProject = fs.mkdtempSync(path.join(os.tmpdir(), 'variable-metrics-no-config-'));
     tempDirs.push(tempProject);
 
-    const originalCwd = process.cwd();
-    const originalArgv = [...process.argv];
-    const originalExitCode = process.exitCode;
+    const exitCode = runCliAndGetExitCode(tempProject);
 
-    try {
-      process.chdir(tempProject);
-      process.argv = [originalArgv[0], scriptPath];
-      process.exitCode = 0;
-
-      runCli();
-
-      expect(process.exitCode).toBe(1);
-    } finally {
-      process.chdir(originalCwd);
-      process.argv = originalArgv;
-      process.exitCode = originalExitCode;
-    }
+    expect(exitCode).toBe(1);
   });
 });

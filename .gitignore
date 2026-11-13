@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+.jscpd-baseline.json
 
 # next.js
 /.next/

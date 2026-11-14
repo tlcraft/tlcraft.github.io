@@ -32,7 +32,7 @@ jobs:
         run: npm run lint
 
       - name: Duplicate Check
-        run: npm run dupcheck:strict
+        run: npm run dupcheck:pr
 
       - name: Build
         run: npm run build

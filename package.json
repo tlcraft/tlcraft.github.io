@@ -20,7 +20,10 @@
     "test": "vitest",
     "test:once": "vitest run",
     "test:ui": "vitest --ui",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "dupcheck": "npx --yes jscpd --reporters console-full src scripts eslint",
+    "dupcheck:strict": "npx --yes jscpd --reporters console --threshold 1 --exit-code 1 src scripts eslint",
+    "dupcheck:pr": "npx --yes jscpd --reporters console --threshold 1 --exit-code 1 --changed src scripts eslint"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^7.3.0",
